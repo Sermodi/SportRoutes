@@ -74,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!grabando) {
                     ruta = new Ruta(nombre.getText().toString());
+                    nombre.setVisibility(View.INVISIBLE);
                     if (!ruta.compruebaNombre(getBaseContext())){
                         builder.setMessage(R.string.vacio)
                                 .setCancelable(false)
