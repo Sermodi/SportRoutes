@@ -81,7 +81,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } else {
                     ruta.setTiempoUltimo(System.currentTimeMillis());
                     if (ruta.getSize() < 10) {//Una ruta con menos de 10 puntos es una ruta muy corta, conviene informar al usuario.
-                        alertaRutaPequena();
+                        if (ruta.getSize() > 2)
+                            alertaRutaPequena();
+                        else
+                            alertaRutaNull();
                     } else {
                         goToConfirmarRuta();
                     }
@@ -90,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+
 
 
     @Override
@@ -213,7 +217,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onRestoreInstanceState(inState);
         if (inState.getBoolean("hayRuta")){
             ruta = inState.getParcelable("ruta");
-            polyline.addAll(ruta.getCoordenadas());
+            polyline.addAll(ruta != null ? ruta.getCoordenadas() : null);
             Log.d("LOGD", "Hay Ruta " + ruta.getSize() + "puntos    " + polyline.getPoints());
         }else{
             Log.d("LOGD", "NO hay ruta!");
@@ -313,7 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Crea un alertDialog informando al usuario de que su ruta es muy pequeña (menos de
-     *  10 puntos) y preguntandole por como actuar.
+     *  10 puntos y más de 2) y preguntandole por como actuar.
      */
     private void alertaRutaPequena() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -335,6 +339,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         alert.show();
     }
 
+    /**
+     * Crea un alertDialog que informa al usuario de que la ruta no es más grande de 2 puntos.
+     */
+    private void alertaRutaNull() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.alertaRutaNull)
+                .setCancelable(true)
+                .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        alert = builder.create();
+        alert.show();
+    }
     /**
      * Accede a la activity confirmaRuta realizando las acciones pertinentes.
      */
