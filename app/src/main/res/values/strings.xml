@@ -68,4 +68,8 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
     <string name="mensajeBienvenida">Wellcome to SportRoutes!\nYour favorite route tracker</string>
     <string name="alertaRutaNull" >You can not save a route with less than two points.</string>
+    <string name="howTo">How to..?</string>
+    <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be concious of the weather at the time he want to start the route</string>
+    <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
+    <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too usefull because sometimes the sun can be shinning and the temperature be bellow zero.</string>
 </resources>
