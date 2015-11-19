@@ -67,4 +67,5 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaAvisoSalidaTitulo">Alert route abandon</string>
     <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
     <string name="mensajeBienvenida">Wellcome to SportRoutes!\nYour favorite route tracker</string>
+    <string name="alertaRutaNull" >You can not save a route with less than two points.</string>
 </resources>

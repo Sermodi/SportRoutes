@@ -54,4 +54,5 @@
     <string name="accion3">3. Configuración</string>
     <string name="accion4">4. Manual de uso</string>
     <string name="acciones">ACCIONES</string>
+    <string name="alertaRutaNull">No puede guardarse una ruta con menos de dos puntos.</string>
 </resources>

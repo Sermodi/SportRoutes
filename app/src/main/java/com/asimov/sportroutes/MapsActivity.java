@@ -15,10 +15,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -41,16 +43,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final int PERMISOS_LOCALIZACION_F = 2;
     private final int PERMISOS_LOCALIZACION_C = 3;
     private LatLng nuevaCoord, anteriorCoord = new LatLng(0,0); //Coordenadas, necesario inicializar la variable
-    private String nombre;
     private AlertDialog alert = null;
+    private EditText nombre;
+    AlertDialog.Builder builder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        Intent i = this.getIntent();
-        nombre = i.getStringExtra("ruta");
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        nombre = (EditText) findViewById(R.id.nombreRuta);
         polyline = new PolylineOptions();
         polyline.color(getResources().getColor(R.color.colorAlerta));
         polyline.visible(true);
@@ -70,14 +73,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 if (!grabando) {
-                    ruta = new Ruta(nombre);
-                    boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
-                    boton.setText(getResources().getString(R.string.parar));
-                    ruta.setTiempoInicio(System.currentTimeMillis());
-                    ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
-                    polyline.add(nuevaCoord);
-                    tomado = false;
-                    grabando = true;
+                    ruta = new Ruta(nombre.getText().toString());
+                    if (!ruta.compruebaNombre(getBaseContext())){
+                        builder.setMessage(R.string.vacio)
+                                .setCancelable(false)
+                                .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                        alert = builder.create();
+                        alert.show();
+
+                    }else {
+                        boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
+                        boton.setText(getResources().getString(R.string.parar));
+                        ruta.setTiempoInicio(System.currentTimeMillis());
+                        ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
+                        polyline.add(nuevaCoord);
+                        tomado = false;
+                        grabando = true;
+                    }
                 } else {
                     ruta.setTiempoUltimo(System.currentTimeMillis());
                     if (ruta.getSize() < 10) {//Una ruta con menos de 10 puntos es una ruta muy corta, conviene informar al usuario.
@@ -93,8 +110,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
-
-
 
     @Override
     protected void onPause() {
@@ -296,7 +311,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
      */
     private void alertaNoGPS() {
-       final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaGpsDesactivado)
                 .setCancelable(false)
                 .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
@@ -320,7 +335,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      *  10 puntos y más de 2) y preguntandole por como actuar.
      */
     private void alertaRutaPequena() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaRutaPequena)
                 .setCancelable(false)
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
@@ -343,7 +358,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * Crea un alertDialog que informa al usuario de que la ruta no es más grande de 2 puntos.
      */
     private void alertaRutaNull() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaRutaNull)
                 .setCancelable(true)
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
@@ -387,9 +402,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public String getTiempo(long[] tiempo) {
         String tiempos;
-        tiempos = String.format(getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]));
-        tiempos = tiempos + " "+String.format(getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]));
-        tiempos = tiempos+" "+String.format(getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]));
+        tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
+        tiempos = tiempos + " "+ getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]);
+        tiempos = tiempos+" "+ getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]);
         Log.d("T2", tiempos);
         return tiempos;
 

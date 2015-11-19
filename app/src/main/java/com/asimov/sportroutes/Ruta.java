@@ -1,5 +1,6 @@
 package com.asimov.sportroutes;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
  *  realice un giro de pantalla.
  */
 public class Ruta implements Parcelable {
-    private String nombre;
-    private ArrayList<LatLng> coordenadas; /*Todos los puntos guardados por los q pasa la ruta.*/
+    private final String nombre;
+    private final ArrayList<LatLng> coordenadas; /*Todos los puntos guardados por los q pasa la ruta.*/
     private long tiempoInicio;  /*Tiempo en milisegundos de inicio de la ruta.*/
     private long tiempoUltimo;
     private long tiempoMejor;
@@ -30,8 +31,33 @@ public class Ruta implements Parcelable {
 
 
     }
+    public boolean compruebaNombre(Context context) {
+        ManejadorBD m = new ManejadorBD(context);
+        if (nombre == null){
+            return false;
+        }
+        else{
+            if (nombre.equals("")){
+                return false;
+            }
+            else{
+                if(m.existeRuta(nombre)) {
+                    return false;
+                }
+                else{
+                    for (int i =0;i<nombre.length();i++){
+                        if(nombre.charAt(i) != 32){
+                            return true;
+                        }
 
-    protected Ruta(Parcel in) {
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private Ruta(Parcel in) {
         nombre = in.readString();
         coordenadas = in.createTypedArrayList(LatLng.CREATOR);
     }
@@ -62,11 +88,6 @@ public class Ruta implements Parcelable {
      */
     public void addCoordenada(LatLng coord){
         coordenadas.add(coord);
-    }
-
-    public void almacena(){
-        //TODO
-        //pendiente del subsistema de persistencia
     }
 
     /**
