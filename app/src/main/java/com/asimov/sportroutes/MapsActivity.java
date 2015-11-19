@@ -74,7 +74,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!grabando) {
                     ruta = new Ruta(nombre.getText().toString());
-                    nombre.setVisibility(View.INVISIBLE);
                     if (!ruta.compruebaNombre(getBaseContext())){
                         builder.setMessage(R.string.vacio)
                                 .setCancelable(false)
@@ -90,6 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }else {
                         boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
                         boton.setText(getResources().getString(R.string.parar));
+                        nombre.setVisibility(View.INVISIBLE);
                         ruta.setTiempoInicio(System.currentTimeMillis());
                         ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
                         polyline.add(nuevaCoord);
