@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name" translatable="false">SportRoutes</string>
+    <string name="saludoInicial"><b>Welcome to SportRoutes</b></string>
+    <string name="title_activity_maps">Main Map</string>
+    <string name="Prefs">Settings</string>
+    <string name="acercaDe">About</string>
+    <string name="generarRuta">New Route</string>
+    <string name="realizarRuta">Reuse route</string>
+    <string name="manual">\nHow to use the App?</string>
+    <string name="inicio">Begin</string>
+    <string name="PermisosInternetDENEGADOS">Internet permission is denied.</string>
+    <string name="PermisosGpsDENEGADOS">GPS permission is denied.</string>
+    <string name="parar">Stop</string>
+    <string name="guardarRuta">Do you want to save the route \"%s\"?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="alertaGpsDesactivado">The GPS provider is disabled. The app will not run without it. Do you want to activate it?</string>
+    <string name="nombre">Write the name of the route</string>
+    <string name="alertaRutaPequena">The route is too small Continue to save screen anyway?</string>
+    <string name="continuar">Continue</string>
+    <string name="guardada">The route has been saved</string>
+    <string name="ignorada">The route has not been saved</string>
+    <string name="vacio">The name of the route cannot be empty</string>
+    <string name="tuTiempoes">Route completed in %s</string>
+    <string name="logotipoUVa">University of Valladolid Logo</string>
+    <string name="icono">App Icon</string>
+    <string name="acerca_de" >Save, reuse and share your hiking, running and cycling routes.</string>
+    <string name="Autores" ><b>Author:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\nEn colaboración con Felix Prieto, profesor de la Escuela de Ingeniería Informática de la Universidad de Valladolid.</string>
+    <plurals name="horas">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+    <plurals name="minutos">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <plurals name="segundos">
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+    <string name="iniciaRuta">Start</string>
+    <string name="fragment1">Option 1</string>
+    <string name="fragment2">Option 2</string>
+    <string name="fragment3">Option 3</string>
+    <string name="openDrawer">Opened menu</string>
+    <string name="closeDrawer">Closed menu</string>
+    <string name="textoComenzarRuta">Haven\'t try SportRoutes yet? Click bellow!</string>
+    <string name="textoRealizarRuta">Let\'s start a Route!</string>
+    <string name="funcionalidadNoImplementada">Ooops.. it seems didn\'t work</string>
+    <string name="perdonMolestias">We are so sorry</string>
+    <string name="principioHowTo">This is a little guide for general hightlights of the app SportRoutes.\nYou can navigate across the app by using left menu, which can be deployed swinging your mouse from left to right or pressing top left button.</string>
+    <string name="acciones">\n\n\nACTIONS</string>
+    <string name="accion1">\n\n1. New Route</string>
+    <string name="accion2">\n\n2. Reuse Route</string>
+    <string name="accion3">\n\n3. Settings</string>
+    <string name="accion4">\n\n4. How to use..?</string>
+    <string name="contentHowTo1">This action starts a new route. Tapping start on the screen will start to record your position, creating a new route while moving through your place. Be sure to enable Tracking position in your phone.\nAt the end, the app will tell you how many secs took to you to finish your new route.
+You can save the route by pressing Yes to Save pop up and be sure to enjoy your route in the future :)</string>
+    <string name="contentHowTo2">This action allow you to reuse a saved route. You can repeat funny momments following previous routes.\n\nOn construction at the moment.\n</string>
+    <string name="contentHowTo3">This action allow the user to enable / disable some options for the app.</string>
+    <string name="contentHowTo4">What can we tell to you of that action.. You\'re already in it :D\n\n</string>
+    <string name="routePreferences">Route settings</string>
+    <string name="preferenciaTiempoTitulo">Show weather</string>
+    <string name="preferenciaTiempoContenido">Allow the app to show a weather prediction</string>
+    <string name="preferenciaTemperaturaTitulo">Show temperature</string>
+    <string name="preferenciaTemperaturaContenido">Allow the app to show a temperature prediction</string>
+    <string name="preferenciaAvisoSalidaTitulo">Alert route abandon</string>
+    <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
+    <string name="mensajeBienvenida">Wellcome to SportRoutes!\nYour favorite route tracker</string>
+</resources>

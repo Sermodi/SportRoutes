@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/routePreferences">
+        <CheckBoxPreference
+            android:key="mostrarTiempo"
+            android:title="@string/preferenciaTiempoTitulo"
+            android:summary="@string/preferenciaTiempoContenido" />
+        <CheckBoxPreference
+            android:key="mostrarTemperatura"
+            android:title="@string/preferenciaTemperaturaTitulo"
+            android:summary="@string/preferenciaTemperaturaContenido" />
+        <CheckBoxPreference
+            android:key="avisoSalidaRuta"
+            android:title="@string/preferenciaAvisoSalidaTitulo"
+            android:summary="@string/preferenciaAvisoSalidaContenido" />
+    </PreferenceCategory>
+</PreferenceScreen>

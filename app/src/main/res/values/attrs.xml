@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScrimsInsetsView">
+        <attr name="insetForeground" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="ScrimInsetsView"></declare-styleable>
+</resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/padreTextoRealizarRuta"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/en_obras"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/padreTextoRealizarRuta"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textoRealizarRuta"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:typeface="monospace"
+            android:text="@string/funcionalidadNoImplementada"
+            android:textSize="20dp"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/molestias"
+            android:typeface="monospace"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="@string/perdonMolestias"
+            android:textSize="20dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/buttonRealizar"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="@string/realizarRuta"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+    <!--<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.asimov.sportroutes.Fragment1">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/imagen0"
+                android:scaleType="center"
+                android:contentDescription="@string/fragment1" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/contenedorPalabritas"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center" >
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/contenedorBoton"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center" >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generarRuta"
+                android:id="@+id/buttonNueva"
+                android:layout_above="@+id/buttonRealizar" />
+        </LinearLayout>
+
+    </FrameLayout>-->

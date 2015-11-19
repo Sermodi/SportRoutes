@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AcercaDeActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="238dp"
+        android:layout_marginBottom="18dp" >
+
+        <ImageView
+            android:id="@+id/ImageView02"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/logotipouva"
+            android:contentDescription="@string/icono" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/logotipouva"
+            android:contentDescription="@string/logotipoUVa" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Tesla2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/acerca_de"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_weight="0.20"
+        android:text="@string/Autores"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
