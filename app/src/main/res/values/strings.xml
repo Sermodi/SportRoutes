@@ -50,10 +50,10 @@
     <string name="perdonMolestias">We are so sorry</string>
     <string name="principioHowTo">This is a little guide for general hightlights of the app SportRoutes.\nYou can navigate across the app by using left menu, which can be deployed swinging your mouse from left to right or pressing top left button.</string>
     <string name="acciones">\n\n\nACTIONS</string>
-    <string name="accion1">\n\n1. New Route</string>
-    <string name="accion2">\n\n2. Reuse Route</string>
-    <string name="accion3">\n\n3. Settings</string>
-    <string name="accion4">\n\n4. How to use..?</string>
+    <string name="accion1">New Route</string>
+    <string name="accion2">Reuse Route</string>
+    <string name="accion3">Settings</string>
+    <string name="accion4">How to use..?</string>
     <string name="contentHowTo1">This action starts a new route. Tapping start on the screen will start to record your position, creating a new route while moving through your place. Be sure to enable Tracking position in your phone.\nAt the end, the app will tell you how many secs took to you to finish your new route.
 You can save the route by pressing Yes to Save pop up and be sure to enjoy your route in the future :)</string>
     <string name="contentHowTo2">This action allow you to reuse a saved route. You can repeat funny momments following previous routes.\n\nOn construction at the moment.\n</string>

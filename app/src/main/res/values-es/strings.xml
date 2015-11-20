@@ -49,10 +49,10 @@
     <string name="fragment3">Opción 3</string>
     <string name="openDrawer">Menu abierto</string>
     <string name="principioHowTo">Esta es una pequeña guía de como usar la aplicación SportRoutes</string>
-    <string name="accion1">1. Nueva Ruta</string>
-    <string name="accion2">2. Realizar Ruta</string>
-    <string name="accion3">3. Configuración</string>
-    <string name="accion4">4. Manual de uso</string>
+    <string name="accion1">Nueva Ruta</string>
+    <string name="accion2">Realizar Ruta</string>
+    <string name="accion3">Configuración</string>
+    <string name="accion4">Manual de uso</string>
     <string name="acciones">ACCIONES</string>
     <string name="alertaRutaNull">No puede guardarse una ruta con menos de dos puntos.</string>
     <string name="contentHowTo1">Esta acción comienza te permite comenzar una nueva ruta. Pulsando sobre Comenzar permitirá a la aplicación comenzar a grabar tu posición mientras realizas tu actividad. Asegurate de tener activadas las opciones de localización en tu teléfono.\nAl final de tu ruta, la aplicación te dirá cuanto tiempo te llevó completar tu nueva ruta. Puedes guardar la ruta pulsando Sí en el pop up que aparecerá al finalizar la ruta y asegurarte de disfrutar tu ruta en el futuro. </string>

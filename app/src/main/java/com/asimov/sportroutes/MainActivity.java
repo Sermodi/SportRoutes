@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
     private int ultimaPos;
-    private final String[] opciones = new String[]{"Nueva ruta", "Realizar ruta", "Preferencias", "How to..."}; //TODO
+    private String[] opciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
+                getString(R.string.accion3), getString(R.string.accion4)};
 
         sifl = (ScrimInsetsFrameLayout) findViewById(R.id.scrimInsetsFrameLayout);
 
@@ -47,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayAdapter<String> ndMenuAdapter =
-                new ArrayAdapter<>(this,
-                        android.R.layout.simple_list_item_activated_1, opciones);
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
 
         ndList.setAdapter(ndMenuAdapter);
         ndList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
