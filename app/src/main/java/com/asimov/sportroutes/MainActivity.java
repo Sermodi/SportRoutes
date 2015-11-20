@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new Fragment2();
                         break;
                     case 2:
+                        //TODO preferencias
                         fragment_preferencias = new Fragment3();
                         break;
                     case 3:
