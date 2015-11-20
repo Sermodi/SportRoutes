@@ -12,9 +12,13 @@ import java.util.ArrayList;
 
 
 /**
- * Created by Javier on 15/11/2015. */
-class ManejadorBD extends SQLiteOpenHelper {
-    //InformaciÃ³n de la base de datos
+ * Created by Javier on 15/11/2015.
+ *
+ * Comunica el programa con la base de datos, todas las consultas a la misma deben pasar por
+ *  ManejadorDB.
+ */
+public class ManejadorBD extends SQLiteOpenHelper {
+    //Información de la base de datos
     private static final String DATABASE_NAME = "routesDatabase";
     private static final int DATABASE_VERSION = 1;
 
@@ -34,11 +38,20 @@ class ManejadorBD extends SQLiteOpenHelper {
     private static final String KEY_COORDENADA_LONG = "longitud";
     private static final String KEY_COORDENADA_RUTA_ID_FK = "num_ruta";
 
+    /**
+     * Creador de la base de datos.
+     * @param context requerido por el super.
+     */
     public ManejadorBD(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //context.deleteDatabase(DATABASE_NAME);
     }
 
+    /**
+     * Crea la base de datos y elimina la antigua si es necesario.
+     * @param context necesario para el creador de SQLiteOpenHelper.
+     * @param a String
+     */
     public ManejadorBD(Context context, String a) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         context.deleteDatabase(DATABASE_NAME);
@@ -82,7 +95,11 @@ class ManejadorBD extends SQLiteOpenHelper {
 
     //Operaciones CRUD
 
-    //MÃ©todo para almacenar una nueva ruta en la base de datos
+
+    /**
+     * Método para almacenar una nueva ruta en la base de datos
+     *  @param ruta Ruta, clase que contiene el contenido de la ruta(nombre, puntos...)
+     */
     public void guardarRuta(Ruta ruta) {
         //Creamos un objeto de la clase ManejadorDB para realizar operaciones con la base de datos
         SQLiteDatabase db = getWritableDatabase();
@@ -119,10 +136,12 @@ class ManejadorBD extends SQLiteOpenHelper {
         db.close();
     }
 
-    //MÃ©todo que recupera todas las rutas almacenadas en la base de datos y las devuelve en un
-    // ArrayList<Ruta>
+    /**
+     * Método que recupera todas las rutas almacenadas en la base de datos y las devuelve en un
+     *  @return ArrayList de Rutas que contendrá todas las rutas almacenadas en la base de datos.
+     */
     public ArrayList<Ruta> obtenerRutas(){
-        ArrayList<Ruta> rutas = new ArrayList<>();
+        ArrayList<Ruta> rutas = new ArrayList<Ruta>();
         SQLiteDatabase db = getReadableDatabase();
         Integer num_ruta;
 
@@ -171,6 +190,12 @@ class ManejadorBD extends SQLiteOpenHelper {
 
     //Método que comprueba en la base de datos si hay almacenada alguna ruta con el nombre que
     // recibe como argumento.
+
+    /**
+     * Comprueba si la ruta dada está almacenada en la base de datos.
+     * @param ruta String, nombre de la ruta que se desea comprobar.
+     * @return Boolean será true si la Ruta existe en la base de datos y false en caso contrario.
+     */
     public boolean existeRuta(String ruta){
         SQLiteDatabase db = getReadableDatabase();
 
@@ -197,8 +222,11 @@ class ManejadorBD extends SQLiteOpenHelper {
 
     }
 
-    //DEBUGGING
-    //MÃ©todo que lee
+    /**
+     * DEBUGGING
+     * Método que lee la base de datos y muestra en el log la información de la misma, puede utilizarse
+     *  para comprobar que la base de datos es como se desea.
+      */
     public void leerBD() {
         Log.d("SQL", "Leyendo base de datos");
         SQLiteDatabase db = getReadableDatabase();
