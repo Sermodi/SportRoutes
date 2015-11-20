@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -76,7 +77,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!grabando) {
                     ruta = new Ruta(nombre.getText().toString());
-                    nombre.setVisibility(View.INVISIBLE);
                     if (!ruta.compruebaNombre(getBaseContext())){
                         builder.setMessage(R.string.vacio)
                                 .setCancelable(false)
@@ -92,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }else {
                         boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
                         boton.setText(getResources().getString(R.string.parar));
+                        nombre.setVisibility(View.INVISIBLE);
                         ruta.setTiempoInicio(System.currentTimeMillis());
                         ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
                         polyline.add(nuevaCoord);
@@ -115,11 +116,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         if(grabando){
@@ -127,11 +123,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
             boton.setText(getResources().getString(R.string.parar));
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -143,7 +134,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    /*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //SI pulsamos atras durante la generacion de una ruta,  al menú principal
+        if(keyCode == KeyEvent.KEYCODE_BREAK){
+            //toast =  new Toast(getApplicationContext());
+            //toast.setText(R.string.ignorada);
+            //toast.setDuration(Toast.LENGTH_LONG);
+            // toast.show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
         * Este método se ejecuta solo cuando el mapa está listo para usar
         * Si los servicios de google no están instalados se muestra un layout p
         * */
@@ -422,7 +427,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public String getTiempo(long[] tiempo) {
+    /**
+     * Imprime el tiempo en horas minutos y segundos en un formato en condiciones.
+     * @param tiempo long[], tiempo en milisegundos.
+     * @return String, tiempo en horas, minutos y segundos.
+     */
+    private String getTiempo(long[] tiempo) {
         String tiempos;
         tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
         tiempos = tiempos + " "+ getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]);

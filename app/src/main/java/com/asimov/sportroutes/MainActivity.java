@@ -8,9 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,24 +17,25 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private ScrimInsetsFrameLayout sifl;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
     private int ultimaPos;
-    private final String[] opciones = new String[]{"Nueva ruta", "Realizar ruta", "Preferencias", "How to..."}; //TODO
+    private String[] opciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
+                getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
 
         sifl = (ScrimInsetsFrameLayout) findViewById(R.id.scrimInsetsFrameLayout);
 
         //Toolbar
 
-        toolbar = (Toolbar) findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
 
@@ -47,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayAdapter<String> ndMenuAdapter =
-                new ArrayAdapter<>(this,
-                        android.R.layout.simple_list_item_activated_1, opciones);
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
 
         ndList.setAdapter(ndMenuAdapter);
         ndList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,22 +54,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Fragment fragment = null;
-                PreferenceFragment fragment_preferencias = null;
+                PreferenceFragment fragment_preferencias = null; //TODO en construccion
                 ultimaPos = pos;
                 switch (pos) {
                     case 0:
-                        fragment = new Fragment1();
+                        fragment = new Fragment_NuevaRuta();
 
                         break;
                     case 1:
-                        fragment = new Fragment2();
+                        fragment = new Fragment_RealizarRuta();
                         break;
                     case 2:
-                        fragment_preferencias = new Fragment3();
+                        fragment_preferencias = new Fragment_Configuracion();
                         break;
                     case 3:
-                        fragment = new Fragment4();
+                        fragment = new Fragment_Manual();
                         break;
+                    case 4:
+                        fragment = new Fragment_AcercaDe();
+
                 }
 
                 if (fragment != null) {
@@ -95,15 +96,6 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.openDrawer, R.string.closeDrawer){
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
         };
 
         drawerLayout.setDrawerListener(drawerToggle);
@@ -124,20 +116,14 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menuprincipal, menu);
-        return true;
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Fragment fragment = null;
+            Fragment fragment;
             if (ultimaPos > 0) {
-                fragment = new Fragment1();
+                fragment = new Fragment_NuevaRuta();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .commit();

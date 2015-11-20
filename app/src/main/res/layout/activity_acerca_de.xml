@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/comenzarTexto">
+    <!--Es necesario fijar un color de fondo, para no ver la imagen de la Activity-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/logotipouva"
+            android:src="@drawable/navheader"
             android:contentDescription="@string/icono" />
 
         <ImageView

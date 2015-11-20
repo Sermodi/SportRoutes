@@ -25,7 +25,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
@@ -35,12 +34,12 @@ import android.widget.FrameLayout;
  * A layout that draws something in the insets passed to {@link #fitSystemWindows(Rect)}, i.e. the area above UI chrome
  * (status and navigation bars, overlay action bars).
  */
+
 public class ScrimInsetsFrameLayout extends FrameLayout {
     private Drawable mInsetForeground;
 
     private Rect mInsets;
-    private Rect mTempRect = new Rect();
-    private OnInsetsCallback mOnInsetsCallback;
+    private final Rect mTempRect = new Rect();
 
     public ScrimInsetsFrameLayout(Context context) {
         super(context);
@@ -68,7 +67,7 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
 
         setWillNotDraw(true);
     }
-
+/*
     @Override
     protected boolean fitSystemWindows(Rect insets) {
         mInsets = new Rect(insets);
@@ -79,7 +78,7 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
         }
         return true; // consume insets
     }
-
+*/
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
@@ -136,11 +135,7 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
      * UI chrome insets (e.g. a Google Map or a ListView). When using with ListView or GridView, remember to set
      * clipToPadding to false.
      */
-    public void setOnInsetsCallback(OnInsetsCallback onInsetsCallback) {
-        mOnInsetsCallback = onInsetsCallback;
-    }
-
-    public static interface OnInsetsCallback {
-        public void onInsetsChanged(Rect insets);
+    private interface OnInsetsCallback {
+        void onInsetsChanged(Rect insets);
     }
 }

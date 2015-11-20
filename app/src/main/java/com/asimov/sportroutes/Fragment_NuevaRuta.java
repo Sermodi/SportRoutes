@@ -1,6 +1,7 @@
 package com.asimov.sportroutes;
 
 /**
+ * Fragmento que mostrara el boton NuevaRuta y una imagen consecuente.
  * Created by Sarekito on 16/11/15.
  */
 
@@ -12,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class Fragment1 extends Fragment {
+public class Fragment_NuevaRuta extends Fragment {
 
-    public Fragment1() {
+    public Fragment_NuevaRuta() {
         // Required empty public constructor
     }
 

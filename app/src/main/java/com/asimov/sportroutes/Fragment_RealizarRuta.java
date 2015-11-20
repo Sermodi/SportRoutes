@@ -1,6 +1,7 @@
 package com.asimov.sportroutes;
 
 /**
+ * Fragmento que muestra el boton realizar ruta
  * Created by Sarekito on 16/11/15.
  */
 import android.os.Bundle;
@@ -9,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Fragment2 extends Fragment {
+public class Fragment_RealizarRuta extends Fragment {
 
-    public Fragment2() {
+    public Fragment_RealizarRuta() {
         // Required empty public constructor
     }
 
