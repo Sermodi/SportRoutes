@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
+ * Muestra el activity de opciones.
  * Created by Sarekito on 17/11/15.
  */
 public class OpcionesActivity extends Activity {
