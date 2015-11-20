@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
-                getString(R.string.accion3), getString(R.string.accion4)};
+                getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
 
         sifl = (ScrimInsetsFrameLayout) findViewById(R.id.scrimInsetsFrameLayout);
 
@@ -66,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new Fragment2();
                         break;
                     case 2:
-                        //TODO preferencias
                         fragment_preferencias = new Fragment3();
                         break;
                     case 3:
                         fragment = new Fragment4();
                         break;
+                    case 4:
+                        fragment = new AcercaDe();
+
                 }
 
                 if (fragment != null) {
@@ -115,12 +117,6 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menuprincipal, menu);
-        return true;
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

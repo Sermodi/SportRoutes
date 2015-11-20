@@ -36,8 +36,6 @@
         </activity>
         <activity android:name=".ConfirmarRuta" >
         </activity>
-        <activity android:name=".AcercaDeActivity" >
-        </activity>
         <activity android:name=".OpcionesActivity" />
     </application>
 
