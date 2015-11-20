@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -127,6 +128,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (alert != null){
             alert.dismiss();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //SI pulsamos atras durante la generacion de una ruta,  al menú principal
+        if(keyCode == KeyEvent.KEYCODE_BREAK){
+            //toast =  new Toast(getApplicationContext());
+            //toast.setText(R.string.ignorada);
+            //toast.setDuration(Toast.LENGTH_LONG);
+            // toast.show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**

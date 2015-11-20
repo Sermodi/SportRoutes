@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,6 +56,19 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //SI pulsamos atras durante la generacion de una ruta,  al menú principal
+        if(keyCode == KeyEvent.KEYCODE_BREAK){
+            //toast =  new Toast(getApplicationContext());
+            //toast.setText(R.string.ignorada);
+            //toast.setDuration(Toast.LENGTH_LONG);
+            // toast.show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

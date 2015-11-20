@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">SportRoutes</string>
-    <string name="saludoInicial"><b>Welcome to SportRoutes</b></string>
     <string name="title_activity_maps">Main Map</string>
     <string name="Prefs">Settings</string>
     <string name="acercaDe">About</string>
@@ -25,7 +24,7 @@
     <string name="logotipoUVa">University of Valladolid Logo</string>
     <string name="icono">App Icon</string>
     <string name="acerca_de" >Save, reuse and share your hiking, running and cycling routes.</string>
-    <string name="Autores" ><b>Author:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\nEn colaboración con Felix Prieto, profesor de la Escuela de Ingeniería Informática de la Universidad de Valladolid.</string>
+    <string name="Autores" ><b>Author:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\n In collaboration with Felix Prieto, professor of the School of Engineering at the University of Valladolid. </string>
     <plurals name="horas">
         <item quantity="one">%d hour</item>
         <item quantity="other">%d hours</item>
@@ -45,7 +44,6 @@
     <string name="openDrawer">Opened menu</string>
     <string name="closeDrawer">Closed menu</string>
     <string name="textoComenzarRuta">Haven\'t try SportRoutes yet? Click bellow!</string>
-    <string name="textoRealizarRuta">Let\'s start a Route!</string>
     <string name="funcionalidadNoImplementada">Ooops.. it seems didn\'t work</string>
     <string name="perdonMolestias">We are so sorry</string>
     <string name="principioHowTo">This is a little guide for general hightlights of the app SportRoutes.\nYou can navigate across the app by using left menu, which can be deployed swinging your mouse from left to right or pressing top left button.</string>
@@ -69,7 +67,7 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="mensajeBienvenida">Wellcome to SportRoutes!\nYour favorite route tracker</string>
     <string name="alertaRutaNull" >You can not save a route with less than two points.</string>
     <string name="howTo">How to..?</string>
-    <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be concious of the weather at the time he want to start the route</string>
+    <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
-    <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too usefull because sometimes the sun can be shinning and the temperature be bellow zero.</string>
+    <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too useful because sometimes the sun can be shinning and the temperature be bellow zero.</string>
 </resources>

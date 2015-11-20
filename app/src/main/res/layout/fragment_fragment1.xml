@@ -51,7 +51,7 @@
             android:typeface="monospace"
             android:textStyle="bold"
             android:background="@android:color/holo_green_dark"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
 
 </RelativeLayout>
@@ -62,7 +62,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.asimov.sportroutes.Fragment1">
+    tools:context="com.asimov.sportroutes.Fragment_NuevaRutaNuevaRuta">
 
     <LinearLayout
         android:layout_width="fill_parent"

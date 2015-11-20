@@ -25,7 +25,7 @@
             android:layout_height="200dp"
             android:src="@drawable/navheader"
             android:scaleType="centerCrop"
-            android:contentDescription="Imagen de la pantalla principal"/>
+            android:contentDescription="@string/app_name"/>
 
         <ListView
             android:id="@+id/navdrawerlist"

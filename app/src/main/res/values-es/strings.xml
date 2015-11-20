@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="saludoInicial"><b>Bienvenido a SportRoutes(Nombre provisional, reservese copyright)!</b></string>
     <string name="title_activity_maps">Mapa principal</string>
     <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
@@ -41,7 +40,6 @@
     <string name="funcionalidadNoImplementada">Ooops.. parece que no funciona</string>
     <string name="iniciaRuta">Comenzar</string>
     <string name="textoComenzarRuta">¿Aún no has probado SportRoutes? Pulsa aquí debajo!</string>
-    <string name="textoRealizarRuta">Vámonos de Ruta!</string>
     <string name="perdonMolestias">Lo sentimos</string>
     <string name="closeDrawer">Menu cerrado</string>
     <string name="fragment1">Opción 1</string>

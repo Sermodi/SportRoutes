@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Comunica el programa con la base de datos, todas las consultas a la misma deben pasar por
  *  ManejadorDB.
  */
-public class ManejadorBD extends SQLiteOpenHelper {
+class ManejadorBD extends SQLiteOpenHelper {
     //Información de la base de datos
     private static final String DATABASE_NAME = "routesDatabase";
     private static final int DATABASE_VERSION = 1;
@@ -141,7 +141,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
      *  @return ArrayList de Rutas que contendrá todas las rutas almacenadas en la base de datos.
      */
     public ArrayList<Ruta> obtenerRutas(){
-        ArrayList<Ruta> rutas = new ArrayList<Ruta>();
+        ArrayList<Ruta> rutas = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Integer num_ruta;
 

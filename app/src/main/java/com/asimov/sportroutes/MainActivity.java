@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,24 +54,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Fragment fragment = null;
-                PreferenceFragment fragment_preferencias = null;
+                PreferenceFragment fragment_preferencias = null; //TODO en construccion
                 ultimaPos = pos;
                 switch (pos) {
                     case 0:
-                        fragment = new Fragment1();
+                        fragment = new Fragment_NuevaRuta();
 
                         break;
                     case 1:
-                        fragment = new Fragment2();
+                        fragment = new Fragment_RealizarRuta();
                         break;
                     case 2:
-                        fragment_preferencias = new Fragment3();
+                        fragment_preferencias = new Fragment_Configuracion();
                         break;
                     case 3:
-                        fragment = new Fragment4();
+                        fragment = new Fragment_Manual();
                         break;
                     case 4:
-                        fragment = new AcercaDe();
+                        fragment = new Fragment_AcercaDe();
 
                 }
 
@@ -122,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Fragment fragment = null;
+            Fragment fragment;
             if (ultimaPos > 0) {
-                fragment = new Fragment1();
+                fragment = new Fragment_NuevaRuta();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .commit();

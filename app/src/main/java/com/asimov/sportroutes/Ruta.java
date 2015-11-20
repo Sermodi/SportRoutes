@@ -31,6 +31,12 @@ public class Ruta implements Parcelable {
 
 
     }
+
+    /**
+     * Comprueba que el nombre no sea vacio, nulo o utilizado
+     * @param context contexto de la aplicacion
+     * @return false si el nombre es vacio o esta en la base de datos. true en caso contrario
+     */
     public boolean compruebaNombre(Context context) {
         ManejadorBD m = new ManejadorBD(context);
         if (nombre == null){
