@@ -70,4 +70,6 @@
     <string name="preferenciaTemperaturaTitulo">Mostrar temperatura</string>
     <string name="preferenciaTiempoContenido">Permite a la aplicación mostrar una predicción del tiempo</string>
     <string name="preferenciaTiempoTitulo">Mostrar predicción climatológica</string>
-    <string name="routePreferences">Configuración de ruta</string></resources>
+    <string name="routePreferences">Configuración de ruta</string>
+    <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
+</resources>

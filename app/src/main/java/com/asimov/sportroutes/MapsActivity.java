@@ -15,10 +15,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,10 +42,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final int PERMISOS_INTERNET = 1;
     private final int PERMISOS_LOCALIZACION_F = 2;
     private final int PERMISOS_LOCALIZACION_C = 3;
+    private static final int PERMISOS_PANTALLA = 4;
     private LatLng nuevaCoord, anteriorCoord = new LatLng(0,0); //Coordenadas, necesario inicializar la variable
     private AlertDialog alert = null;
     private EditText nombre;
-    AlertDialog.Builder builder;
+    private AlertDialog.Builder builder;
 
 
     @Override
@@ -61,7 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         compruebaPermisos();
         //Es necesario comprobar también si está el GPS activo.
         comprobarGPS();
-
+        //Y a continuación activamos la pantalla para dejarla encendida cuando esté este activity activo.
+        activarPantalla();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -138,6 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (alert != null){
             alert.dismiss();
         }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     /*
@@ -205,6 +208,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Si los permisos no están concedidos
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
+                    volver();
+                }
+                break;
+            case PERMISOS_PANTALLA:
+                // Si los permisos no están concedidos
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, R.string.PermisosPantallaDenegados, Toast.LENGTH_LONG).show();
                     volver();
                 }
                 break;
@@ -292,6 +302,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     PERMISOS_LOCALIZACION_C);
         }
+        //Se comprueban los permisos de mantener pantalla encendida.
+        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK);
+        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WAKE_LOCK},
+                    PERMISOS_PANTALLA);
+        }
         // ^--El resultado de "requestPermissions" se comprobará en el método "onRequestPermissionsResult"
 
     }
@@ -306,6 +323,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(!locManag.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             alertaNoGPS();
         }
+    }
+
+    private void activarPantalla(){
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     /**
