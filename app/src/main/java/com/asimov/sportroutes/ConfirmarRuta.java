@@ -18,6 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+/**
+ * Mostrará el activity de ConfirmarRuta donde se verá la ruta recorrida en un mapa de GoogleMaps
+ *  y un par de botones, de confirmar o borrar la ruta realizada.
+ */
 public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallback {
 
     private Ruta ruta;
@@ -66,9 +70,13 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
-    private void Dialogo(int i) {
+    /**
+     * Muestra un diálogo con la información indicada por el parámetro.
+     * @param resource Integer, correspondiente al número de recurso en Strigns.
+     */
+    private void Dialogo(int resource) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(i)
+        builder.setMessage(resource)
                 .setCancelable(false)
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                     @Override
@@ -81,14 +89,21 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
+    /**
+     * LLama al manejador de la base de datos y a Dialogo en el que se mostrará un mensaje
+     *  de "Ruta guardada"
+     */
     private void Guardado() {
         ManejadorBD db = new ManejadorBD(this);
         db.guardarRuta(ruta);
         Dialogo(R.string.guardada);
-        //db.leerBD();
+        db.leerBD();//DEBUG
         //db.obtenerRutas();
     }
 
+    /**
+     * LLama a Dialogo indicandole que el mensaje es que "no se ha guardado la ruta"
+     */
     private void Ignorado() {
         Dialogo(R.string.ignorada);
     }

@@ -129,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    /*
+    /**
         * Este método se ejecuta solo cuando el mapa está listo para usar
         * Si los servicios de google no están instalados se muestra un layout p
         * */
@@ -390,6 +390,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    /**
+     * Imprime el tiempo en horas minutos y segundos en un formato en condiciones.
+     * @param tiempo long[], tiempo en milisegundos.
+     * @return String, tiempo en horas, minutos y segundos.
+     */
     private String getTiempo(long[] tiempo) {
         String tiempos;
         tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
