@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Javier on 15/11/2015. */
-public class ManejadorBD extends SQLiteOpenHelper {
+class ManejadorBD extends SQLiteOpenHelper {
     //InformaciÃ³n de la base de datos
     private static final String DATABASE_NAME = "routesDatabase";
     private static final int DATABASE_VERSION = 1;
@@ -122,7 +122,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
     //MÃ©todo que recupera todas las rutas almacenadas en la base de datos y las devuelve en un
     // ArrayList<Ruta>
     public ArrayList<Ruta> obtenerRutas(){
-        ArrayList<Ruta> rutas = new ArrayList<Ruta>();
+        ArrayList<Ruta> rutas = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Integer num_ruta;
 

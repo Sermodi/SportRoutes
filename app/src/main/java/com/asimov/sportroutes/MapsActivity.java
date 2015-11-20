@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -45,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng nuevaCoord, anteriorCoord = new LatLng(0,0); //Coordenadas, necesario inicializar la variable
     private AlertDialog alert = null;
     private EditText nombre;
-    AlertDialog.Builder builder;
+    private AlertDialog.Builder builder;
 
 
     @Override
@@ -113,11 +112,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         if(grabando){
@@ -125,11 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
             boton.setText(getResources().getString(R.string.parar));
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -401,7 +390,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public String getTiempo(long[] tiempo) {
+    private String getTiempo(long[] tiempo) {
         String tiempos;
         tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
         tiempos = tiempos + " "+ getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]);

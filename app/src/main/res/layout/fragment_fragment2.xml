@@ -14,7 +14,8 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:src="@drawable/en_obras"/>
+            android:src="@drawable/en_obras"
+            android:contentDescription="Icono de seccion por fabricar"/>
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +52,7 @@
 
         <Button
             android:id="@+id/buttonRealizar"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:text="@string/realizarRuta"

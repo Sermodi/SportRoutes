@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="@android:color/white"
-    android:elevation="10dp"
     android:fitsSystemWindows="true"
     app:insetForeground="#4000"
     tools:showIn="@layout/activity_main">
@@ -25,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/navheader"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen de la pantalla principal"/>
 
         <ListView
             android:id="@+id/navdrawerlist"

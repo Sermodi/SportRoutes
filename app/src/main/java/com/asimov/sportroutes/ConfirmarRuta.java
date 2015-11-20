@@ -20,19 +20,14 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     private Ruta ruta;
-    private TextView text;
-    private Button si;
-    private Button no;
-    private AlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Resources res = getResources();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmar_ruta);
-        text = (TextView) findViewById(R.id.textoRuta);
+        TextView text = (TextView) findViewById(R.id.textoRuta);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -40,14 +35,14 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
         ruta = i.getParcelableExtra("ruta");
         String nombreRuta = String.format(res.getString(R.string.guardarRuta), ruta.getNombre());
         text.setText(nombreRuta);
-        si = (Button) findViewById(R.id.si);
+        Button si = (Button) findViewById(R.id.si);
         si.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Guardado();
             }
         });
-        no = (Button) findViewById(R.id.no);
+        Button no = (Button) findViewById(R.id.no);
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,16 +54,15 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
+        googleMap.setMyLocationEnabled(true);
         PolylineOptions po = new PolylineOptions();
         po.color(getResources().getColor(R.color.colorAlerta));
         po.visible(true);
         CameraPosition cp = CameraPosition.fromLatLngZoom(ruta.getCoordenadas().get(0), 18F);
         po.addAll(ruta.getCoordenadas());
         CameraUpdate cu = CameraUpdateFactory.newCameraPosition(cp);
-        mMap.animateCamera(cu);
-        mMap.addPolyline(po);
+        googleMap.animateCamera(cu);
+        googleMap.addPolyline(po);
 
     }
 
@@ -82,7 +76,7 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
                         startActivity(new Intent(getBaseContext(), MainActivity.class));
                     }
                 });
-        alert = builder.create();
+        AlertDialog alert = builder.create();
         alert.show();
 
     }
