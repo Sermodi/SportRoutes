@@ -63,6 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         compruebaPermisos();
         //Es necesario comprobar también si está el GPS activo.
         comprobarGPS();
+        //Se ocultará la statusBar en este activity
+        ocultarStatusBar();
         //Y a continuación activamos la pantalla para dejarla encendida cuando esté este activity activo.
         activarPantalla();
 
@@ -440,6 +442,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("T2", tiempos);
         return tiempos;
 
+    }
+
+    private void ocultarStatusBar(){
+        final View decorView = getWindow().getDecorView();
+        // ulta la Status Bar
+        final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0){
+                    decorView.setSystemUiVisibility(uiOptions);
+                }
+            }
+        });
     }
 
     @Override

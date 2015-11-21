@@ -22,6 +22,8 @@
         android:layout_marginLeft="10dp"
         android:hint="@string/nombre"
         android:background="@color/ourGreen"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         android:textColor="@color/common_signin_btn_text_dark"/>
 
     <Button
