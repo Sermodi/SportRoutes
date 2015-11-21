@@ -421,12 +421,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
         alert = builder.create();
         alert.show();
-
-
-
-
-
-
     }
 
     /**
@@ -444,6 +438,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    /**
+     * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
+     *  ocultarlo hasta que se cambie de activity.
+     */
     private void ocultarStatusBar(){
         final View decorView = getWindow().getDecorView();
         // ulta la Status Bar
