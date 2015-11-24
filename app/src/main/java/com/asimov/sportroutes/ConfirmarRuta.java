@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +45,7 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
         si.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Guardado();
+                guardado();
             }
         });
         Button no = (Button) findViewById(R.id.no);
@@ -107,12 +108,12 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
      * LLama al manejador de la base de datos y a Dialogo en el que se mostrará un mensaje
      *  de "Ruta guardada"
      */
-    private void Guardado() {
+    private void guardado() {
         ManejadorBD db = new ManejadorBD(this);
         db.guardarRuta(ruta);
         Dialogo(R.string.guardada);
-        db.leerBD();//DEBUG
-        //db.obtenerRutas();
+        //db.leerBD();//DEBUG
+        db.obtenerRutas();
     }
 
     /**

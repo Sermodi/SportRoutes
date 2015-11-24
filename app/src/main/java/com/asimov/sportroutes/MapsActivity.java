@@ -406,6 +406,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("TIEMPO",""+ruta.getTiempoUltimo());
         Log.d("TIEMPO", "" + ruta.getTiempoInicio());
         ruta.calculaDuracion();
+        Log.d("TIEMPO", "ULTIMO: "+ruta.getTiempoUltimo()+ "MEJOR"+ ruta.getTiempoMejor());
         long[] tiempo = ruta.tiempoUltimoHumano();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(String.format(getResources().getString(R.string.tuTiempoes), getTiempo(tiempo)))
@@ -413,7 +414,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ruta.imprimeRuta();//DEBUG
+//                        ruta.imprimeRuta();//DEBUG
                         Intent i = new Intent(getBaseContext(), ConfirmarRuta.class);
                         i.putExtra("ruta", ruta);
                         startActivity(i);
@@ -433,7 +434,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
         tiempos = tiempos + " "+ getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]);
         tiempos = tiempos+" "+ getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]);
-        Log.d("T2", tiempos);
         return tiempos;
 
     }

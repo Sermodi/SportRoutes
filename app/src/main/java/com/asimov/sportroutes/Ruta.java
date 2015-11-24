@@ -66,6 +66,9 @@ public class Ruta implements Parcelable {
     private Ruta(Parcel in) {
         nombre = in.readString();
         coordenadas = in.createTypedArrayList(LatLng.CREATOR);
+        tiempoUltimo = in.readLong();
+        tiempoInicio = in.readLong();
+        tiempoMejor = in.readLong();
     }
 
     public static final Creator<Ruta> CREATOR = new Creator<Ruta>() {
@@ -115,6 +118,9 @@ public class Ruta implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nombre);
         dest.writeTypedList(coordenadas);
+        dest.writeLong(tiempoUltimo);
+        dest.writeLong(tiempoInicio);
+        dest.writeLong(tiempoMejor);
     }
 
     /**
@@ -140,7 +146,7 @@ public class Ruta implements Parcelable {
      */
     public void setTiempo(long tiempo) {
         this.tiempoUltimo = tiempo;
-        if (tiempoMejor>tiempo){
+        if (tiempoMejor>tiempo || tiempo == 0){
             this.tiempoMejor = tiempo;
         }
     }
@@ -158,6 +164,7 @@ public class Ruta implements Parcelable {
      * @param tiempoUltimo long con el último tiempo registrado.
      */
     public void setTiempoUltimo(long tiempoUltimo) {
+
         this.tiempoUltimo = tiempoUltimo;
     }
 
@@ -202,5 +209,6 @@ public class Ruta implements Parcelable {
      */
     public void calculaDuracion() {
         setTiempo((tiempoUltimo - tiempoInicio) / 1000);
+        Log.e("Duración", "La duración es:" + getTiempoUltimo());
     }
 }

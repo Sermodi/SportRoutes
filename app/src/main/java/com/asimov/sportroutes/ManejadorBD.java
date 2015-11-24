@@ -109,6 +109,7 @@ class ManejadorBD extends SQLiteOpenHelper {
         String sql = "INSERT INTO " + TABLE_RUTA + " VALUES (null, \"" + ruta.getNombre() + "\", "
                 + ruta.getTiempoUltimo() + " ," + ruta.getTiempoMejor() + ");";
         //Log.d("SQL", "Ejecutando SQL: " + sql);
+        Log.d("TIEMPO", "ULTIMO: "+ruta.getTiempoUltimo()+ "MEJOR"+ ruta.getTiempoMejor());
         db.execSQL(sql);
 
         //Creamos una consulta SQL para obtener el nÃºmero de la ruta en la tabla de la base de
@@ -161,21 +162,20 @@ class ManejadorBD extends SQLiteOpenHelper {
             // id de la ruta que estamos leyendo en esta iteraciÃ³n del bucle
             String sql2 = "SELECT * FROM " + TABLE_COORDENADA + " WHERE " +
                     KEY_COORDENADA_RUTA_ID_FK + " = " + num_ruta + ";";
-            /*
-            Log.d("SQL","Ejecutando SQL: " + sql2);
+
+//            Log.d("SQL","Ejecutando SQL: " + sql2);
             Log.d("SQL", "Resultado SQL ruta: " + cursor.getString(0) + " " + cursor.getString(1)
                     + " " + cursor.getString(2) + " " + cursor.getString(3));
-            */
+
             Cursor cursor2 = db.rawQuery(sql2, null);
 
             //Almacenamos las coordenadas obtenidas para nuestra ruta y las aÃ±adimos al objeto de
             // tipo Ruta
             while(cursor2.moveToNext()){
-                /*
                 Log.d("SQL", "Resultado SQL coordenada: " + cursor2.getString(0) + " " +
                         cursor2.getString(1) + " " + cursor2.getString(2) + " " +
                         cursor2.getString(3));
-                */
+
                 LatLng coordenada = new LatLng(Double.valueOf(cursor2.getString(1)),
                         Double.valueOf(cursor2.getString(2)));
                 ruta.addCoordenada(coordenada);
