@@ -70,4 +70,9 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
     <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too useful because sometimes the sun can be shinning and the temperature be bellow zero.</string>
+    <string name="PermisosPantallaDenegados">Screen permission is denied.</string>
+    <string name="RutaString"><b>Route</b></string>
+    <string name="ultimoTiempo"><b>Last Time</b></string>
+    <string name="mejorTiempo"><b>Best Time</b></string>
+    <string name="clima"><b>Weather</b></string>
 </resources>

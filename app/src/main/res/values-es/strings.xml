@@ -70,4 +70,8 @@
     <string name="preferenciaTiempoTitulo">Mostrar predicción climatológica</string>
     <string name="routePreferences">Configuración de ruta</string>
     <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
+    <string name="RutaString"><b>Ruta</b></string>
+    <string name="mejorTiempo"><b>Mejor Tiempo </b></string>
+    <string name="ultimoTiempo"><b>Ultimo Tiempo</b></string>
+    <string name="clima"><b>Clima</b></string>
 </resources>

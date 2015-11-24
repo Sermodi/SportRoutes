@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup" >
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,8 @@
         <activity android:name=".ConfirmarRuta" >
         </activity>
         <activity android:name=".OpcionesActivity" />
+        <activity android:name=".ListaDeRutasActivity" >
+        </activity>
     </application>
 
 </manifest>
