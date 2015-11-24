@@ -66,6 +66,7 @@ public class Ruta implements Parcelable {
     private Ruta(Parcel in) {
         nombre = in.readString();
         coordenadas = in.createTypedArrayList(LatLng.CREATOR);
+        //Es necesario recoger los tiempos en el mismo orden que se guardaron.
         tiempoUltimo = in.readLong();
         tiempoInicio = in.readLong();
         tiempoMejor = in.readLong();
@@ -118,6 +119,7 @@ public class Ruta implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nombre);
         dest.writeTypedList(coordenadas);
+        //Para elementos del mismo tipo es necesario escribirlos en orden para leerlos en el mismo.
         dest.writeLong(tiempoUltimo);
         dest.writeLong(tiempoInicio);
         dest.writeLong(tiempoMejor);
