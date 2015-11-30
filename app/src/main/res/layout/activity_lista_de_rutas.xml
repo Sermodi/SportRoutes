@@ -74,5 +74,63 @@
 
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Fila">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/TextRuta"
+                android:layout_column="0"
+                android:textSize="15dip"
+                android:paddingLeft="5dp"
+                android:textIsSelectable="false"
+                android:paddingTop="2dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textUltimoT"
+                android:layout_column="0"
+                android:textSize="15dip"
+                android:paddingLeft="5dp"
+                android:textIsSelectable="false"
+                android:paddingTop="2dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textMejorT"
+                android:layout_column="0"
+                android:textSize="15dip"
+                android:paddingLeft="5dp"
+                android:textIsSelectable="false"
+                android:paddingTop="2dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textWeather"
+                android:layout_column="0"
+                android:textSize="15dip"
+                android:paddingLeft="5dp"
+                android:textIsSelectable="false"
+                android:paddingTop="2dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp" />
+        </TableRow>
+
     </TableLayout>
 </RelativeLayout>
