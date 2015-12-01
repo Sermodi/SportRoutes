@@ -68,7 +68,8 @@
     <string name="routePreferences">Configuración de ruta</string>
     <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
     <string name="RutaString"><b>Ruta</b></string>
-    <string name="mejorTiempo"><b>Mejor Tiempo </b></string>
-    <string name="ultimoTiempo"><b>Último Tiempo</b></string>
+    <string name="mejorTiempo"><b>Mejor </b></string>
+    <string name="ultimoTiempo"><b>Último</b></string>
     <string name="clima"><b>Clima</b></string>
+    <string name="tiempo"><b>Tiempo</b></string>
 </resources>

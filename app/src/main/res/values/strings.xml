@@ -69,7 +69,8 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too useful because sometimes the sun can be shinning and the temperature be bellow zero.</string>
     <string name="PermisosPantallaDenegados">Screen permission is denied.</string>
     <string name="RutaString"><b>Route</b></string>
-    <string name="ultimoTiempo"><b>Last Time</b></string>
-    <string name="mejorTiempo"><b>Best Time</b></string>
+    <string name="ultimoTiempo"><b>Last</b></string>
+    <string name="mejorTiempo"><b>Best</b></string>
+    <string name="tiempo"><b>Time</b></string>
     <string name="clima"><b>Weather</b></string>
 </resources>
