@@ -16,9 +16,12 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -40,17 +43,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final int PERMISOS_INTERNET = 1;
     private final int PERMISOS_LOCALIZACION_F = 2;
     private final int PERMISOS_LOCALIZACION_C = 3;
+    private static final int PERMISOS_PANTALLA = 4;
     private LatLng nuevaCoord, anteriorCoord = new LatLng(0,0); //Coordenadas, necesario inicializar la variable
-    private String nombre;
     private AlertDialog alert = null;
+    private EditText nombre;
+    private AlertDialog.Builder builder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        Intent i = this.getIntent();
-        nombre = i.getStringExtra("ruta");
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        nombre = (EditText) findViewById(R.id.nombreRuta);
         polyline = new PolylineOptions();
         polyline.color(getResources().getColor(R.color.colorAlerta));
         polyline.visible(true);
@@ -58,7 +63,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         compruebaPermisos();
         //Es necesario comprobar también si está el GPS activo.
         comprobarGPS();
-
+        //Se ocultará la statusBar en este activity
+        ocultarStatusBar();
+        //Y a continuación activamos la pantalla para dejarla encendida cuando esté este activity activo.
+        activarPantalla();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -70,18 +78,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 if (!grabando) {
-                    ruta = new Ruta(nombre);
-                    boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
-                    boton.setText(getResources().getString(R.string.parar));
-                    ruta.setTiempoInicio(System.currentTimeMillis());
-                    ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
-                    polyline.add(nuevaCoord);
-                    tomado = false;
-                    grabando = true;
+                    ruta = new Ruta(nombre.getText().toString());
+                    if (!ruta.compruebaNombre(getBaseContext())){
+                        builder.setMessage(R.string.vacio)
+                                .setCancelable(false)
+                                .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                        alert = builder.create();
+                        alert.show();
+
+                    }else {
+                        boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
+                        boton.setText(getResources().getString(R.string.parar));
+                        nombre.setVisibility(View.INVISIBLE);
+                        ruta.setTiempoInicio(System.currentTimeMillis());
+                        ruta.addCoordenada(nuevaCoord);//Es la primera coordenada que necesita ruta.
+                        polyline.add(nuevaCoord);
+                        tomado = false;
+                        grabando = true;
+                    }
                 } else {
                     ruta.setTiempoUltimo(System.currentTimeMillis());
                     if (ruta.getSize() < 10) {//Una ruta con menos de 10 puntos es una ruta muy corta, conviene informar al usuario.
-                        alertaRutaPequena();
+                        if (ruta.getSize() > 2)
+                            alertaRutaPequena();
+                        else
+                            alertaRutaNull();
                     } else {
                         goToConfirmarRuta();
                     }
@@ -89,12 +115,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -108,19 +128,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (alert != null){
             alert.dismiss();
         }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    /*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //SI pulsamos atras durante la generacion de una ruta,  al menú principal
+        if(keyCode == KeyEvent.KEYCODE_BREAK){
+            //toast =  new Toast(getApplicationContext());
+            //toast.setText(R.string.ignorada);
+            //toast.setDuration(Toast.LENGTH_LONG);
+            // toast.show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
         * Este método se ejecuta solo cuando el mapa está listo para usar
         * Si los servicios de google no están instalados se muestra un layout p
         * */
@@ -188,6 +218,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     volver();
                 }
                 break;
+            case PERMISOS_PANTALLA:
+                // Si los permisos no están concedidos
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, R.string.PermisosPantallaDenegados, Toast.LENGTH_LONG).show();
+                    volver();
+                }
+                break;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
@@ -213,7 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onRestoreInstanceState(inState);
         if (inState.getBoolean("hayRuta")){
             ruta = inState.getParcelable("ruta");
-            polyline.addAll(ruta.getCoordenadas());
+            polyline.addAll(ruta != null ? ruta.getCoordenadas() : null);
             Log.d("LOGD", "Hay Ruta " + ruta.getSize() + "puntos    " + polyline.getPoints());
         }else{
             Log.d("LOGD", "NO hay ruta!");
@@ -272,6 +309,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     PERMISOS_LOCALIZACION_C);
         }
+        //Se comprueban los permisos de mantener pantalla encendida.
+        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK);
+        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WAKE_LOCK},
+                    PERMISOS_PANTALLA);
+        }
         // ^--El resultado de "requestPermissions" se comprobará en el método "onRequestPermissionsResult"
 
     }
@@ -288,11 +332,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    private void activarPantalla(){
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
     /**
      * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
      */
     private void alertaNoGPS() {
-       final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaGpsDesactivado)
                 .setCancelable(false)
                 .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
@@ -313,10 +361,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Crea un alertDialog informando al usuario de que su ruta es muy pequeña (menos de
-     *  10 puntos) y preguntandole por como actuar.
+     *  10 puntos y más de 2) y preguntandole por como actuar.
      */
     private void alertaRutaPequena() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaRutaPequena)
                 .setCancelable(false)
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
@@ -336,6 +384,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
+     * Crea un alertDialog que informa al usuario de que la ruta no es más grande de 2 puntos.
+     */
+    private void alertaRutaNull() {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.alertaRutaNull)
+                .setCancelable(true)
+                .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        alert = builder.create();
+        alert.show();
+    }
+    /**
      * Accede a la activity confirmaRuta realizando las acciones pertinentes.
      */
     private void goToConfirmarRuta(){
@@ -343,6 +406,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("TIEMPO",""+ruta.getTiempoUltimo());
         Log.d("TIEMPO", "" + ruta.getTiempoInicio());
         ruta.calculaDuracion();
+        Log.d("TIEMPO", "ULTIMO: "+ruta.getTiempoUltimo()+ "MEJOR"+ ruta.getTiempoMejor());
         long[] tiempo = ruta.tiempoUltimoHumano();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(String.format(getResources().getString(R.string.tuTiempoes), getTiempo(tiempo)))
@@ -350,7 +414,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ruta.imprimeRuta();//DEBUG
+//                        ruta.imprimeRuta();//DEBUG
                         Intent i = new Intent(getBaseContext(), ConfirmarRuta.class);
                         i.putExtra("ruta", ruta);
                         startActivity(i);
@@ -358,22 +422,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
         alert = builder.create();
         alert.show();
+    }
 
-
-
-
-
+    /**
+     * Imprime el tiempo en horas minutos y segundos en un formato en condiciones.
+     * @param tiempo long[], tiempo en milisegundos.
+     * @return String, tiempo en horas, minutos y segundos.
+     */
+    private String getTiempo(long[] tiempo) {
+        String tiempos;
+        tiempos = getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]);
+        tiempos = tiempos + " "+ getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]);
+        tiempos = tiempos+" "+ getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]);
+        return tiempos;
 
     }
 
-    public String getTiempo(long[] tiempo) {
-        String tiempos;
-        tiempos = String.format(getResources().getQuantityString(R.plurals.horas, (int)tiempo[0], (int)tiempo[0]));
-        tiempos = tiempos + " "+String.format(getResources().getQuantityString(R.plurals.minutos, (int)tiempo[1],(int)tiempo[1]));
-        tiempos = tiempos+" "+String.format(getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]));
-        Log.d("T2", tiempos);
-        return tiempos;
-
+    /**
+     * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
+     *  ocultarlo hasta que se cambie de activity.
+     */
+    private void ocultarStatusBar(){
+        final View decorView = getWindow().getDecorView();
+        // ulta la Status Bar
+        final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0){
+                    decorView.setSystemUiVisibility(uiOptions);
+                }
+            }
+        });
     }
 
     @Override

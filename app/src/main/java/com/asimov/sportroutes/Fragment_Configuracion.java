@@ -1,15 +1,16 @@
 package com.asimov.sportroutes;
 
 /**
+ * Fragmento de preferencias TODO
  * Created by Sarekito on 16/11/15.
  */
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-public class Fragment3 extends PreferenceFragment {
+public class Fragment_Configuracion extends PreferenceFragment {
 
-    public Fragment3() {
+    public Fragment_Configuracion() {
         // Required empty public constructor
     }
 

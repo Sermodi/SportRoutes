@@ -33,13 +33,16 @@
         android:orientation="horizontal"
         android:weightSum="1">
         <Button
+            style="?buttonBarButtonStyle"
             android:id="@+id/si"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:text="@string/si"
-            android:background="@color/si" />
+            android:background="@color/si"
+            tools:ignore="NestedWeights" />
         <Button
+            style="?buttonBarButtonStyle"
             android:id="@+id/no"
             android:layout_width="169dp"
             android:layout_height="wrap_content"

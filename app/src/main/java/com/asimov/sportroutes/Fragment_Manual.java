@@ -1,6 +1,7 @@
 package com.asimov.sportroutes;
 
 /**
+ * Fragmento que muestra las instrucciones de uso
  * Created by Sarekito on 16/11/15.
  */
 import android.os.Bundle;
@@ -9,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Fragment4 extends Fragment {
+public class Fragment_Manual extends Fragment {
 
-    public Fragment4() {
+    public Fragment_Manual() {
         // Required empty public constructor
     }
 

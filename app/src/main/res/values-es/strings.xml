@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="saludoInicial"><b>Bienvenido a SportRoutes(Nombre provisional, reservese copyright)!</b></string>
     <string name="title_activity_maps">Mapa principal</string>
     <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
@@ -41,7 +40,6 @@
     <string name="funcionalidadNoImplementada">Ooops.. parece que no funciona</string>
     <string name="iniciaRuta">Comenzar</string>
     <string name="textoComenzarRuta">¿Aún no has probado SportRoutes? Pulsa aquí debajo!</string>
-    <string name="textoRealizarRuta">Vámonos de Ruta!</string>
     <string name="perdonMolestias">Lo sentimos</string>
     <string name="closeDrawer">Menu cerrado</string>
     <string name="fragment1">Opción 1</string>
@@ -49,9 +47,31 @@
     <string name="fragment3">Opción 3</string>
     <string name="openDrawer">Menu abierto</string>
     <string name="principioHowTo">Esta es una pequeña guía de como usar la aplicación SportRoutes</string>
-    <string name="accion1">1. Nueva Ruta</string>
-    <string name="accion2">2. Realizar Ruta</string>
-    <string name="accion3">3. Configuración</string>
-    <string name="accion4">4. Manual de uso</string>
+    <string name="accion1">Nueva Ruta</string>
+    <string name="accion2">Realizar Ruta</string>
+    <string name="accion3">Configuración</string>
+    <string name="accion4">Manual de uso</string>
     <string name="acciones">ACCIONES</string>
+    <string name="alertaRutaNull">No puede guardarse una ruta con menos de dos puntos.</string>
+    <string name="contentHowTo1">Esta acción comienza te permite comenzar una nueva ruta. Pulsando sobre Comenzar permitirá a la aplicación comenzar a grabar tu posición mientras realizas tu actividad. Asegurate de tener activadas las opciones de localización en tu teléfono.\nAl final de tu ruta, la aplicación te dirá cuanto tiempo te llevó completar tu nueva ruta. Puedes guardar la ruta pulsando Sí en el pop up que aparecerá al finalizar la ruta y asegurarte de disfrutar tu ruta en el futuro. </string>
+    <string name="contentHowTo2">Esta acción te permite re usar una ruta que tengas guardada. Puedes repetir momentos divertidos siguiendo antiguas rutas.\n\nEn construcción por el momento.\n</string>
+    <string name="contentHowTo3">Esta acción permite al usuario activar o desactivar algunas opciones de la aplicación.</string>
+    <string name="contentHowTo4">¿Qué podemos decir de esta sección? ¡Estás en ella ahora mismo! Comprende algunos de los conceptos claves para el uso de la aplicación</string>
+    <string name="preferenciaAvisoSalidaContenidoAmpliado">Permite a la aplicación avisar al usuario por métodos que serán definidos y actualizados próximamente. Funcionaría emitiendo algún tipo de sonido o vibración (se definirá con la mayor brevedad posible) cuando el usuario se saliera de la ruta seleccionada.</string>
+    <string name="preferenciaTemperaturaContenidoAmpliado">Permite a la aplicación mostrar la temperatura. Pensamos que tiene mucha relevancia y utilidad, ya que muchas veces que el sol brille no tiene nada que ver con que las temperaturas puedan estar bajo cero.</string>
+    <string name="preferenciaTiempoContenidoAmpliado">Permite a la aplicación mostrar una predicción del tiempo. Esta configuración permite al usuario ser consciente del tiempo que hay o va a haber cuando quiera comenzar la ruta.</string>
+    <string name="howTo">¿Cómo..?</string>
+    <string name="mensajeBienvenida">Bienvenido a SportRoutes!\nTu aplicación de seguimiento de rutas favorita</string>
+    <string name="preferenciaAvisoSalidaTitulo">Alerta de abandono de ruta</string>
+    <string name="preferenciaAvisoSalidaContenido">Notifica al usuario cuando abandona la ruta</string>
+    <string name="preferenciaTemperaturaContenido">Permite a la aplicación mostrar una predicción de la temperatura</string>
+    <string name="preferenciaTemperaturaTitulo">Mostrar temperatura</string>
+    <string name="preferenciaTiempoContenido">Permite a la aplicación mostrar una predicción del tiempo</string>
+    <string name="preferenciaTiempoTitulo">Mostrar predicción climatológica</string>
+    <string name="routePreferences">Configuración de ruta</string>
+    <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
+    <string name="RutaString"><b>Ruta</b></string>
+    <string name="mejorTiempo"><b>Mejor Tiempo </b></string>
+    <string name="ultimoTiempo"><b>Ultimo Tiempo</b></string>
+    <string name="clima"><b>Clima</b></string>
 </resources>

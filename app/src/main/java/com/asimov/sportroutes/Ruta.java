@@ -1,5 +1,6 @@
 package com.asimov.sportroutes;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
  *  realice un giro de pantalla.
  */
 public class Ruta implements Parcelable {
-    private String nombre;
-    private ArrayList<LatLng> coordenadas; /*Todos los puntos guardados por los q pasa la ruta.*/
+    private final String nombre;
+    private final ArrayList<LatLng> coordenadas; /*Todos los puntos guardados por los q pasa la ruta.*/
     private long tiempoInicio;  /*Tiempo en milisegundos de inicio de la ruta.*/
     private long tiempoUltimo;
     private long tiempoMejor;
@@ -31,9 +32,44 @@ public class Ruta implements Parcelable {
 
     }
 
-    protected Ruta(Parcel in) {
+    /**
+     * Comprueba que el nombre no sea vacio, nulo o utilizado
+     * @param context contexto de la aplicacion
+     * @return false si el nombre es vacio o esta en la base de datos. true en caso contrario
+     */
+    public boolean compruebaNombre(Context context) {
+        ManejadorBD m = new ManejadorBD(context);
+        if (nombre == null){
+            return false;
+        }
+        else{
+            if (nombre.equals("")){
+                return false;
+            }
+            else{
+                if(m.existeRuta(nombre)) {
+                    return false;
+                }
+                else{
+                    for (int i =0;i<nombre.length();i++){
+                        if(nombre.charAt(i) != 32){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private Ruta(Parcel in) {
         nombre = in.readString();
         coordenadas = in.createTypedArrayList(LatLng.CREATOR);
+        //Es necesario recoger los tiempos en el mismo orden que se guardaron.
+        tiempoUltimo = in.readLong();
+        tiempoInicio = in.readLong();
+        tiempoMejor = in.readLong();
     }
 
     public static final Creator<Ruta> CREATOR = new Creator<Ruta>() {
@@ -64,11 +100,6 @@ public class Ruta implements Parcelable {
         coordenadas.add(coord);
     }
 
-    public void almacena(){
-        //TODO
-        //pendiente del subsistema de persistencia
-    }
-
     /**
      * DEBUGING
      * Método que imprime todos los puntos de la ruta por el logcat.
@@ -88,6 +119,10 @@ public class Ruta implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nombre);
         dest.writeTypedList(coordenadas);
+        //Para elementos del mismo tipo es necesario escribirlos en orden para leerlos en el mismo.
+        dest.writeLong(tiempoUltimo);
+        dest.writeLong(tiempoInicio);
+        dest.writeLong(tiempoMejor);
     }
 
     /**
@@ -113,7 +148,7 @@ public class Ruta implements Parcelable {
      */
     public void setTiempo(long tiempo) {
         this.tiempoUltimo = tiempo;
-        if (tiempoMejor>tiempo){
+        if (tiempoMejor>tiempo || tiempo == 0){
             this.tiempoMejor = tiempo;
         }
     }
@@ -131,6 +166,7 @@ public class Ruta implements Parcelable {
      * @param tiempoUltimo long con el último tiempo registrado.
      */
     public void setTiempoUltimo(long tiempoUltimo) {
+
         this.tiempoUltimo = tiempoUltimo;
     }
 
@@ -175,5 +211,6 @@ public class Ruta implements Parcelable {
      */
     public void calculaDuracion() {
         setTiempo((tiempoUltimo - tiempoInicio) / 1000);
+        Log.e("Duración", "La duración es:" + getTiempoUltimo());
     }
 }
