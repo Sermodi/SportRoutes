@@ -39,28 +39,20 @@ public class Ruta implements Parcelable {
      */
     public boolean compruebaNombre(Context context) {
         ManejadorBD m = new ManejadorBD(context);
-        if (nombre == null){
+        if (nombre == null ||
+                nombre.equals("")||
+                m.existeRuta(nombre)
+                ){
+            return false;
+        }else{
+            for (int i =0;i<nombre.length();i++){
+                if(nombre.charAt(i) != 32){
+                    return true;
+                }
+
+            }
             return false;
         }
-        else{
-            if (nombre.equals("")){
-                return false;
-            }
-            else{
-                if(m.existeRuta(nombre)) {
-                    return false;
-                }
-                else{
-                    for (int i =0;i<nombre.length();i++){
-                        if(nombre.charAt(i) != 32){
-                            return true;
-                        }
-
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     private Ruta(Parcel in) {

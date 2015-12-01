@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         nombre = (EditText) findViewById(R.id.nombreRuta);
         polyline = new PolylineOptions();
-        polyline.color(getResources().getColor(R.color.colorAlerta));
+        polyline.color(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
         polyline.visible(true);
         //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
         compruebaPermisos();
@@ -92,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         alert.show();
 
                     }else {
-                        boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
+                        boton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
                         boton.setText(getResources().getString(R.string.parar));
                         nombre.setVisibility(View.INVISIBLE);
                         ruta.setTiempoInicio(System.currentTimeMillis());
@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
         if(grabando){
             //Si se está grabando ruta el color del boton debe tener una estética distinta.
-            boton.setBackgroundColor(getResources().getColor(R.color.colorAlerta));
+            boton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
             boton.setText(getResources().getString(R.string.parar));
         }
     }
@@ -250,7 +250,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onRestoreInstanceState(inState);
         if (inState.getBoolean("hayRuta")){
             ruta = inState.getParcelable("ruta");
-            polyline.addAll(ruta != null ? ruta.getCoordenadas() : null);
+            assert ruta != null; //En el if ya se comprueba si ruta no es null, pero Lint no lo sabe..
+            polyline.addAll(ruta.getCoordenadas());
             Log.d("LOGD", "Hay Ruta " + ruta.getSize() + "puntos    " + polyline.getPoints());
         }else{
             Log.d("LOGD", "NO hay ruta!");

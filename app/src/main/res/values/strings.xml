@@ -38,9 +38,6 @@
         <item quantity="other">%d seconds</item>
     </plurals>
     <string name="iniciaRuta">Start</string>
-    <string name="fragment1">Option 1</string>
-    <string name="fragment2">Option 2</string>
-    <string name="fragment3">Option 3</string>
     <string name="openDrawer">Opened menu</string>
     <string name="closeDrawer">Closed menu</string>
     <string name="textoComenzarRuta">Haven\'t try SportRoutes yet? Click bellow!</string>
@@ -64,7 +61,7 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaTemperaturaContenido">Allow the app to show a temperature prediction</string>
     <string name="preferenciaAvisoSalidaTitulo">Alert route abandon</string>
     <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
-    <string name="mensajeBienvenida">Wellcome to SportRoutes!\nYour favorite route tracker</string>
+    <string name="mensajeBienvenida">Welcome to SportRoutes!\nYour favorite route tracker</string>
     <string name="alertaRutaNull" >You can not save a route with less than two points.</string>
     <string name="howTo">How to..?</string>
     <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>

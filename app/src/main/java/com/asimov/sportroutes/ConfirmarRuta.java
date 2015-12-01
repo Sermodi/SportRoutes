@@ -4,9 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -75,7 +75,7 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setMyLocationEnabled(true);
         PolylineOptions po = new PolylineOptions();
-        po.color(getResources().getColor(R.color.colorAlerta));
+        po.color(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
         po.visible(true);
         CameraPosition cp = CameraPosition.fromLatLngZoom(ruta.getCoordenadas().get(0), 18F);
         po.addAll(ruta.getCoordenadas());

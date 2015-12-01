@@ -42,9 +42,6 @@
     <string name="textoComenzarRuta">¿Aún no has probado SportRoutes? Pulsa aquí debajo!</string>
     <string name="perdonMolestias">Lo sentimos</string>
     <string name="closeDrawer">Menu cerrado</string>
-    <string name="fragment1">Opción 1</string>
-    <string name="fragment2">Opción 2</string>
-    <string name="fragment3">Opción 3</string>
     <string name="openDrawer">Menu abierto</string>
     <string name="principioHowTo">Esta es una pequeña guía de como usar la aplicación SportRoutes</string>
     <string name="accion1">Nueva Ruta</string>
@@ -72,6 +69,6 @@
     <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
     <string name="RutaString"><b>Ruta</b></string>
     <string name="mejorTiempo"><b>Mejor Tiempo </b></string>
-    <string name="ultimoTiempo"><b>Ultimo Tiempo</b></string>
+    <string name="ultimoTiempo"><b>Último Tiempo</b></string>
     <string name="clima"><b>Clima</b></string>
 </resources>

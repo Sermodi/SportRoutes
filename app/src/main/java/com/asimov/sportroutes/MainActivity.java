@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -82,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
                     ndList.setItemChecked(pos, true);
 
-                    getSupportActionBar().setTitle(opciones[pos]);
+                    if(getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(opciones[pos]);
+                    }
                 }
                 drawerLayout.closeDrawer(sifl);
             }
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //Drawer Layout
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
 
         drawerToggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.openDrawer, R.string.closeDrawer){
@@ -99,9 +102,10 @@ public class MainActivity extends AppCompatActivity {
         };
 
         drawerLayout.setDrawerListener(drawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
     }
 
     @Override
@@ -130,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
                 ndList.setItemChecked(ultimaPos, true);
 
-                getSupportActionBar().setTitle(opciones[0]);
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(opciones[0]);
+                }
                 drawerLayout.closeDrawer(sifl);
                 return true;
             }

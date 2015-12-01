@@ -1,9 +1,5 @@
 package com.asimov.sportroutes;
 
-/**
- * Created by Sarekito on 16/11/15.
- */
-
 /*
  * Copyright 2014 Google Inc.
  *
