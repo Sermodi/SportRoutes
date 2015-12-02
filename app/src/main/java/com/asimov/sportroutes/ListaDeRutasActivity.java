@@ -1,13 +1,16 @@
 package com.asimov.sportroutes;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,22 +30,32 @@ public class ListaDeRutasActivity extends AppCompatActivity {
         // |Nombre | Ultimo Tiempo | Mejor Tiempo | Clima| <---cada fila
         for (int i=0;i<rutas.size();i++){
             TableRow fila = new TableRow(this);
-            Ruta ruta = rutas.get(i);
+            final Ruta ruta = rutas.get(i);
 
             TextView nombre = new TextView(this);
             nombre.setText(ruta.getNombre());
             fila.addView(nombre);
 
             TextView ultimo = new TextView(this);
-            ultimo.setText("" + ruta.getTiempoUltimo());
+            ultimo.setText(String.valueOf(ruta.getTiempoUltimo()));
             fila.addView(ultimo);
 
             TextView mejor = new TextView(this);
-            mejor.setText("" + ruta.getTiempoMejor());
+            mejor.setText(String.valueOf(ruta.getTiempoMejor()));
             fila.addView(mejor);
 
             //TODO Lo mismo para CLIMA!
 
+            //Creamos un evento OnClick para la fila actual.
+            fila.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(),VerRutaActivity.class);
+                    intent.putExtra("ruta", ruta);
+                    startActivity(intent);
+                }
+            });
+            //Añadimos la fila a la tabla
             tabla.addView(fila);
         }
 

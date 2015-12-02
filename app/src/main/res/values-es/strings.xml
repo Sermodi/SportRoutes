@@ -72,4 +72,5 @@
     <string name="ultimoTiempo"><b>Último</b></string>
     <string name="clima"><b>Clima</b></string>
     <string name="tiempo"><b>Tiempo</b></string>
+    <string name="todasTusRutas"><b>Todas tus rutas!</b></string>
 </resources>

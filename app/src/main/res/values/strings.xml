@@ -23,8 +23,8 @@
     <string name="tuTiempoes">Route completed in %s</string>
     <string name="logotipoUVa">University of Valladolid Logo</string>
     <string name="icono">App Icon</string>
-    <string name="acerca_de" >Save, reuse and share your hiking, running and cycling routes.</string>
-    <string name="Autores" ><b>Author:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\n In collaboration with Felix Prieto, professor of the School of Engineering at the University of Valladolid. </string>
+    <string name="acerca_de">Save, reuse and share your hiking, running and cycling routes.</string>
+    <string name="Autores"><b>Author:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\n In collaboration with Felix Prieto, professor of the School of Engineering at the University of Valladolid. </string>
     <plurals name="horas">
         <item quantity="one">%d hour</item>
         <item quantity="other">%d hours</item>
@@ -62,7 +62,7 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaAvisoSalidaTitulo">Alert route abandon</string>
     <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
     <string name="mensajeBienvenida">Welcome to SportRoutes!\nYour favorite route tracker</string>
-    <string name="alertaRutaNull" >You can not save a route with less than two points.</string>
+    <string name="alertaRutaNull">You can not save a route with less than two points.</string>
     <string name="howTo">How to..?</string>
     <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
@@ -73,4 +73,5 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="mejorTiempo"><b>Best</b></string>
     <string name="tiempo"><b>Time</b></string>
     <string name="clima"><b>Weather</b></string>
+    <string name="todasTusRutas"><b>All your Routes!</b></string>
 </resources>
