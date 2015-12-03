@@ -73,4 +73,5 @@
     <string name="clima"><b>Clima</b></string>
     <string name="tiempo"><b>Tiempo</b></string>
     <string name="todasTusRutas"><b>Todas tus rutas!</b></string>
+    <string name="distanciaAInicio"><b>Distancia al inicio:</b></string>
 </resources>

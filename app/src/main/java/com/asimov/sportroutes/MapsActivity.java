@@ -69,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         activarPantalla();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        //Contenido autogenerado por AndroidStudio
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -408,7 +409,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("TIEMPO", "" + ruta.getTiempoInicio());
         ruta.calculaDuracion();
         Log.d("TIEMPO", "ULTIMO: "+ruta.getTiempoUltimo()+ "MEJOR"+ ruta.getTiempoMejor());
-        long[] tiempo = ruta.tiempoUltimoHumano();
+        long[] tiempo = ruta.tiempoUltimoToArray();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(String.format(getResources().getString(R.string.tuTiempoes), getTiempo(tiempo)))
                 .setCancelable(false)

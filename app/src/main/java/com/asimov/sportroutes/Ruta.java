@@ -187,10 +187,11 @@ public class Ruta implements Parcelable {
     }
 
     /**
-     * Expresión del tiempo de forma que cualquier humano pueda entenderla.
-     * @return un String con el formato HH horas MM minutos SS segundos, para mostrar al usuario.
+     * Expresión del tiempo separada en 3 elementos, horas minutos y segundos, para que sea más
+     *  comprensible
+     * @return long[] con 3 elementos, ["horas","minutos", "segundos"]
      */
-    public long[] tiempoUltimoHumano() {
+    public long[] tiempoUltimoToArray() {
         long[] t = new long[3];
         t[0] = tiempoUltimo / 3600;
         t[1] = (tiempoUltimo%3600)/60;
@@ -199,10 +200,24 @@ public class Ruta implements Parcelable {
     }
 
     /**
+     * Expresión del tiempo de forma que cualquier humano pueda entenderla.
+     * @return un String con el formato HH horas MM minutos SS segundos, para mostrar al usuario.
+     */
+    private String tiempoUltimoHumano(){
+        long[] t =  tiempoUltimoToArray();
+        return (t[0])+ "h " + (t[1]) + "m " + (t[2]) + "s";
+    }
+
+    /**
      * Calcula la duración de la ruta en base al tiempo de inicio y de fin.
      */
     public void calculaDuracion() {
         setTiempo((tiempoUltimo - tiempoInicio) / 1000);
         Log.e("Duración", "La duración es:" + getTiempoUltimo());
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " : " +  tiempoUltimoHumano();
     }
 }

@@ -74,4 +74,5 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="tiempo"><b>Time</b></string>
     <string name="clima"><b>Weather</b></string>
     <string name="todasTusRutas"><b>All your Routes!</b></string>
+    <string name="distanciaAInicio"><b>Distance to start:</b></string>
 </resources>
