@@ -137,12 +137,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
+                android:id="@+id/imageView"
+                android:layout_column="2"
                 android:src="@android:drawable/ic_menu_delete"
-                android:layout_column="2" />
+                android:tint="@android:color/holo_red_dark" />
         </TableRow>
 
     </TableLayout>

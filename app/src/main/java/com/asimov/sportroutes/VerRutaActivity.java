@@ -1,15 +1,26 @@
 package com.asimov.sportroutes;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -58,6 +69,17 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setMyLocationEnabled(true);
-
+        ArrayList<LatLng> rutas = ruta.getCoordenadas();
+        //Creamos la polilinea a mostrar en el mapa
+        PolylineOptions polilyne = new PolylineOptions();
+        polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAlerta));
+        polilyne.visible(true);
+        //Movemos la cámara de maps a la posición inicial.
+        CameraPosition camerapos = CameraPosition.fromLatLngZoom(rutas.get(0), 16F);
+        polilyne.addAll(rutas);
+        CameraUpdate cameraupd = CameraUpdateFactory.newCameraPosition(camerapos);
+        googleMap.animateCamera(cameraupd);
+        googleMap.addPolyline(polilyne);
+        LocationManager locationMng;
     }
 }
