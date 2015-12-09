@@ -1,5 +1,6 @@
 package com.asimov.sportroutes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -188,8 +189,6 @@ class ManejadorBD extends SQLiteOpenHelper {
         return rutas;
     }
 
-    //Método que comprueba en la base de datos si hay almacenada alguna ruta con el nombre que
-    // recibe como argumento.
 
     /**
      * Comprueba si la ruta dada está almacenada en la base de datos.
@@ -223,10 +222,60 @@ class ManejadorBD extends SQLiteOpenHelper {
     }
 
     /**
+     * Actualiza el mejor tiempo de la ruta indicada.
+     * @param ruta String, nombre de la ruta que se desea actualizar.
+     * @param tiempo Long, mejor tiempo de la ruta.
+     * @return Integer con el número de filas afectadas por la actualización.
+     */
+    public int actualizarRuta(String ruta, long tiempo){
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Creamos el mapa de valores que deseamos cambiar de la tabla de la base de datos.
+        ContentValues valores = new ContentValues();
+        valores.put(KEY_RUTA_MEJOR, tiempo);
+
+        //Ejecutamos la actualización de la tabla de la base de datos.
+        Log.d("SQL", "Actualizando ruta + " + ruta + ". Nuevo tiempo: " + tiempo + ".");
+        return db.update(TABLE_RUTA, valores, KEY_RUTA_NOMBRE + " = ?",
+                new String[] {ruta});
+
+        //db.close();
+
+    }
+
+    /**
+     * Elimina la ruta deseada de la base de datos.
+     * @param ruta String, nombre de la ruta que se desea eliminar de la base de datos.
+     */
+    public void borrarRuta(String ruta){
+        int num_ruta;
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Obtenemos el ID de la ruta que deseamos borrar de la base de datos.
+        String sql = "SELECT " + KEY_RUTA_ID + " FROM " + TABLE_RUTA + " WHERE " +
+                KEY_RUTA_NOMBRE + " LIKE '%" + ruta + "%';";
+        //Log.d("SQL","Ejecutando SQL: " + sql);
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        num_ruta = cursor.getInt(0);
+        cursor.close();
+
+        //Log.d("SQL", "Eliminando ruta: " + ruta + ". ID ruta: " + num_ruta + ".");
+
+        //Eliminamos de la tabla coordenadas aquellas entradas que sean de la ruta indicada.
+        db.delete(TABLE_COORDENADA, KEY_COORDENADA_RUTA_ID_FK + " = ?", new String[]
+                {String.valueOf(num_ruta)});
+
+        //Eliminamos de la tabla ruta la entrada de la ruta que deseamos eliminar.
+        db.delete(TABLE_RUTA, KEY_RUTA_NOMBRE + " = ?", new String[] {ruta});
+
+    }
+
+    /**
      * DEBUGGING
      * Método que lee la base de datos y muestra en el log la información de la misma, puede utilizarse
      *  para comprobar que la base de datos es como se desea.
-      */
+     */
     public void leerBD() {
         Log.d("SQL", "Leyendo base de datos");
         SQLiteDatabase db = getReadableDatabase();
