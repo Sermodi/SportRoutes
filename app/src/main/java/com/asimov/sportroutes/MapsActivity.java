@@ -65,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         comprobarGPS();
         //Se ocultará la statusBar en este activity
         ocultarStatusBar();
-        //Y a continuación activamos la pantalla para dejarla encendida cuando esté este activity activo.
+        //Y a continuación activamos la pantalla para dejarla encendida cuando este activity esté activo.
         activarPantalla();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

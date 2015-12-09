@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView"
-                android:layout_column="2"
+                android:layout_column="3"
                 android:src="@android:drawable/ic_menu_delete"
                 android:tint="@android:color/holo_red_dark" />
         </TableRow>

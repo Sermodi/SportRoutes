@@ -24,7 +24,7 @@
         android:background="@color/ourGreen"
         android:inputType="text"
         android:imeOptions="actionDone"
-        android:textColor="@color/common_google_signin_btn_text_dark"/>
+        android:textColor="@android:color/secondary_text_dark"/>
 
     <Button
         android:layout_width="wrap_content"
