@@ -12,15 +12,39 @@ import java.util.ArrayList;
 
 public class ListaDeRutasActivity extends AppCompatActivity {
 
+    private TableLayout tabla;
+    private ArrayList<Ruta> rutas;
+    private ManejadorBD db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
-        TableLayout tabla = (TableLayout) findViewById(R.id.tablaRutas);
+        tabla = (TableLayout) findViewById(R.id.tablaRutas);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Se cargan las rutas en la tabla.
+        rutasToTabla();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tabla.removeAllViews();
+    }
+
+    /**
+     * En la tabla del layout se imprimen todas las rutas del sistema.
+     */
+    protected void rutasToTabla(){
         //Cargamos base de datos.
-        ManejadorBD db = new ManejadorBD(getApplicationContext());
+        db = new ManejadorBD(getApplicationContext());
         //Obtenemos todas las rutas de la base de datos
-        ArrayList<Ruta> rutas = db.obtenerRutas();
+        rutas = db.obtenerRutas();
 
         //Para cada ruta creamos una nueva row con la info de la ruta
         // |Nombre | Ultimo Tiempo | Mejor Tiempo | Clima| <---cada fila
@@ -54,7 +78,5 @@ public class ListaDeRutasActivity extends AppCompatActivity {
             //Añadimos la fila a la tabla
             tabla.addView(fila);
         }
-
-
     }
 }

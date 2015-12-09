@@ -75,8 +75,11 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="clima"><b>Weather</b></string>
     <string name="todasTusRutas"><b>All your Routes!</b></string>
     <string name="distanciaAInicio"><b>Distance to start:</b></string>
-    <string name="calculando">searching ...</string>
+    <string name="calculando">searching …</string>
     <string name="km" translatable="false">Km</string>
     <string name="m" translatable="false">m</string>
     <string name="seg" translatable="false">s</string>
+    <string name="borrarRuta">delete route</string>
+    <string name="guiame">Guide me</string>
+    <string name="Comenzar">Start</string>
 </resources>

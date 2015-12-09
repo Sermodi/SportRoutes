@@ -74,5 +74,8 @@
     <string name="tiempo"><b>Tiempo</b></string>
     <string name="todasTusRutas"><b>Todas tus rutas!</b></string>
     <string name="distanciaAInicio"><b>Distancia al inicio:</b></string>
-    <string name="calculando">calculando ...</string>
+    <string name="calculando">calculando …</string>
+    <string name="borrarRuta">Borrar ruta</string>
+    <string name="Comenzar">Comenzar</string>
+    <string name="guiame">Guiame</string>
 </resources>

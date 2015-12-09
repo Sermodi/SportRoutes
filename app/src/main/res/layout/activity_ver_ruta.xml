@@ -111,24 +111,20 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button"
+                android:text="@string/guiame"
+                android:id="@+id/btnGuia"
                 android:layout_column="0" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button2"
+                android:text="@string/Comenzar"
+                android:id="@+id/btnComenzar"
                 android:layout_column="2" />
 
         </TableRow>
@@ -140,9 +136,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/btnBorrarRuta"
                 android:layout_column="3"
                 android:src="@android:drawable/ic_menu_delete"
+                android:contentDescription="@string/borrarRuta"
                 android:tint="@android:color/holo_red_dark" />
         </TableRow>
 

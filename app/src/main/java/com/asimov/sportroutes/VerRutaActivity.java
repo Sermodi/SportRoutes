@@ -1,16 +1,16 @@
 package com.asimov.sportroutes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -30,10 +30,17 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
     private float distancia;
     private TextView textDistancia;
 
+    private Button btnComenzar, btnGuiar;
+
+    private AlertDialog alert = null;
+    private AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_ruta);
+
+        builder = new AlertDialog.Builder(this);
 
         //Se oculta el statusBar para dejar la pantalla más visicble.
         ocultarStatusBar();
@@ -52,16 +59,62 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
         //Mostramos el mejor tiempo de la ruta.
         TextView textMejor = (TextView) findViewById(R.id.textMejorTiempo);
-        textMejor.setText(String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg));
+        String texto = String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg);
+        textMejor.setText(texto);
 
         //Mostramos el ultimo tiempo de la ruta.
         TextView textUltimo = (TextView) findViewById(R.id.textUltimoTiempo);
-        textUltimo.setText(String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg));
+        texto = String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg);
+        textUltimo.setText(texto);
 
         //Operaciones sobre el mapa.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
+
+        //Boton de comenzarRuta
+        btnComenzar = (Button) findViewById(R.id.btnComenzar);
+        btnComenzar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("LOGD", "Se ha pulsado en comenzar ruta");
+            }
+        });
+
+        //Boton guiarme a la ruta
+        btnGuiar = (Button) findViewById(R.id.btnGuia);
+        btnGuiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("LOGD","Se ha pulsado en Guiarme");
+            }
+        });
+
+        ImageView btnBorrar = (ImageView) findViewById(R.id.btnBorrarRuta);
+        btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("LOGD","Se ha pulsado en BORRAR RUTA!");
+                builder.setMessage(R.string.alertaRutaNull)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ManejadorBD baseDatos = new ManejadorBD(getApplicationContext());
+                                baseDatos.borrarRuta(ruta.getNombre());
+                                onBackPressed();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                alert = builder.create();
+                alert.show();
+            }
+        });
+
     }
 
     /**
@@ -116,15 +169,30 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
                 //Obtenemos la distancia.
                 distancia = location.distanceTo(locPrimera);
 
-                String medida;
+                String texto;
                 if (distancia > 1000){
-                    distancia = distancia /1000;
-                    medida = getString(R.string.km);
+                    texto = getString(R.string.km);
+                    texto = String.valueOf(distancia/1000) + " " + texto;
                 }else{
-                    medida = getString(R.string.m);
+                    texto = getString(R.string.m);
+                    texto = String.valueOf(distancia) + " " + texto;
                 }
                 //Cambiamos el valor del textview correspondiente
-                textDistancia.setText(String.valueOf(distancia) + " " + medida);
+                textDistancia.setText(texto);
+
+                //Los botones deben actuar de distinto modo dependiendo de la distancia al inicio
+                if (distancia > 20){
+                    btnComenzar.setClickable(false);
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_dark_text_default));
+                    btnGuiar.setClickable(true);
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
+                }else{
+                    btnComenzar.setClickable(true);
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
+                    btnGuiar.setClickable(false);
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_dark_text_default));
+                }
+
             }
         });
 
