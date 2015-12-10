@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.asimov.sportroutes.General.ManejadorBD;
+import com.asimov.sportroutes.R;
+import com.asimov.sportroutes.General.Ruta;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

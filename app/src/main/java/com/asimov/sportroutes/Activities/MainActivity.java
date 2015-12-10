@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -15,6 +15,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.asimov.sportroutes.Fragments.Fragment_AcercaDe;
+import com.asimov.sportroutes.Fragments.Fragment_Configuracion;
+import com.asimov.sportroutes.Fragments.Fragment_Manual;
+import com.asimov.sportroutes.Fragments.Fragment_NuevaRuta;
+import com.asimov.sportroutes.Fragments.Fragment_RealizarRuta;
+import com.asimov.sportroutes.R;
+import com.asimov.sportroutes.Fragments.ScrimInsetsFrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 

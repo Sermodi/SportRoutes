@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Fragments;
 
 /*
  * Copyright 2014 Google Inc.
@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.asimov.sportroutes.R;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Fragments;
 
 /**
  * Fragmento que muestra el boton realizar ruta
@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.asimov.sportroutes.Activities.ListaDeRutasActivity;
+import com.asimov.sportroutes.R;
 
 public class Fragment_RealizarRuta extends Fragment {
 

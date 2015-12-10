@@ -4,12 +4,12 @@
     android:layout_height="match_parent" android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:paddingBottom="0dp" tools:context=".MapsActivity">
+    android:paddingBottom="0dp" tools:context=".Activities.MapsActivity">
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:id="@+id/map"
-        tools:context="com.asimov.sportroutes.MapsActivity"
+        tools:context=".Activities.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />

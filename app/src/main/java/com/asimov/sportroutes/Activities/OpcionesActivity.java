@@ -1,7 +1,9 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.asimov.sportroutes.Fragments.Fragment_Configuracion;
 
 /**
  * Muestra el activity de opciones.

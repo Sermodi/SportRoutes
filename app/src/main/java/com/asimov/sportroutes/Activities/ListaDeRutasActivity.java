@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.asimov.sportroutes.General.ManejadorBD;
+import com.asimov.sportroutes.R;
+import com.asimov.sportroutes.General.Ruta;
 
 import java.util.ArrayList;
 

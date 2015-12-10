@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,12 +32,12 @@
             android:value="@string/google_maps_key" />
         <!-- El activity que contiene el mapa donde mostraremos rutas. -->
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps"/>
-        <activity android:name=".ConfirmarRuta"/>
-        <activity android:name=".OpcionesActivity" />
-        <activity android:name=".ListaDeRutasActivity"/>
-        <activity android:name=".VerRutaActivity"/>
+        <activity android:name=".Activities.ConfirmarRuta"/>
+        <activity android:name=".Activities.OpcionesActivity" />
+        <activity android:name=".Activities.ListaDeRutasActivity"/>
+        <activity android:name=".Activities.VerRutaActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.asimov.sportroutes.ScrimInsetsFrameLayout
+<com.asimov.sportroutes.Fragments.ScrimInsetsFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,4 +36,4 @@
 
     </LinearLayout>
 
-</com.asimov.sportroutes.ScrimInsetsFrameLayout>
+</com.asimov.sportroutes.Fragments.ScrimInsetsFrameLayout>

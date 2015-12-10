@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Fragments;
 
 /**
  * Fragmento que muestra las instrucciones de uso
@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.asimov.sportroutes.R;
 
 public class Fragment_Manual extends Fragment {
 

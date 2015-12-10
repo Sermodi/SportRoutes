@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Fragments;
 
 /**
  * Fragmento que muestra la informacion de la aplicacion y los desarrolladores.
@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.asimov.sportroutes.R;
 
 public class Fragment_AcercaDe extends Fragment {
 

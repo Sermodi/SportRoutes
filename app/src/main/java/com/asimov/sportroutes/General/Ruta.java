@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.General;
 
 import android.content.Context;
 import android.os.Parcel;

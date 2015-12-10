@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.General;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Comunica el programa con la base de datos, todas las consultas a la misma deben pasar por
  *  ManejadorDB.
  */
-class ManejadorBD extends SQLiteOpenHelper {
+public class ManejadorBD extends SQLiteOpenHelper {
     //Información de la base de datos
     private static final String DATABASE_NAME = "routesDatabase";
     private static final int DATABASE_VERSION = 1;

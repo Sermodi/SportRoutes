@@ -1,4 +1,4 @@
-package com.asimov.sportroutes;
+package com.asimov.sportroutes.Fragments;
 
 /**
  * Fragmento de preferencias TODO
@@ -7,6 +7,8 @@ package com.asimov.sportroutes;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
+import com.asimov.sportroutes.R;
 
 public class Fragment_Configuracion extends PreferenceFragment {
 
