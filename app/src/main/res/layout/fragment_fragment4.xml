@@ -136,7 +136,7 @@
             android:text="@string/contentHowTo4"
             android:textSize="15sp"
             android:layout_marginStart="10dp"
-            />
+            android:layout_marginBottom="20dp" />
 
     </LinearLayout>
 
