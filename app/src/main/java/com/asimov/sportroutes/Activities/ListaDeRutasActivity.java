@@ -1,9 +1,14 @@
 package com.asimov.sportroutes.Activities;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,13 +22,13 @@ import java.util.ArrayList;
 public class ListaDeRutasActivity extends AppCompatActivity {
 
     private TableLayout tabla;
+    private ArrayList<Ruta> rutas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
         tabla = (TableLayout) findViewById(R.id.tablaRutas);
-
     }
 
     @Override
@@ -36,7 +41,7 @@ public class ListaDeRutasActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        tabla.removeAllViews();
+        tabla.removeViews(2,rutas.size());
     }
 
     /**
@@ -46,7 +51,7 @@ public class ListaDeRutasActivity extends AppCompatActivity {
         //Cargamos base de datos.
         ManejadorBD db = new ManejadorBD(getApplicationContext());
         //Obtenemos todas las rutas de la base de datos
-        ArrayList<Ruta> rutas = db.obtenerRutas();
+        rutas = db.obtenerRutas();
 
         //Para cada ruta creamos una nueva row con la info de la ruta
         // |Nombre | Ultimo Tiempo | Mejor Tiempo | Clima| <---cada fila
@@ -56,14 +61,17 @@ public class ListaDeRutasActivity extends AppCompatActivity {
 
             TextView nombre = new TextView(this);
             nombre.setText(ruta.getNombre());
+            addPropiedades(nombre);
             fila.addView(nombre);
 
             TextView ultimo = new TextView(this);
             ultimo.setText(String.valueOf(ruta.getTiempoUltimo()));
+            addPropiedades(ultimo);
             fila.addView(ultimo);
 
             TextView mejor = new TextView(this);
             mejor.setText(String.valueOf(ruta.getTiempoMejor()));
+            addPropiedades(mejor);
             fila.addView(mejor);
 
             //TODO Lo mismo para CLIMA!
@@ -80,5 +88,25 @@ public class ListaDeRutasActivity extends AppCompatActivity {
             //Añadimos la fila a la tabla
             tabla.addView(fila);
         }
+    }
+
+    /**
+     * Dado un TextView le añade los margenes, paddings, tamaño de texto
+     *  y color de fondo
+     * @param view TextView que se desea cambiar.
+     */
+    private void addPropiedades(TextView view) {
+        //El tamaño del texto será de 21sp
+        view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21);
+
+        TextView ejemplo = (TextView) findViewById(R.id.tituloRuta);
+        //Determinamos el padding y margin copiando los de "ejemplo"
+        if (ejemplo != null) {
+            view.setLayoutParams(ejemplo.getLayoutParams());
+        }
+        //El fondo del texto será gris
+        view.setBackgroundColor(ContextCompat.getColor(
+                getApplicationContext(),
+                R.color.grisClaro));
     }
 }

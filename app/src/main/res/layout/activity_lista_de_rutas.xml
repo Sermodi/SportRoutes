@@ -28,7 +28,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="100dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:fillViewport="false">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -48,7 +49,9 @@
                     android:layout_column="1"
                     android:layout_span="2"
                     android:id="@+id/textTiempo"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:background="@color/gris"
+                    android:textSize="22dp" />
 
             </TableRow>
 
@@ -63,12 +66,14 @@
                     android:text="@string/RutaString"
                     android:id="@+id/tituloRuta"
                     android:layout_column="0"
-                    android:textSize="15sp"
-                    android:paddingLeft="5dp"
+                    android:textSize="22dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/gris"
                     android:textIsSelectable="false"
-                    android:paddingTop="2dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="2dp" />
+                    android:paddingLeft="2dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -77,11 +82,14 @@
                     android:text="@string/ultimoTiempo"
                     android:id="@+id/tituloUltimoT"
                     android:layout_column="1"
-                    android:textSize="15sp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingBottom="5dp" />
+                    android:textSize="22dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/gris"
+                    android:textIsSelectable="false"
+                    android:paddingLeft="2dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,11 +98,14 @@
                     android:text="@string/mejorTiempo"
                     android:id="@+id/tituloMejorT"
                     android:layout_column="2"
-                    android:textSize="15sp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingBottom="5dp" />
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="22dp"
+                    android:background="@color/gris"
+                    android:textIsSelectable="false"
+                    android:paddingLeft="2dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,11 +114,14 @@
                     android:text="@string/clima"
                     android:id="@+id/tituloClima"
                     android:layout_column="3"
-                    android:textSize="15sp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingBottom="5dp" />
+                    android:textSize="22dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/gris"
+                    android:textIsSelectable="false"
+                    android:paddingLeft="2dp" />
 
             </TableRow>
 
