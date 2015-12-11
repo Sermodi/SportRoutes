@@ -3,6 +3,7 @@
     <string name="title_activity_maps">Mapa principal</string>
     <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
+    <string name="deAcuerdo">De acuerdo</string>
     <string name="generarRuta">Nueva Ruta</string>
     <string name="realizarRuta">Realizar Ruta</string>
     <string name="manual">¿Cómo usar la Aplicación?</string>
@@ -75,7 +76,8 @@
     <string name="todasTusRutas"><b>Todas tus rutas!</b></string>
     <string name="distanciaAInicio"><b>Distancia al inicio:</b></string>
     <string name="calculando">calculando …</string>
-    <string name="borrarRuta">Borrar ruta</string>
+    <string name="borrarRuta">¿Borrar ruta?</string>
     <string name="Comenzar">Comenzar</string>
     <string name="guiame">Guiame</string>
+    <string name="gMaps">Google Maps te llevara al punto de inicio. ¡Llamanos cuando llegues!</string>
 </resources>

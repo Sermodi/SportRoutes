@@ -3,6 +3,7 @@
     <string name="title_activity_maps">Main Map</string>
     <string name="Prefs">Settings</string>
     <string name="acercaDe">About</string>
+    <string name="deAcuerdo">I agree</string>
     <string name="generarRuta">New Route</string>
     <string name="realizarRuta">Reuse route</string>
     <string name="manual">\nHow to use the App?</string>
@@ -79,7 +80,8 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="km" translatable="false">Km</string>
     <string name="m" translatable="false">m</string>
     <string name="seg" translatable="false">s</string>
-    <string name="borrarRuta">delete route</string>
+    <string name="borrarRuta">delete route?</string>
     <string name="guiame">Guide me</string>
     <string name="Comenzar">Start</string>
+    <string name="gMaps">We call Google Maps now. Call us when you get to start!</string>
 </resources>

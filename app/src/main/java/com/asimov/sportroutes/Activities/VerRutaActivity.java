@@ -38,8 +38,8 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
     private Button btnComenzar, btnGuiar;
 
-    private AlertDialog alert = null;
-    private AlertDialog.Builder builder;
+    private  AlertDialog alert = null;
+    private  AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onClick(View v) {
                 Log.d("LOGD","Se ha pulsado en BORRAR RUTA!");
-                builder.setMessage(R.string.alertaRutaNull)
+                builder.setMessage(R.string.borrarRuta)
                         .setCancelable(true)
                         .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                             @Override
@@ -123,12 +123,28 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    /**
+     * Este metodo se activa al pulsar el boton "guiame". Prepara la navegacion desde nuestra posicion
+     * actual al inicio de la ruta
+     */
     public void guiado (){
-        LatLng primerPunto = ruta.getCoordenadas().get(0);
-        Uri gmmIntentUri = Uri.parse("google.navigation:q="+primerPunto);
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
+        builder.setMessage(R.string.gMaps)
+                .setCancelable(true)
+                .setPositiveButton(R.string.deAcuerdo, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Tomamos el primer punto
+                        LatLng primerPunto = ruta.getCoordenadas().get(0);
+                        //Generaos una Uri que indica a maps el destino y la opcion de ir en bici
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+primerPunto.latitude+","+primerPunto.longitude+"&mode=b");
+                        //Generamos la intencion y le pedimos que llame a maps
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    }
+                });
+        alert = builder.create();
+        alert.show();
     }
 
     /**
@@ -203,9 +219,10 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
                     btnGuiar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            verRuta.guiado();
+                           guiado();
                         }
                     });
+
                 }else{
                     btnComenzar.setClickable(true);
                     btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
