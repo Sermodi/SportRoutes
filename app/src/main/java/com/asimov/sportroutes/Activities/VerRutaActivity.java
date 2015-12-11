@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -32,6 +34,7 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
     private Ruta ruta;
     private float distancia;
     private TextView textDistancia;
+    private VerRutaActivity verRuta = this;
 
     private Button btnComenzar, btnGuiar;
 
@@ -120,6 +123,14 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    public void guiado (){
+        LatLng primerPunto = ruta.getCoordenadas().get(0);
+        Uri gmmIntentUri = Uri.parse("google.navigation:q="+primerPunto);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
+
     /**
      * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
      *  ocultarlo hasta que se cambie de activity.
@@ -189,6 +200,12 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
                     btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_dark_text_default));
                     btnGuiar.setClickable(true);
                     btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
+                    btnGuiar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            verRuta.guiado();
+                        }
+                    });
                 }else{
                     btnComenzar.setClickable(true);
                     btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
