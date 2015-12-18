@@ -1,9 +1,9 @@
 <resources>
-<!--
+    <!--
     Aquí va la clave GoogleServicies indispensable para usar todos los complementos de google
     que necesitamos. Esta clave siempre empieza por la cadena AIza
 -->
-<string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
-    AIzaSyDC9WayKUNPYVzeXqVYixbq4H0Gt3rq9X4
-</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyDC9WayKUNPYVzeXqVYixbq4H0Gt3rq9X4
+    </string>
 </resources>

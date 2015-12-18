@@ -213,9 +213,9 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
                 //Los botones deben actuar de distinto modo dependiendo de la distancia al inicio
                 if (distancia > 20){
                     btnComenzar.setClickable(false);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_dark_text_default));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
                     btnGuiar.setClickable(true);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_light_default));
                     btnGuiar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -225,9 +225,17 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
                 }else{
                     btnComenzar.setClickable(true);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_light_text_default));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_plus_signin_btn_text_light_default));
                     btnGuiar.setClickable(false);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_signin_btn_dark_text_default));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+                    btnComenzar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getBaseContext(),RealizarRuta.class);
+                            i.putExtra("ruta", ruta);
+                            startActivity(i);
+                        }
+                    });
                 }
 
             }

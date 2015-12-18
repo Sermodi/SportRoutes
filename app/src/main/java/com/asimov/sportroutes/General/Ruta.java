@@ -224,4 +224,15 @@ public class Ruta implements Parcelable {
     }
 
 
+    public boolean alejado(LatLng nuevaCoord) {
+        for (int i =0;i<coordenadas.size();i++){
+            double d = Math.sqrt(Math.pow( (nuevaCoord.latitude - coordenadas.get(i).latitude) , 2 ) +
+                            Math.pow( (nuevaCoord.longitude - coordenadas.get(i).longitude ) , 2 ));
+            if(d<0.0001){
+                return false;
+            }
+        }
+        return true;
+
+    }
 }

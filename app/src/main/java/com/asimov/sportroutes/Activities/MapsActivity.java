@@ -180,7 +180,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //Datos de inicialización, son diferentes.
                         CameraPosition camPos;
                         if (!grabando) {
-                            camPos = CameraPosition.fromLatLngZoom(anteriorCoord, 17F);
+                            camPos = CameraPosition.fromLatLngZoom(anteriorCoord, 16F);
                             tomado = true;
                         } else {
                             camPos = CameraPosition.fromLatLngZoom(anteriorCoord, mMap.getCameraPosition().zoom);
