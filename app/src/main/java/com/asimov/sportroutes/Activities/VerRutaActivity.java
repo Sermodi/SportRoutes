@@ -1,10 +1,18 @@
 package com.asimov.sportroutes.Activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asimov.sportroutes.General.ManejadorBD;
 import com.asimov.sportroutes.R;
@@ -41,10 +50,18 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
     private  AlertDialog alert = null;
     private  AlertDialog.Builder builder;
 
+    private static final int PERMISOS_LOCALIZACION_C = 3;
+    private static final int PERMISOS_LOCALIZACION_F = 2 ;
+    private static final int PERMISOS_INTERNET = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_ruta);
+
+        compruebaPermisos();
+
+        comprobarGPS();
 
         builder = new AlertDialog.Builder(this);
 
@@ -96,6 +113,7 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
+        //Acción de borrar ruta, requiere confirmación
         ImageView btnBorrar = (ImageView) findViewById(R.id.btnBorrarRuta);
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +186,7 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         googleMap.setMyLocationEnabled(true);
         ArrayList<LatLng> rutas = ruta.getCoordenadas();
         //Creamos la polilinea a mostrar en el mapa
@@ -243,4 +262,112 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
 
     }
+
+    /**
+     * Comprueba los permisos necesarios para que funcione la aplicación en este punto
+     */
+    private void compruebaPermisos() {
+
+        int controlPermisos ;
+        //Primero se comprueba el permiso de acceso a INTERNET
+        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
+        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.INTERNET},
+                    PERMISOS_INTERNET);
+        }
+        //Se comprueban los permisos de Localización Fina.
+        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISOS_LOCALIZACION_F);
+        }
+
+        //Se comprueban los permisos de Localización Gruesa.
+        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISOS_LOCALIZACION_C);
+        }
+        // ^--El resultado de "requestPermissions" se comprobará en el método "onRequestPermissionsResult"
+
+    }
+
+    /**
+     * Comprueba la disponibilidad del sistema GPS en el dispositivo, si no está disponible se
+     *  ejecuta una alerta (alertaNoGPS).
+     */
+    private void comprobarGPS() {
+        LocationManager locManag = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //Si el GPS no está activado se lanza una alerta.
+        if(!locManag.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            alertaNoGPS();
+        }
+    }
+
+    /**
+     * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
+     */
+    private void alertaNoGPS() {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.alertaGpsDesactivado)
+                .setCancelable(false)
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISOS_INTERNET:
+                // Si los permisos no están concedidos
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, R.string.PermisosInternetDENEGADOS, Toast.LENGTH_LONG).show();
+                    this.finish();
+                }
+                break;
+            case PERMISOS_LOCALIZACION_F:
+                // Si los permisos no están concedidos
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
+                    volver();
+                }
+                break;
+            case PERMISOS_LOCALIZACION_C:
+                // Si los permisos no están concedidos
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
+                    volver();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    /**
+     * Cierra el activity actual para volver al activity anterior
+     *  Funcionamiento semejante al boton "back"
+     */
+    private void volver(){
+        SystemClock.sleep(2000);
+        this.finish();//cierra el activity como si se pulsara el botón volver del dispositivo.
+    }
+
+
+
 }

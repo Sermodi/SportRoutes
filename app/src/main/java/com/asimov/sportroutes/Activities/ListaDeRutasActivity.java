@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -33,15 +30,16 @@ public class ListaDeRutasActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
-        //Se cargan las rutas en la tabla.
+        if(tabla != null && rutas != null){
+            tabla.removeViews(2,rutas.size());}
+        //Se recargan las rutas en la tabla.
         rutasToTabla();
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        tabla.removeViews(2,rutas.size());
     }
 
     /**
