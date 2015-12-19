@@ -1,28 +1,17 @@
 package com.asimov.sportroutes.Activities;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asimov.sportroutes.General.ManejadorBD;
 import com.asimov.sportroutes.R;
@@ -36,7 +25,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallback {
@@ -44,7 +32,6 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
     private Ruta ruta;
     private float distancia;
     private TextView textDistancia;
-    private VerRutaActivity verRuta = this;
 
     private Button btnComenzar, btnGuiar;
 
@@ -139,7 +126,7 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
      * Este metodo se activa al pulsar el boton "guiame". Prepara la navegacion desde nuestra posicion
      * actual al inicio de la ruta
      */
-    public void guiado (){
+    private void guiado(){
         builder.setMessage(R.string.gMaps)
                 .setCancelable(true)
                 .setPositiveButton(R.string.deAcuerdo, new DialogInterface.OnClickListener() {

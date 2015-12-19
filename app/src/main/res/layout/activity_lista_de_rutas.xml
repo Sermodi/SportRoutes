@@ -51,7 +51,7 @@
                     android:id="@+id/textTiempo"
                     android:textAlignment="center"
                     android:background="@color/gris"
-                    android:textSize="22dp" />
+                    android:textSize="22sp" />
 
             </TableRow>
 
@@ -66,14 +66,15 @@
                     android:text="@string/RutaString"
                     android:id="@+id/tituloRuta"
                     android:layout_column="0"
-                    android:textSize="22dp"
+                    android:textSize="22sp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
                     android:background="@color/gris"
                     android:textIsSelectable="false"
-                    android:paddingLeft="2dp" />
+                    android:paddingRight="1dp"
+                    android:paddingLeft="1dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -82,14 +83,15 @@
                     android:text="@string/ultimoTiempo"
                     android:id="@+id/tituloUltimoT"
                     android:layout_column="1"
-                    android:textSize="22dp"
+                    android:textSize="22sp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
                     android:background="@color/gris"
                     android:textIsSelectable="false"
-                    android:paddingLeft="2dp" />
+                    android:paddingRight="1dp"
+                    android:paddingLeft="1dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,10 +104,11 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
-                    android:textSize="22dp"
+                    android:textSize="22sp"
                     android:background="@color/gris"
                     android:textIsSelectable="false"
-                    android:paddingLeft="2dp" />
+                    android:paddingRight="1dp"
+                    android:paddingLeft="1dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,14 +117,15 @@
                     android:text="@string/clima"
                     android:id="@+id/tituloClima"
                     android:layout_column="3"
-                    android:textSize="22dp"
+                    android:textSize="22sp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
                     android:background="@color/gris"
                     android:textIsSelectable="false"
-                    android:paddingLeft="2dp" />
+                    android:paddingRight="1dp"
+                    android:paddingLeft="1dp" />
 
             </TableRow>
 

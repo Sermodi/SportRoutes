@@ -274,7 +274,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
     /**
      * DEBUGGING
      * Método que lee la base de datos y muestra en el log la información de la misma, puede utilizarse
-     *  para comprobar que la base de datos es como se desea.
+     *  para comprobar que la base de datos es como se desea, DEBUG.
      */
     public void leerBD() {
         Log.d("SQL", "Leyendo base de datos");

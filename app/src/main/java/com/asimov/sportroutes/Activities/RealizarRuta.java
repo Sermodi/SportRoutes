@@ -1,13 +1,12 @@
 package com.asimov.sportroutes.Activities;
 /*openweather*/
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Vibrator;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.asimov.sportroutes.General.Ruta;
 import com.asimov.sportroutes.R;
@@ -37,7 +36,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
         Intent i = getIntent();
         ruta = i.getParcelableExtra("ruta");
-        v = (Vibrator) getSystemService(getApplicationContext().VIBRATOR_SERVICE);
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

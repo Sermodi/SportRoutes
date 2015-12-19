@@ -30,16 +30,17 @@ import com.asimov.sportroutes.R;
  */
 public class ActivityPermisos extends AppCompatActivity{
 
-    protected AlertDialog alert = null;
-    protected AlertDialog.Builder builder;
+    AlertDialog alert = null;
+    AlertDialog.Builder builder;
 
-    protected static final int PERMISOS_LOCALIZACION_C = 3;
-    protected static final int PERMISOS_LOCALIZACION_F = 2 ;
-    protected static final int PERMISOS_INTERNET = 1;
+    private static final int PERMISOS_LOCALIZACION_C = 3;
+    private static final int PERMISOS_LOCALIZACION_F = 2 ;
+    private static final int PERMISOS_INTERNET = 1;
     /**
      * Comprueba los permisos necesarios para que funcione la aplicación en este punto
      */
-    protected void compruebaPermisos() {
+    void compruebaPermisos() {
+        //No es protected porq el Lint nos indicaba que debía ser local del paquete.
 
         int controlPermisos ;
         //Primero se comprueba el permiso de acceso a INTERNET
@@ -73,7 +74,8 @@ public class ActivityPermisos extends AppCompatActivity{
      * Comprueba la disponibilidad del sistema GPS en el dispositivo, si no está disponible se
      *  ejecuta una alerta (alertaNoGPS).
      */
-    protected void comprobarGPS() {
+    void comprobarGPS() {
+        //No es protected porq el Lint nos indicaba que debía ser local del paquete.
         LocationManager locManag = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //Si el GPS no está activado se lanza una alerta.
         if(!locManag.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -84,7 +86,7 @@ public class ActivityPermisos extends AppCompatActivity{
     /**
      * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
      */
-    protected void alertaNoGPS() {
+    private void alertaNoGPS() {
         builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alertaGpsDesactivado)
                 .setCancelable(false)
@@ -108,7 +110,8 @@ public class ActivityPermisos extends AppCompatActivity{
      * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
      *  ocultarlo hasta que se cambie de activity.
      */
-    protected void ocultarStatusBar(){
+    void ocultarStatusBar(){
+        //No es protected porq el Lint nos indicaba que debía ser local del paquete.
         final View decorView = getWindow().getDecorView();
         // Oculta la Status Bar
         final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -126,7 +129,8 @@ public class ActivityPermisos extends AppCompatActivity{
     /**
      * Mantiene la pantalla encendida.
      */
-    protected void activarPantalla(){
+    void activarPantalla(){
+        //No es protected porq el Lint nos indicaba que debía ser local del paquete.
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 

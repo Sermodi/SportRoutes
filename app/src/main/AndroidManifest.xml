@@ -41,7 +41,7 @@
         <activity android:name=".Activities.VerRutaActivity" />
         <activity
             android:name=".Activities.RealizarRuta"
-            android:label="@string/title_activity_realizar_ruta"></activity>
+            android:label="@string/title_activity_realizar_ruta"/>
     </application>
 
 </manifest>

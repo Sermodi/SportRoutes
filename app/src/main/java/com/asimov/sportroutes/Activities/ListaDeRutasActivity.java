@@ -37,11 +37,6 @@ public class ListaDeRutasActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     /**
      * En la tabla del layout se imprimen todas las rutas del sistema.
      */

@@ -1,18 +1,9 @@
 package com.asimov.sportroutes.Activities;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -22,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.asimov.sportroutes.R;
 import com.asimov.sportroutes.General.Ruta;
@@ -42,10 +32,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
     private Button boton;
     private Ruta ruta;
     private PolylineOptions polyline;
-    private final int PERMISOS_INTERNET = 1;
-    private final int PERMISOS_LOCALIZACION_F = 2;
-    private final int PERMISOS_LOCALIZACION_C = 3;
-    private static final int PERMISOS_PANTALLA = 4;
     private LatLng nuevaCoord, anteriorCoord = new LatLng(0,0); //Coordenadas, necesario inicializar la variable
     private AlertDialog alert = null;
     private EditText nombre;
@@ -197,43 +183,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
         });
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISOS_INTERNET:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosInternetDENEGADOS, Toast.LENGTH_LONG).show();
-                    this.finish();
-                }
-                break;
-            case PERMISOS_LOCALIZACION_F:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
-                    volver();
-                }
-                break;
-            case PERMISOS_LOCALIZACION_C:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
-                    volver();
-                }
-                break;
-            case PERMISOS_PANTALLA:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosPantallaDenegados, Toast.LENGTH_LONG).show();
-                    volver();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -262,15 +211,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
         }
         tomado = inState.getBoolean("tomado");
         grabando = inState.getBoolean("grabando");
-    }
-
-    /**
-     * Cierra el activity actual para volver al activity anterior
-     *  Funcionamiento semejante al boton "back"
-     */
-    private void volver(){
-        SystemClock.sleep(2000);
-        this.finish();//cierra el activity como si se pulsara el botón volver del dispositivo.
     }
 
     /**
