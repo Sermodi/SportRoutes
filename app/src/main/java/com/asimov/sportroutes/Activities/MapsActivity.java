@@ -35,7 +35,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback {
     private GoogleMap mMap;
     private boolean tomado = false;
     private boolean grabando = false;
@@ -61,14 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         polyline = new PolylineOptions();
         polyline.color(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
         polyline.visible(true);
-        //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
-        compruebaPermisos();
-        //Es necesario comprobar también si está el GPS activo.
-        comprobarGPS();
-        //Se ocultará la statusBar en este activity
-        ocultarStatusBar();
-        //Y a continuación activamos la pantalla para dejarla encendida cuando este activity esté activo.
-        activarPantalla();
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         //Contenido autogenerado por AndroidStudio
@@ -128,6 +121,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             boton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
             boton.setText(getResources().getString(R.string.parar));
         }
+        //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
+        compruebaPermisos();
+        //Es necesario comprobar también si está el GPS activo.
+        comprobarGPS();
+        //Se ocultará la statusBar en este activity
+        ocultarStatusBar();
+        //Y a continuación activamos la pantalla para dejarla encendida cuando este activity esté activo.
+        activarPantalla();
     }
 
     @Override
@@ -285,83 +286,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         );
     }
 
-    /**
-     * Comprueba los permisos necesarios para que funcione la aplicación en este punto
-     */
-    private void compruebaPermisos() {
-
-        int controlPermisos ;
-        //Primero se comprueba el permiso de acceso a INTERNET
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.INTERNET},
-                    PERMISOS_INTERNET);
-        }
-        //Se comprueban los permisos de Localización Fina.
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISOS_LOCALIZACION_F);
-        }
-
-        //Se comprueban los permisos de Localización Gruesa.
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PERMISOS_LOCALIZACION_C);
-        }
-        //Se comprueban los permisos de mantener pantalla encendida.
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WAKE_LOCK},
-                    PERMISOS_PANTALLA);
-        }
-        // ^--El resultado de "requestPermissions" se comprobará en el método "onRequestPermissionsResult"
-
-    }
-
-    /**
-     * Comprueba la disponibilidad del sistema GPS en el dispositivo, si no está disponible se
-     *  ejecuta una alerta (alertaNoGPS).
-     */
-    private void comprobarGPS() {
-        LocationManager locManag = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //Si el GPS no está activado se lanza una alerta.
-        if(!locManag.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            alertaNoGPS();
-        }
-    }
-
-    private void activarPantalla(){
-      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    }
-
-    /**
-     * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
-     */
-    private void alertaNoGPS() {
-        builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.alertaGpsDesactivado)
-                .setCancelable(false)
-                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        alert = builder.create();
-        alert.show();
-    }
 
     /**
      * Crea un alertDialog informando al usuario de que su ruta es muy pequeña (menos de
@@ -440,25 +364,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         tiempos = tiempos+" "+ getResources().getQuantityString(R.plurals.segundos,  (int)tiempo[2],(int)tiempo[2]);
         return tiempos;
 
-    }
-
-    /**
-     * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
-     *  ocultarlo hasta que se cambie de activity.
-     */
-    private void ocultarStatusBar(){
-        final View decorView = getWindow().getDecorView();
-        // ulta la Status Bar
-        final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility) {
-                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0){
-                    decorView.setSystemUiVisibility(uiOptions);
-                }
-            }
-        });
     }
 
     @Override

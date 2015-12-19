@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
  * Mostrará el activity de ConfirmarRuta donde se verá la ruta recorrida en un mapa de GoogleMaps
  *  y un par de botones, de confirmar o borrar la ruta realizada.
  */
-public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallback {
+public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallback {
 
     private Ruta ruta;
 
@@ -40,6 +40,7 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         Intent i = this.getIntent();
         ruta = i.getParcelableExtra("ruta");
         String nombreRuta = String.format(res.getString(R.string.guardarRuta), ruta.getNombre());
@@ -58,6 +59,18 @@ public class ConfirmarRuta extends AppCompatActivity implements OnMapReadyCallba
                 Ignorado();
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
+        compruebaPermisos();
+        //Es necesario comprobar también si está el GPS activo.
+        comprobarGPS();
+        //Se ocultará la statusBar en este activity
+        ocultarStatusBar();
+        super.onResume();
     }
 
     @Override

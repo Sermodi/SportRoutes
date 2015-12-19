@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.net.URI;
 import java.util.ArrayList;
 
-public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallback {
 
     private Ruta ruta;
     private float distancia;
@@ -46,13 +47,6 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
     private VerRutaActivity verRuta = this;
 
     private Button btnComenzar, btnGuiar;
-
-    private  AlertDialog alert = null;
-    private  AlertDialog.Builder builder;
-
-    private static final int PERMISOS_LOCALIZACION_C = 3;
-    private static final int PERMISOS_LOCALIZACION_F = 2 ;
-    private static final int PERMISOS_INTERNET = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,23 +159,21 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
         alert.show();
     }
 
-    /**
-     * Oculta el statusBar del dispositivo, y si este se vuelve visible por alguna razón vuelve a
-     *  ocultarlo hasta que se cambie de activity.
-     */
-    private void ocultarStatusBar(){
-        final View decorView = getWindow().getDecorView();
-        // Oculta la Status Bar
-        final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility) {
-                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                    decorView.setSystemUiVisibility(uiOptions);
-                }
-            }
-        });
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Se oculta el statusBar para dejar la pantalla más visicble.
+        ocultarStatusBar();
+        //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
+        compruebaPermisos();
+        //Es necesario comprobar también si está el GPS activo.
+        comprobarGPS();
+        //Se ocultará la statusBar en este activity
+        ocultarStatusBar();
+        //Y a continuación activamos la pantalla para dejarla encendida cuando este activity esté activo.
+        activarPantalla();
+
     }
 
     @Override
@@ -263,111 +255,7 @@ public class VerRutaActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    /**
-     * Comprueba los permisos necesarios para que funcione la aplicación en este punto
-     */
-    private void compruebaPermisos() {
-
-        int controlPermisos ;
-        //Primero se comprueba el permiso de acceso a INTERNET
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.INTERNET},
-                    PERMISOS_INTERNET);
-        }
-        //Se comprueban los permisos de Localización Fina.
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISOS_LOCALIZACION_F);
-        }
-
-        //Se comprueban los permisos de Localización Gruesa.
-        controlPermisos = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if (controlPermisos != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PERMISOS_LOCALIZACION_C);
-        }
-        // ^--El resultado de "requestPermissions" se comprobará en el método "onRequestPermissionsResult"
-
-    }
-
-    /**
-     * Comprueba la disponibilidad del sistema GPS en el dispositivo, si no está disponible se
-     *  ejecuta una alerta (alertaNoGPS).
-     */
-    private void comprobarGPS() {
-        LocationManager locManag = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //Si el GPS no está activado se lanza una alerta.
-        if(!locManag.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            alertaNoGPS();
-        }
-    }
-
-    /**
-     * Crea un alertDialog que informa al usuario de que no hay GPS pidiendole activarlo.
-     */
-    private void alertaNoGPS() {
-        builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.alertaGpsDesactivado)
-                .setCancelable(false)
-                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        alert = builder.create();
-        alert.show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISOS_INTERNET:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosInternetDENEGADOS, Toast.LENGTH_LONG).show();
-                    this.finish();
-                }
-                break;
-            case PERMISOS_LOCALIZACION_F:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
-                    volver();
-                }
-                break;
-            case PERMISOS_LOCALIZACION_C:
-                // Si los permisos no están concedidos
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.PermisosGpsDENEGADOS, Toast.LENGTH_LONG).show();
-                    volver();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    /**
-     * Cierra el activity actual para volver al activity anterior
-     *  Funcionamiento semejante al boton "back"
-     */
-    private void volver(){
-        SystemClock.sleep(2000);
-        this.finish();//cierra el activity como si se pulsara el botón volver del dispositivo.
-    }
-
-
-
 }
+
+
+
