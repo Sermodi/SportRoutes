@@ -10,12 +10,13 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 /**
- * Created by antonio on 12/11/15.
- *
  * Esta clase contiene toda la información de una ruta, desde su nombre y todos los puntos que la
  *  comprenden hasta el tiempo de inicio y fin.
  * Implementa la clase Parcelable para poder ser enviada entre activities y ser guardada cuando se
  *  realice un giro de pantalla.
+ *
+ * Autor: antonio
+ * Fecha: 12/11/15.
  */
 public class Ruta implements Parcelable {
     private final String nombre;
@@ -28,8 +29,6 @@ public class Ruta implements Parcelable {
         nombre = inombre;
         coordenadas = new ArrayList<>();
         tiempoMejor = Long.MAX_VALUE;
-
-
     }
 
     /**
@@ -146,13 +145,36 @@ public class Ruta implements Parcelable {
     }
 
     /**
-     * Devuelve el último tiempo en el que se realizó la ruta (en milisegundos)
-     * @return long con el último tiempo de la ruta en milisegundos.
+     * Devuelve el último tiempo en el que se realizó la ruta (en segundos)
+     * @return long con el último tiempo de la ruta en segundos.
      */
     public long getTiempoUltimo(){
         return tiempoUltimo;
     }
 
+    /**
+     * Devuelve el último tiempo en el que se realizó la ruta (en segundos) en un formato que
+     * una persona podría leer sin hacer ningun cálculo
+     * @return String con el último tiempo de la ruta en segundos.
+     */
+    public String getTiempoUltimoHumano(){
+        String tiempo = "";
+        long tiempAux = tiempoUltimo;
+        long aux;
+        if (tiempAux >= 3600) {//mayor de una hora
+            aux = tiempAux/3600;
+            tiempAux = tiempAux - aux * 3600;
+            tiempo += aux + " h ";
+        }
+        if (tiempAux >= 60){ //mayor de un minuto
+            aux = tiempAux/60;
+            tiempAux = tiempAux - (aux * 60);
+            tiempo += aux + " m ";
+        }
+        tiempo+= tiempAux + " s ";
+        Log.d("DEBUG","El tiempoUltimo" + tiempoUltimo + " en Humano es: " + tiempo);
+        return tiempo;
+    }
     /**
      * Guarda el último tiempo calculado hasta ahora.
      * @param tiempoUltimo long con el último tiempo registrado.
@@ -164,7 +186,7 @@ public class Ruta implements Parcelable {
 
     /**
      * Devuelve el momento inicial en el que se ha empezado a capturar la ruta.
-     * @return long con el tiempo en milisegundos.
+     * @return long con el tiempo en segundos.
      */
     public long getTiempoInicio() {
         return tiempoInicio;
@@ -184,6 +206,30 @@ public class Ruta implements Parcelable {
      */
     public long getTiempoMejor() {
         return tiempoMejor;
+    }
+
+    /**
+     * Devuelve el último tiempo en el que se realizó la ruta (en segundos) en un formato que
+     * una persona podría leer sin hacer ningun cálculo
+     * @return String con el último tiempo de la ruta en segundos.
+     */
+    public String getTiempoMejorHumano(){
+        String tiempo = "";
+        long tiempAux = tiempoMejor;
+        long aux;
+        if (tiempAux >= 3600) {//mayor de una hora
+            aux = tiempAux/3600;
+            tiempAux = tiempAux - aux * 3600;
+            tiempo += aux + " h ";
+        }
+        if (tiempAux >= 60){ //mayor de un minuto
+            aux = tiempAux/60;
+            tiempAux = tiempAux - (aux * 60);
+            tiempo += aux + " m ";
+        }
+        tiempo+= tiempAux + " s ";
+        Log.d("DEBUG","El tiempoMejor" + tiempoMejor + "en Humano es: " + tiempo);
+        return tiempo;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.asimov.sportroutes.Activities;
+package com.asimov.sportroutes.activities;
 
 import android.app.Activity;
 import android.os.Bundle;

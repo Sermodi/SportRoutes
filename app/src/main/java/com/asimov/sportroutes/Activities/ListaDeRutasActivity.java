@@ -1,4 +1,4 @@
-package com.asimov.sportroutes.Activities;
+package com.asimov.sportroutes.activities;
 
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -58,12 +58,12 @@ public class ListaDeRutasActivity extends AppCompatActivity {
             fila.addView(nombre);
 
             TextView ultimo = new TextView(this);
-            ultimo.setText(String.valueOf(ruta.getTiempoUltimo()));
+            ultimo.setText(ruta.getTiempoUltimoHumano());
             addPropiedades(ultimo);
             fila.addView(ultimo);
 
             TextView mejor = new TextView(this);
-            mejor.setText(String.valueOf(ruta.getTiempoMejor()));
+            mejor.setText(String.valueOf(ruta.getTiempoMejorHumano()));
             addPropiedades(mejor);
             fila.addView(mejor);
 

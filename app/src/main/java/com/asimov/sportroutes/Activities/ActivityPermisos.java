@@ -1,4 +1,4 @@
-package com.asimov.sportroutes.Activities;
+package com.asimov.sportroutes.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
