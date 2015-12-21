@@ -1,4 +1,4 @@
-package com.asimov.sportroutes.Activities;
+package com.asimov.sportroutes.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -211,9 +211,9 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
                 //Los botones deben actuar de distinto modo dependiendo de la distancia al inicio
                 if (distancia > 20){
                     btnComenzar.setClickable(false);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.grisClaro));
                     btnGuiar.setClickable(true);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_light_default));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gris));
                     btnGuiar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -223,9 +223,9 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
 
                 }else{
                     btnComenzar.setClickable(true);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_plus_signin_btn_text_light_default));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gris));
                     btnGuiar.setClickable(false);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.grisClaro));
                     btnComenzar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
