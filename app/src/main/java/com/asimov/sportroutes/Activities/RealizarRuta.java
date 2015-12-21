@@ -61,9 +61,17 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         mMap = googleMap;
         /* Se activa el botón de google maps que centra el mapa en la posición actual.*/
         mMap.setMyLocationEnabled(true);
+        //Creamos el marcador de inicio de ruta
         MarkerOptions mo = new MarkerOptions();
         mo.position(ruta.getCoordenadas().get(0));
+        mo.title("Inicio");
         mMap.addMarker(mo);
+        //Y se añade el marcador de fin de ruta
+        mo = new MarkerOptions();
+        mo.position(ruta.getCoordenadas().get(ruta.getSize()-1));
+        mo.title("Fin");
+        mMap.addMarker(mo);
+
         PolylineOptions polilyne = new PolylineOptions();
         polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAlerta));
         polilyne.visible(true);
@@ -80,7 +88,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
                     inicioMuestra = false;
                 }
                 else{
-                    camPos = CameraPosition.fromLatLngZoom(nuevaCoord, mMap.getCameraPosition().zoom);
+                    camPos = CameraPosition.fromLatLngZoom(nuevaCoord, 25F);
                     if(ruta.alejado(nuevaCoord)){
                         //Vibra por 500 milisegundos
                         v.vibrate(500);
