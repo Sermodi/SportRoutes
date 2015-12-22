@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Vibrator;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.asimov.sportroutes.General.Ruta;
 import com.asimov.sportroutes.R;
@@ -17,7 +18,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback {
@@ -28,6 +31,13 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private boolean inicioMuestra = true;
     private CameraPosition camPos;
     private Vibrator v;
+    private Location antiguaLocation;
+
+    private final int METRO = 1;
+    private final int KILOMETRO = 1000;
+    private Polyline linea;
+    private Marker markSiguiente,markFinal;
+    private int coordInicial; //indice de la ruta que marca la siguiente coordenada por la que debe pasar el usuario
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,9 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
         Intent i = getIntent();
         ruta = i.getParcelableExtra("ruta");
+
+        nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo.
+
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -59,44 +72,93 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        /* Se activa el botón de google maps que centra el mapa en la posición actual.*/
-        mMap.setMyLocationEnabled(true);
-        //Creamos el marcador de inicio de ruta
-        MarkerOptions mo = new MarkerOptions();
-        mo.position(ruta.getCoordenadas().get(0));
-        mo.title("Inicio");
-        mMap.addMarker(mo);
-        //Y se añade el marcador de fin de ruta
-        mo = new MarkerOptions();
-        mo.position(ruta.getCoordenadas().get(ruta.getSize()-1));
-        mo.title("Fin");
-        mMap.addMarker(mo);
 
-        PolylineOptions polilyne = new PolylineOptions();
-        polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAlerta));
-        polilyne.visible(true);
-        polilyne.addAll(ruta.getCoordenadas());
-        googleMap.addPolyline(polilyne);
+        dibujamMap();
+
         // El siguiente listener controla el cambio de coordenadas */
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
-                nuevaCoord = new LatLng(location.getLatitude(), location.getLongitude());
+                antiguaLocation = new Location("");
+                antiguaLocation.setLatitude(nuevaCoord.latitude);
+                antiguaLocation.setLongitude(nuevaCoord.longitude);
+
+                //Si el usuario se ha movido al menos 1 metro
+                float distancia = location.distanceTo(antiguaLocation);
+                if (distancia >= METRO) {
+                    nuevaCoord = new LatLng(location.getLatitude(), location.getLongitude());
+                    camPos = CameraPosition.fromLatLngZoom(nuevaCoord, 25F);
                 /*Un marcador necesita como mínimo unas coordenadas.*/
-                if(inicioMuestra){
-                    camPos = CameraPosition.fromLatLngZoom(nuevaCoord, 25F);
-                    inicioMuestra = false;
-                }
-                else{
-                    camPos = CameraPosition.fromLatLngZoom(nuevaCoord, 25F);
-                    if(ruta.alejado(nuevaCoord)){
-                        //Vibra por 500 milisegundos
-                        v.vibrate(500);
+                    if (inicioMuestra) {
+                        inicioMuestra = false;
+                    } else {
+                        float cercania;
+                        float menorDistancia = 5 * KILOMETRO;//Distancia al punto más cercano
+                        int i = coordInicial;
+                        Location punto = new Location("punto");
+                        do {
+                            //obtenemos la location
+                            LatLng puntoLatLng = ruta.getCoordenadas().get(coordInicial + i);
+                            punto.setLongitude(puntoLatLng.longitude);
+                            punto.setLatitude(puntoLatLng.latitude);
+                            //obtenemos la distancia desde posicion actual a punto de ruta
+                            cercania = location.distanceTo(punto);
+                            //Si estamos a menos de 1 Metro de un punto de la ruta, se elimina ese
+                            // punto y todos los anteriores
+
+                            if (cercania < 2*METRO){
+                                for (int j = 0; j <= i; j++){
+                                    coordInicial++;
+                                    menorDistancia = 0;
+                                    Log.d("LOGD","Coincide, se borra el elemento");
+                                }
+                                dibujamMap();
+                            }else if (cercania < menorDistancia){
+                                menorDistancia = cercania;
+                                Log.d("LOGD","Está más cerca");
+                            }
+                            i++;
+                        }while((coordInicial + i)<ruta.getSize() &&     //Mientras sigan quedando coordenadas y
+                                !(cercania < METRO) &&                  // el usuario no esté en el punto y
+                                cercania < 5*KILOMETRO);                // el usuario esté a menos de 5 km
+
+                        if (menorDistancia >= 15) {
+                            //Vibra por 500 milisegundos
+                            v.vibrate(500);
+                        }
                     }
+                    CameraUpdate cu = CameraUpdateFactory.newCameraPosition(camPos);
+                    mMap.animateCamera(cu);
                 }
-                CameraUpdate cu = CameraUpdateFactory.newCameraPosition(camPos);
-                mMap.animateCamera(cu);
             }
         });
+    }
+
+    public void dibujamMap(){
+        //Borramos la linea anterior, si existe
+        if (linea != null) {
+            linea.remove();
+            markSiguiente.remove();
+            Log.d("LOGD", "Se borra la linea");
+        }
+        /* Se activa el botón de google maps que centra el mapa en la posición actual.*/
+        mMap.setMyLocationEnabled(true);
+        //Creamos el marcador de inicio de ruta
+        MarkerOptions mo = new MarkerOptions();
+        mo.position(ruta.getCoordenadas().get(coordInicial));
+        mo.title("Siguiente");
+        markSiguiente = mMap.addMarker(mo);
+        //Y se añade el marcador de fin de ruta
+        mo = new MarkerOptions();
+        mo.position(ruta.getCoordenadas().get(ruta.getSize()-1));
+        mo.title("Fin");
+        markFinal = mMap.addMarker(mo);
+
+        PolylineOptions polilyne = new PolylineOptions();
+        polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAlerta));
+        polilyne.visible(true);
+        polilyne.addAll(ruta.getCoordenadas(coordInicial));
+        linea = mMap.addPolyline(polilyne);
+        Log.d("LOGD","" + ruta.getSize());
     }
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Esta clase contiene toda la información de una ruta, desde su nombre y todos los puntos que la
@@ -92,6 +93,13 @@ public class Ruta implements Parcelable {
     }
 
     /**
+     * Elimina la coordenada con el indice correspondiente.
+     */
+    public void borraPrimeraCoordenada() {
+        coordenadas.remove(0);
+    }
+
+    /**
      * DEBUGING
      * Método que imprime todos los puntos de la ruta por el logcat.
      */
@@ -131,6 +139,18 @@ public class Ruta implements Parcelable {
     public ArrayList<LatLng> getCoordenadas() {
         return coordenadas;
     }
+     /**
+     * Un conjunto con cada uno de los puntos guardados que tiene la ruta actualmente.
+     * @return un ArrayList de LatLng
+     */
+    public ArrayList<LatLng> getCoordenadas(int inicial) {
+        ArrayList<LatLng> result = new ArrayList<>();
+        for (int i = inicial; i < coordenadas.size(); i++) {
+            result.add(coordenadas.get(i));
+        }
+        return result;
+    }
+
 
     /**
      * Dado un tiempo en milisegundos lo guarda como último tiempo de la ruta y si

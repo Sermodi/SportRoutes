@@ -23,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -63,12 +64,12 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
 
         //Mostramos el mejor tiempo de la ruta.
         TextView textMejor = (TextView) findViewById(R.id.textMejorTiempo);
-        String texto = String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg);
+        String texto = ruta.getTiempoMejorHumano();
         textMejor.setText(texto);
 
         //Mostramos el ultimo tiempo de la ruta.
         TextView textUltimo = (TextView) findViewById(R.id.textUltimoTiempo);
-        texto = String.valueOf(ruta.getTiempoMejor()) + " " + getString(R.string.seg);
+        texto = ruta.getTiempoMejorHumano();
         textUltimo.setText(texto);
 
         //Operaciones sobre el mapa.
@@ -167,6 +168,18 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
 
         googleMap.setMyLocationEnabled(true);
+
+        //Creamos el marcador de inicio de ruta
+        MarkerOptions mo = new MarkerOptions();
+        mo.position(ruta.getCoordenadas().get(0));
+        mo.title("Inicio");
+        googleMap.addMarker(mo);
+        //Y se añade el marcador de fin de ruta
+        mo = new MarkerOptions();
+        mo.position(ruta.getCoordenadas().get(ruta.getSize()-1));
+        mo.title("Fin");
+        googleMap.addMarker(mo);
+
         ArrayList<LatLng> rutas = ruta.getCoordenadas();
         //Creamos la polilinea a mostrar en el mapa
         PolylineOptions polilyne = new PolylineOptions();
@@ -211,9 +224,9 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
                 //Los botones deben actuar de distinto modo dependiendo de la distancia al inicio
                 if (distancia > 20){
                     btnComenzar.setClickable(false);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.grisClaro));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.comenzarTexto));
                     btnGuiar.setClickable(true);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gris));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.negro));
                     btnGuiar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -223,9 +236,9 @@ public class VerRutaActivity extends ActivityPermisos implements OnMapReadyCallb
 
                 }else{
                     btnComenzar.setClickable(true);
-                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gris));
+                    btnComenzar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.negro));
                     btnGuiar.setClickable(false);
-                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.grisClaro));
+                    btnGuiar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.comenzarTexto));
                     btnComenzar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

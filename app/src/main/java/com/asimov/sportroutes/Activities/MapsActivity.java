@@ -271,8 +271,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
      */
     private void goToConfirmarRuta(){
         tomado = true;
-        Log.d("TIEMPO",""+ruta.getTiempoUltimo());
-        Log.d("TIEMPO", "" + ruta.getTiempoInicio());
         ruta.calculaDuracion();
         Log.d("TIEMPO", "ULTIMO: "+ruta.getTiempoUltimo()+ "MEJOR"+ ruta.getTiempoMejor());
         long[] tiempo = ruta.tiempoUltimoToArray();
