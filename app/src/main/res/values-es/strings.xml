@@ -80,4 +80,5 @@
     <string name="Comenzar">Comenzar</string>
     <string name="guiame">Guiame</string>
     <string name="gMaps">Google Maps te llevara al punto de inicio. ¡Llamanos cuando llegues!</string>
+    <string name="finDeRuta">Has terminado correctamente. Felicidades!!</string>
 </resources>

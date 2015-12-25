@@ -85,4 +85,5 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="Comenzar">Start</string>
     <string name="gMaps">We call Google Maps now. Call us when you get to start!</string>
     <string name="title_activity_realizar_ruta" translatable="false">Map</string>
+    <string name="finDeRuta">You end the route successfully!!\nCongratulations</string>
 </resources>

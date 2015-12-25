@@ -162,7 +162,7 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
 
                     //DEBUG Log.d("LocDebug", "Distancia es de --> " + distancia(anteriorCoord, nuevaCoord));
                     //Una coordenada se considerará válida si como mínimo se ha movido una distancia de 0.0001 grados.
-                    if (distancia(anteriorCoord, nuevaCoord) > 0.0001) {
+                    if (Ruta.calculaDistancia(anteriorCoord, nuevaCoord) > 0.0001) {
                         anteriorCoord = nuevaCoord;
                         //Datos de inicialización, son diferentes.
                         CameraPosition camPos;
@@ -211,19 +211,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
         }
         tomado = inState.getBoolean("tomado");
         grabando = inState.getBoolean("grabando");
-    }
-
-    /**
-     * Cálculo de la distancia euclidea entre desde el "origen" hasta el "destino"
-     * @param origen ,punto desde el que se calculará la distancia.
-     * @param destino ,punto hacia el que se calculará la distancia.
-     * @return la distancia euclidea desde origen a destino, esta es: SQRT(destino.x - origen.x)^2 + (destino.y - origen.y)^2)
-     */
-    private double distancia(LatLng origen, LatLng destino){
-        return Math.sqrt(
-                Math.pow( (destino.latitude - origen.latitude) , 2 ) +
-                        Math.pow( (destino.longitude - origen.longitude ) , 2 )
-        );
     }
 
 

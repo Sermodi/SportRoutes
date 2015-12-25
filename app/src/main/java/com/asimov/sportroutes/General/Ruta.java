@@ -8,7 +8,6 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Esta clase contiene toda la información de una ruta, desde su nombre y todos los puntos que la
@@ -90,13 +89,6 @@ public class Ruta implements Parcelable {
      */
     public void addCoordenada(LatLng coord){
         coordenadas.add(coord);
-    }
-
-    /**
-     * Elimina la coordenada con el indice correspondiente.
-     */
-    public void borraPrimeraCoordenada() {
-        coordenadas.remove(0);
     }
 
     /**
@@ -200,16 +192,11 @@ public class Ruta implements Parcelable {
      * @param tiempoUltimo long con el último tiempo registrado.
      */
     public void setTiempoUltimo(long tiempoUltimo) {
-
         this.tiempoUltimo = tiempoUltimo;
-    }
-
-    /**
-     * Devuelve el momento inicial en el que se ha empezado a capturar la ruta.
-     * @return long con el tiempo en segundos.
-     */
-    public long getTiempoInicio() {
-        return tiempoInicio;
+        //Si el ultimo tiempo mejora el mejor tiempo, este se renueva.
+        if(tiempoUltimo < tiempoMejor){
+            this.tiempoMejor = tiempoUltimo;
+        }
     }
 
     /**
@@ -288,15 +275,36 @@ public class Ruta implements Parcelable {
     }
 
 
-    public boolean alejado(LatLng nuevaCoord) {
+    /**
+     * Determina si una coordenada está cerca de algún elemento de la ruta. Si es así devuelve el
+     *  índice correspondiente, sino su resultado es cero.
+     * @param nuevaCoord LatLng con la coordenada que se desea comprobar.
+     * @return int: ·Si la coordenada está cerca de algun punto -- indice de ese punto en la lista
+     *                  de coordenadas
+     *              ·Sino -- return -1;
+     */
+    public int alejado(LatLng nuevaCoord) {
         for (int i =0;i<coordenadas.size();i++){
-            double d = Math.sqrt(Math.pow( (nuevaCoord.latitude - coordenadas.get(i).latitude) , 2 ) +
-                            Math.pow( (nuevaCoord.longitude - coordenadas.get(i).longitude ) , 2 ));
-            if(d<0.0001){
-                return false;
+            //Cálculo de la distancia euclidea.
+            double distan = calculaDistancia(coordenadas.get(i),nuevaCoord);
+            if(distan < 0.0001){
+                return i;
             }
         }
-        return true;
+        return -1;
 
+    }
+
+    /**
+     * Cálculo de la distancia euclidea entre desde el "origen" hasta el "destino"
+     * @param origen ,punto desde el que se calculará la distancia.
+     * @param destino ,punto hacia el que se calculará la distancia.
+     * @return la distancia euclidea desde origen a destino, esta es: SQRT(destino.x - origen.x)^2 + (destino.y - origen.y)^2)
+     */
+    public static double calculaDistancia(LatLng origen, LatLng destino){
+        return Math.sqrt(
+                Math.pow( (destino.latitude - origen.latitude) , 2 ) +
+                        Math.pow( (destino.longitude - origen.longitude ) , 2 )
+        );
     }
 }
