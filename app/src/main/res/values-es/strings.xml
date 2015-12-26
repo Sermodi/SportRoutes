@@ -4,7 +4,6 @@
     <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
     <string name="deAcuerdo">De acuerdo</string>
-    <string name="generarRuta">Nueva Ruta</string>
     <string name="realizarRuta">Realizar Ruta</string>
     <string name="manual">¿Cómo usar la Aplicación?</string>
     <string name="inicio">Inicio</string>
@@ -58,7 +57,6 @@
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Permite a la aplicación avisar al usuario por métodos que serán definidos y actualizados próximamente. Funcionaría emitiendo algún tipo de sonido o vibración (se definirá con la mayor brevedad posible) cuando el usuario se saliera de la ruta seleccionada.</string>
     <string name="preferenciaTemperaturaContenidoAmpliado">Permite a la aplicación mostrar la temperatura. Pensamos que tiene mucha relevancia y utilidad, ya que muchas veces que el sol brille no tiene nada que ver con que las temperaturas puedan estar bajo cero.</string>
     <string name="preferenciaTiempoContenidoAmpliado">Permite a la aplicación mostrar una predicción del tiempo. Esta configuración permite al usuario ser consciente del tiempo que hay o va a haber cuando quiera comenzar la ruta.</string>
-    <string name="howTo">¿Cómo..?</string>
     <string name="mensajeBienvenida">Bienvenido a SportRoutes!\nTu aplicación de seguimiento de rutas favorita</string>
     <string name="preferenciaAvisoSalidaTitulo">Alerta de abandono de ruta</string>
     <string name="preferenciaAvisoSalidaContenido">Notifica al usuario cuando abandona la ruta</string>
@@ -67,7 +65,6 @@
     <string name="preferenciaTiempoContenido">Permite a la aplicación mostrar una predicción del tiempo</string>
     <string name="preferenciaTiempoTitulo">Mostrar predicción climatológica</string>
     <string name="routePreferences">Configuración de ruta</string>
-    <string name="PermisosPantallaDenegados">No se ha permitido dejar la pantalla encendida.</string>
     <string name="RutaString"><b>Ruta</b></string>
     <string name="mejorTiempo"><b>Mejor </b></string>
     <string name="ultimoTiempo"><b>Último</b></string>
@@ -81,4 +78,6 @@
     <string name="guiame">Guiame</string>
     <string name="gMaps">Google Maps te llevara al punto de inicio. ¡Llamanos cuando llegues!</string>
     <string name="finDeRuta">Has terminado correctamente. Felicidades!!</string>
+    <string name="TituloRutaEnd">Ruta Finalizada.</string>
+    <string name="record">Has superado tu mejor tiempo!</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.asimov.sportroutes.activities;
 /*openweather*/
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +10,9 @@ import android.os.Vibrator;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.TextView;
 
+import com.asimov.sportroutes.General.ManejadorBD;
 import com.asimov.sportroutes.General.Ruta;
 import com.asimov.sportroutes.R;
 import com.google.android.gms.maps.CameraUpdate;
@@ -30,7 +32,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private GoogleMap mMap;
     private Ruta ruta;
     private LatLng nuevaCoord;
-    private boolean inicioMuestra = true;
+    private boolean inicioMuestra = true, fin = false;
     private CameraPosition camPos;
     private Vibrator v;
     private Location antiguaLocation;
@@ -40,6 +42,8 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private Polyline linea;
     private Marker markSiguiente;
     private int coordInicial; //indice de la ruta que marca la siguiente coordenada por la que debe pasar el usuario
+    private long tiempo;
+    private ManejadorBD db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,8 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         ruta = i.getParcelableExtra("ruta");
 
         nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo.
+
+        coordInicial = 0;
 
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -68,6 +74,8 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         //Y a continuación activamos la pantalla para dejarla encendida cuando este activity esté activo.
         activarPantalla();
 
+        db = new ManejadorBD(this);
+
         super.onResume();
     }
 
@@ -79,9 +87,12 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
         polilyne.visible(true);
         polilyne.addAll(ruta.getCoordenadas());
-        linea = mMap.addPolyline(polilyne);
+        polilyne.zIndex(1);
+        mMap.addPolyline(polilyne);
 
         dibujamMap();
+        
+        tiempo = System.currentTimeMillis();
 
         // El siguiente listener controla el cambio de coordenadas */
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
@@ -93,50 +104,62 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
                 //Si el usuario se ha movido al menos 1 metro
                 float distancia = location.distanceTo(antiguaLocation);
-                if (distancia >= METRO) {
+                if (distancia >= METRO && !fin) {
                     nuevaCoord = new LatLng(location.getLatitude(), location.getLongitude());
                     camPos = CameraPosition.fromLatLngZoom(nuevaCoord, 25F);
                 /*Un marcador necesita como mínimo unas coordenadas.*/
                     if (inicioMuestra) {
                         inicioMuestra = false;
                     } else {
-                        float cercania;
-                        float menorDistancia = KILOMETRO;//Distancia al punto más cercano
-                        int i = coordInicial;
-                        Location punto = new Location("punto");
-                        do {
-                            //obtenemos la location
-                            LatLng puntoLatLng = ruta.getCoordenadas().get(coordInicial + i);
-                            punto.setLongitude(puntoLatLng.longitude);
-                            punto.setLatitude(puntoLatLng.latitude);
-                            //obtenemos la distancia desde posicion actual a punto de ruta
-                            cercania = location.distanceTo(punto);
-                            //Si estamos a menos de 1 Metro de un punto de la ruta, se elimina ese
-                            // punto y todos los anteriores
-                            if (cercania < 3*METRO){
-                                if(coordInicial + i == ruta.getCoordenadas().size()) {
-                                    finDeRuta();
-                                }else{
-                                    for (int j = 0; j <= i; j++) {
-                                        coordInicial++;
-                                        menorDistancia = 0;
-                                        Log.d("LOGD", "Coincide, se borra el elemento");
-                                    }
-                                }
+                        int indice = ruta.pasa_por(new LatLng(location.getLatitude(), location.getLongitude()));
+                        if (indice > -1){
+                            /*Hay una coordenada cercana de la ruta */
+                            if (indice >= ruta.getSize() - 1){
+                                tiempo = System.currentTimeMillis() - tiempo;
+                                tiempo /= 1000;
+                                finDeRuta();
+                            }else{
+                                coordInicial = indice + 1;
                                 dibujamMap();
-                            }else if (cercania < menorDistancia){
-                                menorDistancia = cercania;
-                                Log.d("LOGD","Está más cerca");
                             }
-                            i++;
-                        }while((coordInicial + i)<ruta.getSize() &&     //Mientras sigan quedando coordenadas y
-                                !(cercania < METRO) &&                  // el usuario no esté en el punto y
-                                cercania < 5*KILOMETRO);                // el usuario esté a menos de 5 km
-
-                        if (menorDistancia >= 15) {
+                        }else{
                             //Vibra por 500 milisegundos
                             v.vibrate(500);
                         }
+//                        //TODO borrar
+//                        do {
+//                            //obtenemos la location
+//                            LatLng puntoLatLng = ruta.getCoordenadas().get(coordInicial + i);
+//                            punto.setLongitude(puntoLatLng.longitude);
+//                            punto.setLatitude(puntoLatLng.latitude);
+//                            //obtenemos la distancia desde posicion actual a punto de ruta
+//                            cercania = location.distanceTo(punto);
+//                            //Si estamos a menos de 1 Metro de un punto de la ruta, se elimina ese
+//                            // punto y todos los anteriores
+//                            if (cercania < 3*METRO){
+//                                if(coordInicial + i == ruta.getCoordenadas().size()) {
+//                                    finDeRuta();
+//                                }else{
+//                                    for (int j = 0; j <= i; j++) {
+//                                        coordInicial++;
+//                                        menorDistancia = 0;
+//                                        Log.d("LOGD", "Coincide, se borra el elemento");
+//                                    }
+//                                }
+//                                dibujamMap();
+//                            }else if (cercania < menorDistancia){
+//                                menorDistancia = cercania;
+//                                Log.d("LOGD","Está más cerca");
+//                            }
+//                            i++;
+//                        }while((coordInicial + i)<ruta.getSize() &&     //Mientras sigan quedando coordenadas y
+//                                !(cercania < METRO) &&                  // el usuario no esté en el punto y
+//                                cercania < 5*KILOMETRO);                // el usuario esté a menos de 5 km
+//
+//                        if (menorDistancia >= 15) {
+//                            //Vibra por 500 milisegundos
+//                            v.vibrate(500);
+//                        }
                     }
                     CameraUpdate cu = CameraUpdateFactory.newCameraPosition(camPos);
                     mMap.animateCamera(cu);
@@ -168,23 +191,57 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         PolylineOptions polilyne = new PolylineOptions();
         polilyne.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAlerta));
         polilyne.visible(true);
-        polilyne.addAll(ruta.getCoordenadas());
+        polilyne.addAll(ruta.getCoordenadas(coordInicial));
+        polilyne.zIndex(10);
         linea = mMap.addPolyline(polilyne);
         Log.d("LOGD","" + ruta.getSize());
     }
 
     private void finDeRuta(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.finDeRuta)
-                .setCancelable(false)
-                .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(getBaseContext(), MainActivity.class));
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+        final Dialog dialog = new Dialog(RealizarRuta.this);
+        dialog.setContentView(R.layout.alert_fin_ruta);
+        dialog.setTitle(R.string.TituloRutaEnd);
+
+        dialog.setCanceledOnTouchOutside(true);
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                db.actualizarRuta(ruta.getNombre(),ruta.getTiempoUltimo(), (tiempo < ruta.getTiempoMejor()));
+                Intent i = new Intent(getApplicationContext(), ListaDeRutasActivity.class);
+                startActivity(i);
+            }
+        });
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Intent i = new Intent(getApplicationContext(), ListaDeRutasActivity.class);
+                startActivity(i);
+            }
+        });
+
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText(R.string.finDeRuta);
+
+        TextView textRecord = (TextView) dialog.findViewById(R.id.textRecord);
+        if (tiempo < ruta.getTiempoMejor()) {
+            textRecord.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.gris));
+            textRecord.setText(R.string.record);
+        }else{
+            textRecord.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.gris));
+            textRecord.setText("");
+        }
+        ruta.setTiempoUltimo(tiempo);
+
+        TextView textTiempo = (TextView) dialog.findViewById(R.id.tiempo);
+        textTiempo.setText(ruta.getTiempoUltimoHumano());
+
+        dialog.show();
+
+        fin = true;
 
     }
 }

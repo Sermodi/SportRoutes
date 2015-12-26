@@ -150,8 +150,10 @@ public class Ruta implements Parcelable {
      * @param tiempo long con el tiempo en milisegundos.
      */
     public void setTiempo(long tiempo) {
-        this.tiempoUltimo = tiempo;
-        if (tiempoMejor>tiempo || tiempo == 0){
+        if (tiempoUltimo == 0){
+            this.tiempoUltimo = tiempo;
+        }
+        if (tiempo < this.tiempoMejor){
             this.tiempoMejor = tiempo;
         }
     }
@@ -196,6 +198,7 @@ public class Ruta implements Parcelable {
         //Si el ultimo tiempo mejora el mejor tiempo, este se renueva.
         if(tiempoUltimo < tiempoMejor){
             this.tiempoMejor = tiempoUltimo;
+            Log.d("LOGD","Es más pequeño " + tiempoMejor + " -- ultimo : " + tiempoUltimo);
         }
     }
 
@@ -283,7 +286,7 @@ public class Ruta implements Parcelable {
      *                  de coordenadas
      *              ·Sino -- return -1;
      */
-    public int alejado(LatLng nuevaCoord) {
+    public int pasa_por(LatLng nuevaCoord) {
         for (int i =0;i<coordenadas.size();i++){
             //Cálculo de la distancia euclidea.
             double distan = calculaDistancia(coordenadas.get(i),nuevaCoord);

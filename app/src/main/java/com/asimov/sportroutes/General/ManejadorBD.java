@@ -156,8 +156,9 @@ public class ManejadorBD extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             num_ruta = cursor.getInt(0);
             Ruta ruta = new Ruta(cursor.getString(1));
-            ruta.setTiempoInicio(cursor.getLong(2));
+            ruta.setTiempoUltimo(cursor.getLong(2));
             ruta.setTiempo(cursor.getLong(3));
+            Log.d("LOGD","El tiempo comparado: Ultimo"+ cursor.getLong(2) +  "-->" + ruta.getTiempoUltimo()+ "\nMejor "+ cursor.getLong(3) + " -->" +ruta.getTiempoMejor());
 
             //Consultamos la tabla coordenada para encontrar las coordenadas que coincidan con el
             // id de la ruta que estamos leyendo en esta iteraciÃ³n del bucle
@@ -224,7 +225,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
     /**
      * Actualiza el mejor tiempo de la ruta indicada.
      * @param ruta String, nombre de la ruta que se desea actualizar.
-     * @param tiempo Long, mejor tiempo de la ruta.
+     * @param tiempo Long, nuevo tiempo de la ruta.
      * @return Integer con el número de filas afectadas por la actualización.
      */
     public int actualizarRuta(String ruta, long tiempo){
@@ -232,7 +233,32 @@ public class ManejadorBD extends SQLiteOpenHelper {
 
         //Creamos el mapa de valores que deseamos cambiar de la tabla de la base de datos.
         ContentValues valores = new ContentValues();
-        valores.put(KEY_RUTA_MEJOR, tiempo);
+        valores.put(KEY_RUTA_ULTIMO, tiempo);
+
+        //Ejecutamos la actualización de la tabla de la base de datos.
+        Log.d("SQL", "Actualizando ruta + " + ruta + ". Nuevo tiempo: " + tiempo + ".");
+        return db.update(TABLE_RUTA, valores, KEY_RUTA_NOMBRE + " = ?",
+                new String[] {ruta});
+
+        //db.close();
+
+    }
+/**
+     * Actualiza el mejor tiempo de la ruta indicada.
+     * @param ruta String, nombre de la ruta que se desea actualizar.
+     * @param tiempo Long, nuevo tiempo de la ruta.
+     * @param best Boolean, indica si el tiempo es mejor
+     * @return Integer con el número de filas afectadas por la actualización.
+     */
+    public int actualizarRuta(String ruta, long tiempo,Boolean best){
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Creamos el mapa de valores que deseamos cambiar de la tabla de la base de datos.
+        ContentValues valores = new ContentValues();
+        valores.put(KEY_RUTA_ULTIMO, tiempo);
+        if (best){
+            valores.put(KEY_RUTA_MEJOR, tiempo);
+        }
 
         //Ejecutamos la actualización de la tabla de la base de datos.
         Log.d("SQL", "Actualizando ruta + " + ruta + ". Nuevo tiempo: " + tiempo + ".");

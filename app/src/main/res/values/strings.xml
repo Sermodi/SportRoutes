@@ -4,7 +4,6 @@
     <string name="Prefs">Settings</string>
     <string name="acercaDe">About</string>
     <string name="deAcuerdo">I agree</string>
-    <string name="generarRuta">New Route</string>
     <string name="realizarRuta">Reuse route</string>
     <string name="manual">\nHow to use the App?</string>
     <string name="inicio">Begin</string>
@@ -64,11 +63,9 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaAvisoSalidaContenido">Notify the user when abandon the selected route</string>
     <string name="mensajeBienvenida">Welcome to SportRoutes!\nYour favorite route tracker</string>
     <string name="alertaRutaNull">You can not save a route with less than two points.</string>
-    <string name="howTo">How to..?</string>
     <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
     <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too useful because sometimes the sun can be shinning and the temperature be bellow zero.</string>
-    <string name="PermisosPantallaDenegados">Screen permission is denied.</string>
     <string name="RutaString"><b>Route</b></string>
     <string name="ultimoTiempo"><b>Last</b></string>
     <string name="mejorTiempo"><b>Best</b></string>
@@ -79,11 +76,12 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="calculando">searching …</string>
     <string name="km" translatable="false">Km</string>
     <string name="m" translatable="false">m</string>
-    <string name="seg" translatable="false">s</string>
     <string name="borrarRuta">delete route?</string>
     <string name="guiame">Guide me</string>
     <string name="Comenzar">Start</string>
     <string name="gMaps">We call Google Maps now. Call us when you get to start!</string>
     <string name="title_activity_realizar_ruta" translatable="false">Map</string>
     <string name="finDeRuta">You end the route successfully!!\nCongratulations</string>
+    <string name="TituloRutaEnd">Route Finalized</string>
+    <string name="record">you have improved your best time!</string>
 </resources>
