@@ -91,16 +91,6 @@ public class Ruta implements Parcelable {
         coordenadas.add(coord);
     }
 
-    /**
-     * DEBUGING
-     * Método que imprime todos los puntos de la ruta por el logcat.
-     */
-    public void imprimeRuta() {
-        for (int i =0;i<coordenadas.size();i++){
-            Log.d("Coordenadas", ""+coordenadas.get(i));
-        }
-    }
-
     @Override
     public int describeContents() {
         return 0;
