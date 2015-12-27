@@ -268,7 +268,9 @@ public class Ruta implements Parcelable {
      * Calcula la duración de la ruta en base al tiempo de inicio y de fin.
      */
     public void calculaDuracion() {
-        setTiempo((tiempoUltimo - tiempoInicio) / 1000);
+        long duracion = (tiempoUltimo - tiempoInicio) / 1000;
+        this.tiempoUltimo = duracion;
+        this.tiempoMejor = duracion;
         Log.e("Duración", "La duración es:" + getTiempoUltimo());
     }
 
