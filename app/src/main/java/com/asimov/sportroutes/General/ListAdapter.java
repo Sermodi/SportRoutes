@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 /**
  * Descripción: Adaptador de ListView
- * @Autor : Sergio.
+ * @Author : Sergio.
  * Fecha de creación: 31/12/2015.
  */
 public abstract class ListAdapter extends BaseAdapter {
 
-    private ArrayList<?> entradas;
-    private int R_layout_IdView;
-    private Context contexto;
+    private final ArrayList<?> entradas;
+    private final int R_layout_IdView;
+    private final Context contexto;
 
     public ListAdapter(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
         super();

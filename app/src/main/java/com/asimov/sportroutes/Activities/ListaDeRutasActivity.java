@@ -1,44 +1,29 @@
 package com.asimov.sportroutes.activities;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.asimov.sportroutes.General.ManejadorBD;
 import com.asimov.sportroutes.R;
 import com.asimov.sportroutes.General.Ruta;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class ListaDeRutasActivity extends AppCompatActivity {
-
-    private TableLayout tabla;
-    private ArrayList<Ruta> rutas;
-    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
-        lista = (ListView) findViewById(R.id.ListView_listado);
-//        tabla = (TableLayout) findViewById(R.id.tablaRutas);
     }
 
     @Override
     protected void onResume() {
-        if(tabla != null && rutas != null){
-            tabla.removeViews(2,rutas.size());}
         //Se recargan las rutas en la tabla.
         rutasToTabla();
         super.onResume();
@@ -51,8 +36,9 @@ public class ListaDeRutasActivity extends AppCompatActivity {
         //Cargamos base de datos.
         ManejadorBD db = new ManejadorBD(getApplicationContext());
         //Obtenemos todas las rutas de la base de datos
-        rutas = db.obtenerRutas();
+        ArrayList<Ruta> rutas = db.obtenerRutas();
 
+        ListView lista = (ListView) findViewById(R.id.ListView_listado);
         //Cada ruta estará almacenada en una listview que mostrará la información de la misma.
         lista.setAdapter(new com.asimov.sportroutes.General.ListAdapter(this, R.layout.info_ruta, rutas) {
             @Override
