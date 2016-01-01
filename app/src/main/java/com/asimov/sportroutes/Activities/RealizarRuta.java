@@ -38,7 +38,6 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private Location antiguaLocation;
 
     private final int METRO = 1;
-    private final int KILOMETRO = 1000;
     private Polyline linea;
     private Marker markSiguiente;
     private int coordInicial; //indice de la ruta que marca la siguiente coordenada por la que debe pasar el usuario

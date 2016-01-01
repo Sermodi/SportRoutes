@@ -267,7 +267,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        ruta.imprimeRuta();//DEBUG
                         Intent i = new Intent(getBaseContext(), ConfirmarRuta.class);
                         i.putExtra("ruta", ruta);
                         startActivity(i);

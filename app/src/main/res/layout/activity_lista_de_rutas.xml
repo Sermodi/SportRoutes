@@ -15,121 +15,14 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_marginTop="44dp"
-        android:layout_alignEnd="@+id/scrollView"
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:textSize="35sp" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:fillViewport="false">
-
-        <TableLayout
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ListView_listado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tablaRutas"
-            android:stretchColumns="*">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/tiempo"
-                    android:layout_column="1"
-                    android:layout_span="2"
-                    android:id="@+id/textTiempo"
-                    android:textAlignment="center"
-                    android:background="@color/gris"
-                    android:textSize="22sp" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/RutaString"
-                    android:id="@+id/tituloRuta"
-                    android:layout_column="0"
-                    android:textSize="22sp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="@color/gris"
-                    android:textIsSelectable="false"
-                    android:paddingRight="1dp"
-                    android:paddingLeft="1dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/ultimoTiempo"
-                    android:id="@+id/tituloUltimoT"
-                    android:layout_column="1"
-                    android:textSize="22sp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="@color/gris"
-                    android:textIsSelectable="false"
-                    android:paddingRight="1dp"
-                    android:paddingLeft="1dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/mejorTiempo"
-                    android:id="@+id/tituloMejorT"
-                    android:layout_column="2"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="22sp"
-                    android:background="@color/gris"
-                    android:textIsSelectable="false"
-                    android:paddingRight="1dp"
-                    android:paddingLeft="1dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/clima"
-                    android:id="@+id/tituloClima"
-                    android:layout_column="3"
-                    android:textSize="22sp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="@color/gris"
-                    android:textIsSelectable="false"
-                    android:paddingRight="1dp"
-                    android:paddingLeft="1dp" />
-
-            </TableRow>
-
-        </TableLayout>
-    </ScrollView>
-
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView">
+        </ListView>
 </RelativeLayout>
