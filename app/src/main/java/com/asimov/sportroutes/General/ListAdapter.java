@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Descripción: Adaptador de ListView
- * @Author : Sergio.
+ * Autor : Sergio.
  * Fecha de creación: 31/12/2015.
  */
 public abstract class ListAdapter extends BaseAdapter {
