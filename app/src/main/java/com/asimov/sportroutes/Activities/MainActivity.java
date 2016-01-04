@@ -1,39 +1,106 @@
 package com.asimov.sportroutes.activities;
 
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.asimov.sportroutes.Fragments.Fragment_AcercaDe;
-import com.asimov.sportroutes.Fragments.Fragment_Configuracion;
-import com.asimov.sportroutes.Fragments.Fragment_Manual;
-import com.asimov.sportroutes.Fragments.Fragment_NuevaRuta;
-import com.asimov.sportroutes.Fragments.Fragment_RealizarRuta;
 import com.asimov.sportroutes.R;
-import com.asimov.sportroutes.Fragments.ScrimInsetsFrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ScrimInsetsFrameLayout sifl;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
-    private ListView ndList;
-    private int ultimaPos;
-    private String[] opciones;
+    DrawerLayout drawerLayout;
+    ListView listView;
+    String[] opciones;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        listView = (ListView) findViewById(R.id.list_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
+                getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
+
+        listView.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1,
+                opciones));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                Toast.makeText(MainActivity.this, "Action: " + opciones[arg2],
+                        Toast.LENGTH_SHORT).show();
+                switch (arg2) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(MainActivity.this, RealizarRuta.class));
+                        break;
+                    case 2:
+                        //Preferencias
+                        //startActivity(new Intent(MainActivity.this, ))
+                        break;
+                    case 3:
+                        //Manual
+                        //startActivity(new Intent(MainActivity.this, ))
+                        break;
+                    case 4:
+                        //Acerca de
+                        break;
+
+                }
+                //asdfasd
+
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        // Mostramos el botÃ³n en la barra de la aplicaciÃ³n
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    /*
+	 * mostramos/ocultamos el menu al presionar el icono de la aplicacion
+	 * ubicado en la barra XXX
+	 */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (drawerLayout.isDrawerOpen(listView)) {
+                    drawerLayout.closeDrawers();
+                } else {
+                    drawerLayout.openDrawer(listView);
+                }
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menuprincipal, menu);
+        return true;
+    }
+
+
+    /*
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -115,21 +182,21 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
         }
 
-    }
-
+    }*/
+/*
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
-    }
-
+    }*/
+/*
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
-
+*/
+/*
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -151,9 +218,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
-    @Override
+    /*
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -171,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
 
        /* Button btn = (Button)findViewById(R.id.buttonNueva);
