@@ -1,16 +1,25 @@
 package com.asimov.sportroutes.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.asimov.sportroutes.General.Clima.Clima;
+import com.asimov.sportroutes.General.Clima.ClimaClienteHttp;
+import com.asimov.sportroutes.General.Clima.jsonClimaParser;
 import com.asimov.sportroutes.General.ManejadorBD;
 import com.asimov.sportroutes.R;
 import com.asimov.sportroutes.General.Ruta;
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -44,19 +53,56 @@ public class ListaDeRutasActivity extends AppCompatActivity {
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
+                    //Mostramos el nombre
                     TextView nombre = (TextView) view.findViewById(R.id.textNombre);
                     if (nombre != null)
                         nombre.setText(((Ruta) entrada).getNombre());
-
+                    //Mostramos el mejor tiempo.
                     TextView mejor = (TextView) view.findViewById(R.id.textMejor);
                     if (mejor != null)
                         mejor.setText(((Ruta) entrada).getTiempoMejorHumano());
-
+                    //Mostramos el ultimo tiempo.
                     TextView ultimo = (TextView) view.findViewById(R.id.textUltimo);
                     if (ultimo != null)
                         ultimo.setText(((Ruta) entrada).getTiempoUltimoHumano());
 
-                    //TODO lo mismo para el clima
+                    final TextView temp =  (TextView) view.findViewById(R.id.textViewTemperatura);
+                    final TextView ciudad =  (TextView) view.findViewById(R.id.textViewCiudad);
+                    final ImageView img =  (ImageView) view.findViewById(R.id.imageViewClima);
+                    //lo mismo para el clima
+                    LatLng coordenada = ((Ruta) entrada).getCoordenadas().get(0);
+                    class ClimaAsincrono extends AsyncTask<String, Void, Clima> {
+
+                        @Override
+                        protected Clima doInBackground(String... params) {
+                            Clima clima = new Clima();
+                            String data = ((new ClimaClienteHttp()).getClima(params[0], params[1]));
+
+                            try {
+                                clima = jsonClimaParser.getWeather(data);
+
+                                clima.iconDrawable = ((new ClimaClienteHttp()).getImagen(clima.currentCondition.getIcon()));
+                                Log.d("LOGD", clima.currentCondition.getIcon() );
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            return clima;
+
+                        }
+
+                        @Override
+                        protected void onPostExecute(Clima clima) {
+                            super.onPostExecute(clima);
+                            img.setImageDrawable(clima.iconDrawable);
+                            temp.setText(String.valueOf(clima.temperature.getTemp() + " ºC"));
+                            String textAux =clima.localizacion.getCiudad() + ", " + clima.localizacion.getPais();
+                            ciudad.setText(textAux);
+                        }
+                    }
+                    ClimaAsincrono peticion = new ClimaAsincrono();
+                    peticion.execute(String.valueOf(coordenada.latitude),
+                            String.valueOf(coordenada.longitude));
                 }
             }
         });
