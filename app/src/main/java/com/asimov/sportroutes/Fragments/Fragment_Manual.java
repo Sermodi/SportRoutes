@@ -22,6 +22,6 @@ public class Fragment_Manual extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment4, container, false);
+        return inflater.inflate(R.layout.how_to_activity, container, false);
     }
 }

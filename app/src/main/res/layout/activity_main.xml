@@ -21,13 +21,10 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="#007095"
+        android:background="#31B404"
         android:choiceMode="singleChoice"
-        android:divider="#005875"
+        android:divider="#0B6121"
         android:dividerHeight="2dp" >
-
-
-
         </ListView>
 
 </android.support.v4.widget.DrawerLayout>

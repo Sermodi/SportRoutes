@@ -80,4 +80,5 @@
     <string name="finDeRuta">Has terminado correctamente. Felicidades!!</string>
     <string name="TituloRutaEnd">Ruta Finalizada.</string>
     <string name="record">Has superado tu mejor tiempo!</string>
+    <string name="atrasAMain">A SportRoutes</string>
 </resources>

@@ -43,6 +43,8 @@
             android:name=".activities.RealizarRuta"
             android:label="@string/title_activity_realizar_ruta"/>
         <activity android:name=".activities.ActivityPermisos"/>
+        <activity android:name=".activities.HowToActivity"/>
+        <activity android:name=".activities.AboutUs"/>
     </application>
 
 </manifest>
