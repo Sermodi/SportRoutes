@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, ListaDeRutasActivity.class));
                         break;
                     case 2:
-                        //Preferencias
-                        //startActivity(new Intent(MainActivity.this, ))
+                        startActivity(new Intent(MainActivity.this, OpcionesActivity.class));
                         break;
                     case 3:
                         //Manual

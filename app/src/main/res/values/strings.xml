@@ -1,4 +1,5 @@
 <resources>
+    <string name="weatherSettings">Weather setting</string>
     <string name="app_name" translatable="false">SportRoutes</string>
     <string name="title_activity_maps">Main Map</string>
     <string name="Prefs">Settings</string>

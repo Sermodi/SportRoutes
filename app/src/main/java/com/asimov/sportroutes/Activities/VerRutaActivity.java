@@ -3,6 +3,7 @@ package com.asimov.sportroutes.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;

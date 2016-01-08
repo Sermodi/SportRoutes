@@ -1,7 +1,10 @@
 package com.asimov.sportroutes.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,13 +25,18 @@ import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ListaDeRutasActivity extends AppCompatActivity {
 
+    boolean mostrarTiempo, mostrarTemperatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mostrarTiempo = prefs.getBoolean("mostrarTiempo", true);
+        mostrarTemperatura = prefs.getBoolean("mostrarTemperatura", true);
     }
 
     @Override
@@ -65,10 +73,16 @@ public class ListaDeRutasActivity extends AppCompatActivity {
                     TextView ultimo = (TextView) view.findViewById(R.id.textUltimo);
                     if (ultimo != null)
                         ultimo.setText(((Ruta) entrada).getTiempoUltimoHumano());
-
-                    final TextView temp =  (TextView) view.findViewById(R.id.textViewTemperatura);
                     final TextView ciudad =  (TextView) view.findViewById(R.id.textViewCiudad);
                     final ImageView img =  (ImageView) view.findViewById(R.id.imageViewClima);
+                    final TextView temp = (TextView) view.findViewById(R.id.textViewTemperatura);
+                    if (!mostrarTiempo){
+                        img.setVisibility(View.INVISIBLE);
+                    }
+                    if(!mostrarTemperatura){
+                        temp.setVisibility(View.INVISIBLE);
+                    }
+
                     //lo mismo para el clima
                     LatLng coordenada = ((Ruta) entrada).getCoordenadas().get(0);
                     class ClimaAsincrono extends AsyncTask<String, Void, Clima> {

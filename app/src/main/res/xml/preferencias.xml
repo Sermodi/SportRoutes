@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/routePreferences">
         <CheckBoxPreference
+            android:key="avisoSalidaRuta"
+            android:title="@string/preferenciaAvisoSalidaTitulo"
+            android:summary="@string/preferenciaAvisoSalidaContenido" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/weatherSettings">
+        <CheckBoxPreference
             android:key="mostrarTiempo"
             android:title="@string/preferenciaTiempoTitulo"
             android:summary="@string/preferenciaTiempoContenido" />
@@ -10,9 +16,5 @@
             android:key="mostrarTemperatura"
             android:title="@string/preferenciaTemperaturaTitulo"
             android:summary="@string/preferenciaTemperaturaContenido" />
-        <CheckBoxPreference
-            android:key="avisoSalidaRuta"
-            android:title="@string/preferenciaAvisoSalidaTitulo"
-            android:summary="@string/preferenciaAvisoSalidaContenido" />
     </PreferenceCategory>
 </PreferenceScreen>

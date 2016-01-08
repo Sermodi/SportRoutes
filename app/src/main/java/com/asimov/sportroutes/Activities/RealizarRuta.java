@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Vibrator;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.TextView;
@@ -36,6 +39,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private CameraPosition camPos;
     private Vibrator v;
     private Location antiguaLocation;
+    private boolean vibracionActiva;
 
     private final int METRO = 1;
     private Polyline linea;
@@ -43,6 +47,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private int coordInicial; //indice de la ruta que marca la siguiente coordenada por la que debe pasar el usuario
     private long tiempo;
     private ManejadorBD db;
+    private boolean vibracion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,9 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
         Intent i = getIntent();
         ruta = i.getParcelableExtra("ruta");
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        vibracion = prefs.getBoolean("avisoSalidaRuta", true);
 
         nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo.
 
@@ -123,7 +131,9 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
                             }
                         }else{
                             //Vibra por 500 milisegundos
-                            v.vibrate(500);
+                            if (vibracion) {
+                                v.vibrate(500);
+                            }
                         }
 //                        //TODO borrar
 //                        do {
