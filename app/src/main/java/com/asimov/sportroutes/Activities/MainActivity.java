@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         listView = (ListView) findViewById(R.id.list_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int imagenasdf = R.drawable.navheader;
         opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
                 getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this, RealizarRuta.class));
+                        startActivity(new Intent(MainActivity.this, ListaDeRutasActivity.class));
                         break;
                     case 2:
                         //Preferencias
@@ -55,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         //Manual
-                        //startActivity(new Intent(MainActivity.this, ))
+                        startActivity(new Intent(MainActivity.this, HowToActivity.class));
                         break;
                     case 4:
-                        //Acerca de
+                        startActivity(new Intent(MainActivity.this, AboutUs.class));
                         break;
 
                 }
@@ -68,9 +69,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Mostramos el botÃ³n en la barra de la aplicaciÃ³n
+        // Mostramos el botÃƒÂ³n en la barra de la aplicaciÃƒÂ³n
         //getActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    /* ImplementaciÃ³n del listener del boton fisico del menu de algunos moviles (Modi, revisa que vaya plz) */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (drawerLayout.isDrawerOpen(listView)) {
+                drawerLayout.closeDrawers();
+            } else {
+                drawerLayout.openDrawer(listView);
+            }
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     /*
