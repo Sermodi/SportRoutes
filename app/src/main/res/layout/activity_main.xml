@@ -15,17 +15,35 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="#31B404"
-        android:choiceMode="singleChoice"
-        android:divider="#0B6121"
-        android:dividerHeight="2dp" >
-        </ListView>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="left"
+            android:layout_marginTop="30dp"
+            android:visibility="visible"
+            android:id="@+id/Linear1">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="225dp"
+                android:src="@drawable/navheader"
+                android:id="@+id/imageView" />
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="300dp"
+                android:layout_height="426dp"
+                android:layout_gravity="left"
+                android:background="@color/colorPrimary"
+                android:choiceMode="singleChoice"
+                android:divider="@color/colorPrimaryDark"
+                android:dividerHeight="2dp">
+                </ListView>
+
+        </LinearLayout>
+
 
 </android.support.v4.widget.DrawerLayout>
 

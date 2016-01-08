@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class HowToActivity  extends AppCompatActivity {
     DrawerLayout drawerLayoutHowTo = null;
     ListView listViewHowTo = null;
     String[] opcionesHowTo;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,8 @@ public class HowToActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.how_to_activity);
         drawerLayoutHowTo = (DrawerLayout) findViewById(R.id.drawer_layout_how_to);
-        listViewHowTo = (ListView) findViewById(R.id.list_view_how_to);
+        linearLayout = (LinearLayout) findViewById(R.id.Linear1);
+        listViewHowTo = (ListView) findViewById(R.id.list_view);
         listViewHowTo.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1,
                 opcionesHowTo));
@@ -68,10 +71,10 @@ public class HowToActivity  extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (drawerLayoutHowTo.isDrawerOpen(listViewHowTo)) {
+                if (drawerLayoutHowTo.isDrawerOpen(linearLayout)) {
                     drawerLayoutHowTo.closeDrawers();
                 } else {
-                    drawerLayoutHowTo.openDrawer(listViewHowTo);
+                    drawerLayoutHowTo.openDrawer(linearLayout);
                 }
                 return true;
         }
