@@ -1,6 +1,5 @@
 package com.asimov.sportroutes.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,22 +24,23 @@ import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ListaDeRutasActivity extends AppCompatActivity {
 
-    boolean mostrarTiempo, mostrarTemperatura;
+    private boolean mostrarTiempo;
+    private boolean mostrarTemperatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mostrarTiempo = prefs.getBoolean("mostrarTiempo", true);
-        mostrarTemperatura = prefs.getBoolean("mostrarTemperatura", true);
     }
 
     @Override
     protected void onResume() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mostrarTiempo = prefs.getBoolean("mostrarTiempo", true);
+        mostrarTemperatura = prefs.getBoolean("mostrarTemperatura", true);
+
         //Se recargan las rutas en la tabla.
         rutasToTabla();
         super.onResume();

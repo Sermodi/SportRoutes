@@ -1,5 +1,4 @@
 package com.asimov.sportroutes.activities;
-/*openweather*/
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Vibrator;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -39,7 +37,6 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
     private CameraPosition camPos;
     private Vibrator v;
     private Location antiguaLocation;
-    private boolean vibracionActiva;
 
     private final int METRO = 1;
     private Polyline linea;
@@ -57,8 +54,6 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         Intent i = getIntent();
         ruta = i.getParcelableExtra("ruta");
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        vibracion = prefs.getBoolean("avisoSalidaRuta", true);
 
         nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo.
 
@@ -72,6 +67,9 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
     @Override
     protected void onResume() {
+        //Se comprueba si la vibración está activa.
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        vibracion = prefs.getBoolean("avisoSalidaRuta", true);
         //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
         compruebaPermisos();
         //Es necesario comprobar también si está el GPS activo.

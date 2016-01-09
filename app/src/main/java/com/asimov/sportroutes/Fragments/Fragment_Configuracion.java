@@ -18,8 +18,8 @@ public class Fragment_Configuracion extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        addPreferencesFromResource(R.xml.preferencias);
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferencias);
 /* TODO
         btnPreferencias = (Button)findViewById(R.id.BtnPreferencias);
 
