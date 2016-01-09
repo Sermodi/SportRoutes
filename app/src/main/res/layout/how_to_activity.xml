@@ -162,6 +162,7 @@
             android:layout_width="300dp"
             android:layout_height="225dp"
             android:src="@drawable/navheader"
+            android:contentDescription="@string/todasTusRutas"
             android:id="@+id/imageView" />
 
         <ListView

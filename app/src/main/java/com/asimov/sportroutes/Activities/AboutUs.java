@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.asimov.sportroutes.R;
 
 /**
- * Created by Sarekito on 6/1/16.
+ * Activity que contiene la información referente a AcercaDe, con el nombre de los autores y colaboradores.
  */
 public class AboutUs extends AppCompatActivity {
     @Override

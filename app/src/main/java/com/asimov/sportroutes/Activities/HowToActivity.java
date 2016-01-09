@@ -15,12 +15,11 @@ import android.widget.Toast;
 import com.asimov.sportroutes.R;
 
 /**
- * Created by Sarekito on 5/1/16.
+ * Activity que ofrece una pequeña ayuda al usuario.
  */
 public class HowToActivity  extends AppCompatActivity {
-    DrawerLayout drawerLayoutHowTo = null;
-    ListView listViewHowTo = null;
-    String[] opcionesHowTo;
+    private DrawerLayout drawerLayoutHowTo = null;
+    private String[] opcionesHowTo;
     private LinearLayout linearLayout;
 
     @Override
@@ -31,7 +30,7 @@ public class HowToActivity  extends AppCompatActivity {
         setContentView(R.layout.how_to_activity);
         drawerLayoutHowTo = (DrawerLayout) findViewById(R.id.drawer_layout_how_to);
         linearLayout = (LinearLayout) findViewById(R.id.Linear1);
-        listViewHowTo = (ListView) findViewById(R.id.list_view);
+        ListView listViewHowTo = (ListView) findViewById(R.id.list_view);
         listViewHowTo.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1,
                 opcionesHowTo));

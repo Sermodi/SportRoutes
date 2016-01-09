@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
-    android:background="@color/comenzarTexto">
+    >
     <!--Es necesario fijar un color de fondo, para no ver la imagen de la Activity-->
 
     <LinearLayout

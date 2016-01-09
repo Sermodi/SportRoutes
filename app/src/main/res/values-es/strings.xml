@@ -42,8 +42,6 @@
     <string name="iniciaRuta">Comenzar</string>
     <string name="textoComenzarRuta">¿Aún no has probado SportRoutes? Pulsa aquí debajo!</string>
     <string name="perdonMolestias">Lo sentimos</string>
-    <string name="closeDrawer">Menu cerrado</string>
-    <string name="openDrawer">Menu abierto</string>
     <string name="principioHowTo">Esta es una pequeña guía de como usar la aplicación SportRoutes</string>
     <string name="accion1">Nueva Ruta</string>
     <string name="accion2">Realizar Ruta</string>
@@ -63,10 +61,9 @@
     <string name="preferenciaAvisoSalidaContenido">Notifica al usuario cuando abandona la ruta</string>
     <string name="preferenciaTemperaturaContenido">Permite a la aplicación mostrar una predicción de la temperatura</string>
     <string name="preferenciaTemperaturaTitulo">Mostrar temperatura</string>
-    <string name="preferenciaTiempoContenido">Permite a la aplicación mostrar una predicción del tiempo</string>
+    <string name="preferenciaTiempoContenido">Permite a la aplicación mostrar el icono de predicción del tiempo</string>
     <string name="preferenciaTiempoTitulo">Mostrar predicción climatológica</string>
     <string name="routePreferences">Configuración de ruta</string>
-    <string name="RutaString"><b>Ruta</b></string>
     <string name="mejorTiempo"><b>Mejor </b></string>
     <string name="ultimoTiempo"><b>Último</b></string>
     <string name="clima"><b>Clima</b></string>

@@ -1,7 +1,7 @@
 package com.asimov.sportroutes.Fragments;
 
 /**
- * Fragmento de preferencias TODO
+ * Fragmento de preferencias
  * Created by Sarekito on 16/11/15.
  */
 
@@ -18,9 +18,9 @@ public class Fragment_Configuracion extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
-/*
+        super.onCreate(savedInstanceState);
+/* TODO
         btnPreferencias = (Button)findViewById(R.id.BtnPreferencias);
 
         btnPreferencias.setOnClickListener(new OnClickListener() {

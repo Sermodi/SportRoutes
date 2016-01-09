@@ -39,8 +39,6 @@
         <item quantity="other">%d seconds</item>
     </plurals>
     <string name="iniciaRuta">Start</string>
-    <string name="openDrawer">Opened menu</string>
-    <string name="closeDrawer">Closed menu</string>
     <string name="textoComenzarRuta">Haven\'t try SportRoutes yet? Click bellow!</string>
     <string name="funcionalidadNoImplementada">Ooops.. it seems didn\'t work</string>
     <string name="perdonMolestias">We are so sorry</string>
@@ -57,7 +55,7 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="contentHowTo4">What can we tell to you of that action.. You\'re already in it :D\n\n</string>
     <string name="routePreferences">Route settings</string>
     <string name="preferenciaTiempoTitulo">Show weather</string>
-    <string name="preferenciaTiempoContenido">Allow the app to show a weather prediction</string>
+    <string name="preferenciaTiempoContenido">Allow the app to show a weather prediction icon</string>
     <string name="preferenciaTemperaturaTitulo">Show temperature</string>
     <string name="preferenciaTemperaturaContenido">Allow the app to show a temperature prediction</string>
     <string name="preferenciaAvisoSalidaTitulo">Alert route abandon</string>
@@ -67,7 +65,6 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="preferenciaTiempoContenidoAmpliado">Allow the app to show a weather prediction. This setting will help the user to be conscious of the weather at the time he want to start the route</string>
     <string name="preferenciaAvisoSalidaContenidoAmpliado">Allow the app to alert the user by some methods to be defined soon. It works by beeping or vibration (should be defined soon) when the user gets out of the selected route.</string>
     <string name="preferenciaTemperaturaContenidoAmpliado">Allow the app to show the temperature. We think is too useful because sometimes the sun can be shinning and the temperature be bellow zero.</string>
-    <string name="RutaString"><b>Route</b></string>
     <string name="ultimoTiempo"><b>Last</b></string>
     <string name="mejorTiempo"><b>Best</b></string>
     <string name="tiempo"><b>Time</b></string>
