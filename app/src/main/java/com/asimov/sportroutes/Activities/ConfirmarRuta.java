@@ -35,15 +35,20 @@ public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallbac
         Resources res = getResources();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmar_ruta);
+
         TextView text = (TextView) findViewById(R.id.textoRuta);
+        //Se carga el fragmento del mapa.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Se recupera el elemento ruta.
         Intent i = this.getIntent();
         ruta = i.getParcelableExtra("ruta");
+
         String nombreRuta = String.format(res.getString(R.string.guardarRuta), ruta.getNombre());
         text.setText(nombreRuta);
+        //Se guarda si el usuario selecciona Si.
         Button si = (Button) findViewById(R.id.si);
         si.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +81,6 @@ public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallbac
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //SI pulsamos atras durante la generacion de una ruta,  al menú principal
         if(keyCode == KeyEvent.KEYCODE_BREAK){
-            //toast =  new Toast(getApplicationContext());
-            //toast.setText(R.string.ignorada);
-            //toast.setDuration(Toast.LENGTH_LONG);
-            // toast.show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             return true;
         }
@@ -88,7 +89,9 @@ public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //Activamos el boton de google
         googleMap.setMyLocationEnabled(true);
+        //Creamos la linea a mostrar en el map
         PolylineOptions po = new PolylineOptions();
         po.color(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
         po.visible(true);

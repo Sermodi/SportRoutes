@@ -3,7 +3,6 @@ package com.asimov.sportroutes.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -33,6 +32,7 @@ public class MainActivity extends ActivityPermisos {
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
+        //Iniciamos la toolbar con el boton de arriba para abrir el menu.
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -80,9 +80,6 @@ public class MainActivity extends ActivityPermisos {
             }
         });
 
-        // Mostramos el botÃƒÂ³n en la barra de la aplicaciÃƒÂ³n
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -101,6 +98,8 @@ public class MainActivity extends ActivityPermisos {
                 drawerLayout.openDrawer(linearLayout);
             }
             return true;
+        }else if (keyCode == KeyEvent.KEYCODE_BACK){
+            finish();
         }
         return super.onKeyUp(keyCode, event);
     }
@@ -126,9 +125,6 @@ public class MainActivity extends ActivityPermisos {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menuprincipal, menu);
-
         if (drawerLayout.isDrawerOpen(linearLayout)) {
             drawerLayout.closeDrawers();
         } else {
@@ -240,7 +236,7 @@ public class MainActivity extends ActivityPermisos {
 
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Fragment fragment;
-            if (ultimaPos > 0) {
+            if (ultimaPos > 0) {TODO
                 fragment = new Fragment_NuevaRuta();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, fragment)

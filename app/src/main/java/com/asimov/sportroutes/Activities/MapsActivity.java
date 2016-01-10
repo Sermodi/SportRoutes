@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -130,10 +129,6 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //SI pulsamos atras durante la generacion de una ruta,  al menú principal
         if(keyCode == KeyEvent.KEYCODE_BREAK){
-            //toast =  new Toast(getApplicationContext());
-            //toast.setText(R.string.ignorada);
-            //toast.setDuration(Toast.LENGTH_LONG);
-            // toast.show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             return true;
         }
@@ -289,13 +284,5 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
         return tiempos;
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menuprincipal, menu);
-        return true;
-    }
-
 
 }

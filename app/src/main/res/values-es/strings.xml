@@ -5,7 +5,6 @@
     <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
     <string name="deAcuerdo">De acuerdo</string>
-    <string name="realizarRuta">Realizar Ruta</string>
     <string name="manual">¿Cómo usar la Aplicación?</string>
     <string name="inicio">Inicio</string>
     <string name="PermisosInternetDENEGADOS">No se ha permitido acceso a Internet.</string>
@@ -38,10 +37,7 @@
     <string name="icono">Icono de la aplicación</string>
     <string name="acerca_de">Guarda, reutiliza y comparte tus rutas de senderismo, running y ciclismo.</string>
     <string name="Autores"><b>Autores:</b>\n\tDiego Alonso Gonzalez\n\tSergio Modino Catalán\n\tAntonio Pesquera Rodriguez\n\tFrancisco Javier Reoyo Carrón\n\nEn colaboración con Felix Prieto, profesor de la Escuela de Ingeniería Informática de la Universidad de Valladolid.</string>
-    <string name="funcionalidadNoImplementada">Ooops.. parece que no funciona</string>
-    <string name="iniciaRuta">Comenzar</string>
     <string name="textoComenzarRuta">¿Aún no has probado SportRoutes? Pulsa aquí debajo!</string>
-    <string name="perdonMolestias">Lo sentimos</string>
     <string name="principioHowTo">Esta es una pequeña guía de como usar la aplicación SportRoutes</string>
     <string name="accion1">Nueva Ruta</string>
     <string name="accion2">Realizar Ruta</string>

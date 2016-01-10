@@ -5,7 +5,6 @@
     <string name="Prefs">Settings</string>
     <string name="acercaDe">About</string>
     <string name="deAcuerdo">I agree</string>
-    <string name="realizarRuta">Reuse route</string>
     <string name="manual">\nHow to use the App?</string>
     <string name="inicio">Begin</string>
     <string name="PermisosInternetDENEGADOS">Internet permission is denied.</string>
@@ -38,10 +37,7 @@
         <item quantity="one">%d second</item>
         <item quantity="other">%d seconds</item>
     </plurals>
-    <string name="iniciaRuta">Start</string>
     <string name="textoComenzarRuta">Haven\'t try SportRoutes yet? Click bellow!</string>
-    <string name="funcionalidadNoImplementada">Ooops.. it seems didn\'t work</string>
-    <string name="perdonMolestias">We are so sorry</string>
     <string name="principioHowTo">This is a little guide for general hightlights of the app SportRoutes.\nYou can navigate across the app by using left menu, which can be deployed swinging your mouse from left to right or pressing top left button.</string>
     <string name="acciones">\n\n\nACTIONS</string>
     <string name="accion1">New Route</string>

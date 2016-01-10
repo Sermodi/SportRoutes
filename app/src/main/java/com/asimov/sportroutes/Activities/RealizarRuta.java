@@ -55,7 +55,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
         ruta = i.getParcelableExtra("ruta");
 
 
-        nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo.
+        nuevaCoord = new LatLng(37.2227777778,115.814444444); //Se busca una localización donde no pueda haber ningún individuo (Area 51).
 
         coordInicial = 0;
 
@@ -133,40 +133,6 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
                                 v.vibrate(500);
                             }
                         }
-//                        //TODO borrar
-//                        do {
-//                            //obtenemos la location
-//                            LatLng puntoLatLng = ruta.getCoordenadas().get(coordInicial + i);
-//                            punto.setLongitude(puntoLatLng.longitude);
-//                            punto.setLatitude(puntoLatLng.latitude);
-//                            //obtenemos la distancia desde posicion actual a punto de ruta
-//                            cercania = location.distanceTo(punto);
-//                            //Si estamos a menos de 1 Metro de un punto de la ruta, se elimina ese
-//                            // punto y todos los anteriores
-//                            if (cercania < 3*METRO){
-//                                if(coordInicial + i == ruta.getCoordenadas().size()) {
-//                                    finDeRuta();
-//                                }else{
-//                                    for (int j = 0; j <= i; j++) {
-//                                        coordInicial++;
-//                                        menorDistancia = 0;
-//                                        Log.d("LOGD", "Coincide, se borra el elemento");
-//                                    }
-//                                }
-//                                dibujamMap();
-//                            }else if (cercania < menorDistancia){
-//                                menorDistancia = cercania;
-//                                Log.d("LOGD","Está más cerca");
-//                            }
-//                            i++;
-//                        }while((coordInicial + i)<ruta.getSize() &&     //Mientras sigan quedando coordenadas y
-//                                !(cercania < METRO) &&                  // el usuario no esté en el punto y
-//                                cercania < 5*KILOMETRO);                // el usuario esté a menos de 5 km
-//
-//                        if (menorDistancia >= 15) {
-//                            //Vibra por 500 milisegundos
-//                            v.vibrate(500);
-//                        }
                     }
                     CameraUpdate cu = CameraUpdateFactory.newCameraPosition(camPos);
                     mMap.animateCamera(cu);

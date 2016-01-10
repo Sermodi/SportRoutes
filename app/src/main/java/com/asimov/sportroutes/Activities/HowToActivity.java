@@ -28,6 +28,7 @@ public class HowToActivity  extends AppCompatActivity {
                 getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.how_to_activity);
+
         drawerLayoutHowTo = (DrawerLayout) findViewById(R.id.drawer_layout_how_to);
         linearLayout = (LinearLayout) findViewById(R.id.Linear1);
         ListView listViewHowTo = (ListView) findViewById(R.id.list_view);
@@ -50,7 +51,6 @@ public class HowToActivity  extends AppCompatActivity {
                         break;
                     case 2:
                         //Preferencias
-                        //startActivity(new Intent(MainActivity.this, ))
                         break;
                     case 3:
                         //Manual
