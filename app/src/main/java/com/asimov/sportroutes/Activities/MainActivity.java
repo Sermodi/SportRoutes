@@ -44,7 +44,7 @@ public class MainActivity extends ActivityPermisos {
                     button.setVisibility(View.GONE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putBoolean("primeraVez", false);
-                    editor.commit();
+                    editor.apply();
                 }
             });
 
