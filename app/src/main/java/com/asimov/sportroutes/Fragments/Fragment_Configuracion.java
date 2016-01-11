@@ -20,15 +20,6 @@ public class Fragment_Configuracion extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
-/* TODO
-        btnPreferencias = (Button)findViewById(R.id.BtnPreferencias);
-
-        btnPreferencias.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,
-                        OpcionesActivity.class));
-            }
-        });*/
+        getPreferenceScreen().removePreference(getPreferenceScreen().findPreference("primeraVez"));
     }
 }

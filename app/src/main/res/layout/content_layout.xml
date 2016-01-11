@@ -46,10 +46,29 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:textColor="@android:color/white"
-                android:text="@string/mensajeBienvenida"
-                android:layout_marginBottom="120dp"
-                android:layout_weight="0.34"
-                android:layout_gravity="center" />
+                android:text=""
+                android:layout_marginBottom="25dp"
+                android:layout_weight="0.30" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textView9"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.17"
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/comenzarTexto" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Comenzar"
+                android:id="@+id/button"
+                android:visibility="gone"
+                android:layout_marginBottom="50dp" />
 
         </LinearLayout>
 

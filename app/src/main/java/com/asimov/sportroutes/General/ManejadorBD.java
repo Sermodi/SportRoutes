@@ -256,7 +256,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
      * @param best Boolean, indica si el tiempo es mejor
      * @return Integer con el número de filas afectadas por la actualización.
      */
-    public int actualizarRuta(String ruta, long tiempo,Boolean best){
+    public void actualizarRuta(String ruta, long tiempo,Boolean best){
         SQLiteDatabase db = getWritableDatabase();
 
         //Creamos el mapa de valores que deseamos cambiar de la tabla de la base de datos.
@@ -268,7 +268,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
 
         //Ejecutamos la actualización de la tabla de la base de datos.
         Log.d("SQL", "Actualizando ruta + " + ruta + ". Nuevo tiempo: " + tiempo + ".");
-        return db.update(TABLE_RUTA, valores, KEY_RUTA_NOMBRE + " = ?",
+        db.update(TABLE_RUTA, valores, KEY_RUTA_NOMBRE + " = ?",
                 new String[] {ruta});
 
         //db.close();
@@ -304,7 +304,8 @@ public class ManejadorBD extends SQLiteOpenHelper {
     }
 
     /**
-     * Puebla la base de datos con tres rutas a modo de ejemplo..
+     * Puebla la base de datos con tres rutas a modo de ejemplo, para que las pruebas se puedan
+     * realizar más rápidamente.
      */
     private void poblarBD(SQLiteDatabase db){
         Ruta ruta;

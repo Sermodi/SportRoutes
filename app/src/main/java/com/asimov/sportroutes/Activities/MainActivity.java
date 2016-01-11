@@ -1,7 +1,9 @@
 package com.asimov.sportroutes.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -10,22 +12,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.asimov.sportroutes.R;
 
 public class MainActivity extends ActivityPermisos {
 
-    private DrawerLayout drawerLayout;
-    private String[] opciones;
-    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView textoMotivador = (TextView) findViewById(R.id.textoComenzarRuta);
+        textoMotivador.setText(R.string.mensajeBienvenida);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean primeraVez = prefs.getBoolean("primeraVez", true);
+        if(primeraVez){
+            TextView textoPrimera = (TextView) findViewById(R.id.textView9);
+            textoPrimera.setText(R.string.textoComenzarRuta);
+            final Button button = (Button) findViewById(R.id.button);
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                    button.setVisibility(View.GONE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("primeraVez", false);
+                    editor.commit();
+                }
+            });
+
+
+        }
 
         //Toolbar
 
@@ -39,9 +63,9 @@ public class MainActivity extends ActivityPermisos {
         }
 
         linearLayout = (LinearLayout) findViewById(R.id.Linear1);
-        ListView listView = (ListView) findViewById(R.id.list_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        String[] opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
                 getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
 
         listView.setAdapter(new ArrayAdapter<>(this,
@@ -53,29 +77,25 @@ public class MainActivity extends ActivityPermisos {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                Toast.makeText(MainActivity.this, "Action: " + opciones[arg2],
-                        Toast.LENGTH_SHORT).show();
                 switch (arg2) {
                     case 0:
-                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this, ListaDeRutasActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ListaDeRutasActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(MainActivity.this, OpcionesActivity.class));
+                        startActivity(new Intent(getApplicationContext(), OpcionesActivity.class));
                         break;
                     case 3:
                         //Manual
-                        startActivity(new Intent(MainActivity.this, HowToActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HowToActivity.class));
                         break;
                     case 4:
-                        startActivity(new Intent(MainActivity.this, AboutUs.class));
+                        startActivity(new Intent(getApplicationContext(), AboutUs.class));
                         break;
 
                 }
-                //asdfasd
-
                 drawerLayout.closeDrawers();
             }
         });

@@ -80,8 +80,8 @@ public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallbac
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //SI pulsamos atras durante la generacion de una ruta,  al menú principal
-        if(keyCode == KeyEvent.KEYCODE_BREAK){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Ignorado();
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -114,7 +114,10 @@ public class ConfirmarRuta extends ActivityPermisos implements OnMapReadyCallbac
                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(getBaseContext(), MainActivity.class));
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 });
         AlertDialog alert = builder.create();

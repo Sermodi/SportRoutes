@@ -124,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/guiame"
                 android:id="@+id/btnGuia"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_column="0" />
 
             <Button
@@ -131,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Comenzar"
                 android:id="@+id/btnComenzar"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_column="2" />
 
         </TableRow>

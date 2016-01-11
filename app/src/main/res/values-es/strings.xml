@@ -2,7 +2,6 @@
 <resources>
     <string name="weatherSettings">Opciones climatológicas</string>
     <string name="title_activity_maps">Mapa principal</string>
-    <string name="Prefs">Preferencias</string>
     <string name="acercaDe">Acerca de</string>
     <string name="deAcuerdo">De acuerdo</string>
     <string name="manual">¿Cómo usar la Aplicación?</string>

@@ -20,8 +20,15 @@
         <activity android:name=".activities.MainActivity">
             <intent-filter android:label="Cluster09">
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                    android:host="https://github.com"
+                    android:pathPrefix="/Sermodi/SportRoutes" />
             </intent-filter>
         </activity>
         <!--

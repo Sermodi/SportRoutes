@@ -191,6 +191,7 @@ public class RealizarRuta extends ActivityPermisos implements OnMapReadyCallback
 
             @Override
             public void onDismiss(DialogInterface dialog) {
+                db.actualizarRuta(ruta.getNombre(),ruta.getTiempoUltimo(), (tiempo < ruta.getTiempoMejor()));
                 Intent i = new Intent(getApplicationContext(), ListaDeRutasActivity.class);
                 startActivity(i);
             }

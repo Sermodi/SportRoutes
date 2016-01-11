@@ -8,6 +8,7 @@
     <color name="si">#119911</color>
     <color name="ourGreen">#02EB4C</color>
     <color name="gris">#aaa</color>
-    <!--<color name="grisClaro">#ccc</color>-->
+    <color name="grisClaroTransparente">#96b7b7b7</color>
     <color name="negro">#000</color>
+
 </resources>

@@ -12,9 +12,14 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.asimov.sportroutes.R;
@@ -36,6 +41,9 @@ public class ActivityPermisos extends AppCompatActivity{
     private static final int PERMISOS_LOCALIZACION_C = 3;
     private static final int PERMISOS_LOCALIZACION_F = 2 ;
     private static final int PERMISOS_INTERNET = 1;
+    LinearLayout linearLayout;
+    DrawerLayout drawerLayout;
+
     /**
      * Comprueba los permisos necesarios para que funcione la aplicación en este punto
      */

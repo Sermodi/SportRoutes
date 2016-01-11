@@ -5,16 +5,25 @@
         <CheckBoxPreference
             android:key="avisoSalidaRuta"
             android:title="@string/preferenciaAvisoSalidaTitulo"
+            android:defaultValue="true"
             android:summary="@string/preferenciaAvisoSalidaContenido" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/weatherSettings">
         <CheckBoxPreference
             android:key="mostrarTiempo"
             android:title="@string/preferenciaTiempoTitulo"
+            android:defaultValue="true"
             android:summary="@string/preferenciaTiempoContenido" />
         <CheckBoxPreference
             android:key="mostrarTemperatura"
             android:title="@string/preferenciaTemperaturaTitulo"
+            android:defaultValue="true"
             android:summary="@string/preferenciaTemperaturaContenido" />
     </PreferenceCategory>
+    <CheckBoxPreference
+        android:key="primeraVez"
+        android:title=""
+        android:defaultValue="true"
+        android:visibility="gone"
+        android:summary="" />
 </PreferenceScreen>

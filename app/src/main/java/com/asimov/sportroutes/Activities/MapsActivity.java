@@ -60,7 +60,7 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!grabando) {
                     ruta = new Ruta(nombre.getText().toString());
-                    if (!ruta.nombreValido(getBaseContext())){
+                    if (ruta.nombreNoValido(getBaseContext())){
                         builder.setMessage(R.string.vacio)
                                 .setCancelable(false)
                                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
@@ -105,6 +105,7 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
             //Si se está grabando ruta el color del boton debe tener una estética distinta.
             boton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAlerta));
             boton.setText(getResources().getString(R.string.parar));
+            nombre.setVisibility(View.INVISIBLE);
         }
         //Comprobamos si los permisos están activados (Desde API 23 los permisos se dan al ejecutar la aplicacion)
         compruebaPermisos();

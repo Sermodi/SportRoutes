@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +32,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class ListaDeRutasActivity extends AppCompatActivity {
+public class ListaDeRutasActivity extends ActivityPermisos {
 
     private boolean mostrarTiempo;
     private boolean mostrarTemperatura;
@@ -33,6 +40,55 @@ public class ListaDeRutasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_rutas);
+
+        //Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);
+
+        //Iniciamos la toolbar con el boton de arriba para abrir el menu.
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+        linearLayout = (LinearLayout) findViewById(R.id.Linear1);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        String[] opciones = new String[]{getString(R.string.accion1), getString(R.string.accion2),
+                getString(R.string.accion3), getString(R.string.accion4), getString(R.string.acercaDe)};
+
+        listView.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1,
+                opciones));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                switch (arg2) {
+                    case 0:
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), ListaDeRutasActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), OpcionesActivity.class));
+                        break;
+                    case 3:
+                        //Manual
+                        startActivity(new Intent(getApplicationContext(), HowToActivity.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(getApplicationContext(), AboutUs.class));
+                        break;
+
+                }
+                drawerLayout.closeDrawers();
+
+
+            }
+        });
     }
 
     @Override
@@ -41,9 +97,48 @@ public class ListaDeRutasActivity extends AppCompatActivity {
         mostrarTiempo = prefs.getBoolean("mostrarTiempo", true);
         mostrarTemperatura = prefs.getBoolean("mostrarTemperatura", true);
 
+        ocultarStatusBar();
+
         //Se recargan las rutas en la tabla.
         rutasToTabla();
         super.onResume();
+    }
+
+    /** Implementación del listener del boton fisico del menu de algunos moviles */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (drawerLayout.isDrawerOpen(linearLayout)) {
+                drawerLayout.closeDrawers();
+            } else {
+                drawerLayout.openDrawer(linearLayout);
+            }
+            return true;
+        }else if (keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    /**
+     * mostramos/ocultamos el menu al presionar el icono de la aplicacion
+     * ubicado en la barra
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (drawerLayout.isDrawerOpen(linearLayout)) {
+                    drawerLayout.closeDrawers();
+                } else {
+                    drawerLayout.openDrawer(linearLayout);
+                }
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
