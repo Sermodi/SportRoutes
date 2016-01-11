@@ -78,4 +78,5 @@ You can save the route by pressing Yes to Save pop up and be sure to enjoy your 
     <string name="TituloRutaEnd">Route Finalized</string>
     <string name="record">you have improved your best time!</string>
     <string name="atrasAMain">Back to SportRoutes</string>
+    <string name="existe">The name of route already exists.</string>
 </resources>

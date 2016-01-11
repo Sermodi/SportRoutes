@@ -60,8 +60,15 @@ public class MapsActivity extends ActivityPermisos implements OnMapReadyCallback
             public void onClick(View v) {
                 if (!grabando) {
                     ruta = new Ruta(nombre.getText().toString());
-                    if (ruta.nombreNoValido(getBaseContext())){
-                        builder.setMessage(R.string.vacio)
+                    int valido = ruta.nombreValido(getBaseContext());
+                    if (valido < 1){
+                        String mensaje;
+                        if (valido == 0){
+                            mensaje = getString(R.string.vacio);
+                        }else{
+                            mensaje = getString(R.string.existe);
+                        }
+                        builder.setMessage(mensaje)
                                 .setCancelable(false)
                                 .setPositiveButton(R.string.continuar, new DialogInterface.OnClickListener() {
                                     @Override

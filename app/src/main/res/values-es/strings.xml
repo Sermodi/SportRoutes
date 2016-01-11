@@ -74,4 +74,5 @@
     <string name="TituloRutaEnd">Ruta Finalizada.</string>
     <string name="record">Has superado tu mejor tiempo!</string>
     <string name="atrasAMain">A SportRoutes</string>
+    <string name="existe">El nombre de la ruta ya existe</string>
 </resources>

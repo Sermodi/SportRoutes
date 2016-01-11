@@ -34,25 +34,25 @@ public class Ruta implements Parcelable {
     /**
      * Comprueba que el nombre no sea vacio, nulo o utilizado
      * @param context contexto de la aplicacion
-     * @return true si el nombre está vacio o esta en la base de datos. false en caso contrario
+     * @return int, 0 si el nombre está vacio, -1 esta en la base de datos. 1 en caso contrario
      */
-    public boolean nombreNoValido(Context context) {
+    public int nombreValido(Context context) {
         ManejadorBD m = new ManejadorBD(context);
         if (nombre == null ||
-                nombre.equals("")||
-                m.existeRuta(nombre)
+                nombre.equals("")
                 ){
-            return true;
+            return 0;
+        }else if (m.existeRuta(nombre)) {
+            return -1;
         }else{
-            for (int i =0;i<nombre.length();i++){
-                if(nombre.charAt(i) != 32){
-                    return false;
+                for (int i =0;i<nombre.length();i++){
+                    if(nombre.charAt(i) != 32){
+                        return 1;
+                    }
                 }
-
+                return 0;
             }
-            return true;
         }
-    }
 
     private Ruta(Parcel in) {
         nombre = in.readString();
