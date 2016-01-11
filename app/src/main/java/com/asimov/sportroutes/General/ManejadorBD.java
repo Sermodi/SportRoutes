@@ -48,16 +48,6 @@ public class ManejadorBD extends SQLiteOpenHelper {
         //context.deleteDatabase(DATABASE_NAME);
     }
 
-    /**
-     * Crea la base de datos y elimina la antigua si es necesario.
-     * @param context necesario para el creador de SQLiteOpenHelper.
-     * @param a String
-     */
-    public ManejadorBD(Context context, String a) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //context.deleteDatabase(DATABASE_NAME);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -232,29 +222,7 @@ public class ManejadorBD extends SQLiteOpenHelper {
      * Actualiza el mejor tiempo de la ruta indicada.
      * @param ruta String, nombre de la ruta que se desea actualizar.
      * @param tiempo Long, nuevo tiempo de la ruta.
-     * @return Integer con el número de filas afectadas por la actualización.
-     */
-    public int actualizarRuta(String ruta, long tiempo){
-        SQLiteDatabase db = getWritableDatabase();
-
-        //Creamos el mapa de valores que deseamos cambiar de la tabla de la base de datos.
-        ContentValues valores = new ContentValues();
-        valores.put(KEY_RUTA_ULTIMO, tiempo);
-
-        //Ejecutamos la actualización de la tabla de la base de datos.
-        Log.d("SQL", "Actualizando ruta + " + ruta + ". Nuevo tiempo: " + tiempo + ".");
-        return db.update(TABLE_RUTA, valores, KEY_RUTA_NOMBRE + " = ?",
-                new String[] {ruta});
-
-        //db.close();
-
-    }
-/**
-     * Actualiza el mejor tiempo de la ruta indicada.
-     * @param ruta String, nombre de la ruta que se desea actualizar.
-     * @param tiempo Long, nuevo tiempo de la ruta.
      * @param best Boolean, indica si el tiempo es mejor
-     * @return Integer con el número de filas afectadas por la actualización.
      */
     public void actualizarRuta(String ruta, long tiempo,Boolean best){
         SQLiteDatabase db = getWritableDatabase();
@@ -805,46 +773,6 @@ public class ManejadorBD extends SQLiteOpenHelper {
             //Log.d("SQL", "Ejecutando SQL: " + sql);
             db.execSQL(sql);
         }
-    }
-
-    /**
-     * DEBUGGING
-     * Método que lee la base de datos y muestra en el log la información de la misma, puede utilizarse
-     *  para comprobar que la base de datos es como se desea, DEBUG.
-     */
-    public void leerBD() {
-        Log.d("SQL", "Leyendo base de datos");
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id_ruta, nombre from ruta", null);
-        Log.d("SQL", "Imprimiendo tabla ruta");
-        Integer j = 0;
-        cursor.moveToFirst();
-        while (cursor.moveToNext()) {
-            j++;
-            Log.d("SQL", "Linea " + j);
-
-            Integer i;
-            Integer col = cursor.getColumnCount();
-            for (i = 0; i < col; i++) {
-                Log.d("SQL", cursor.getString(i));
-            }
-        }
-
-        cursor = db.rawQuery("SELECT * from coordenada", null);
-        Log.d("SQL", "Imprimiendo tabla coordenada");
-        j = 0;
-        while (cursor.moveToNext()) {
-            j++;
-            Log.d("SQL", "Linea " + j);
-
-            Integer i;
-            Integer col = cursor.getColumnCount();
-            for (i = 0; i < col; i++) {
-                Log.d("SQL", cursor.getString(i));
-            }
-        }
-        cursor.close();
-        db.close();
     }
 
 }
